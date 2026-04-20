@@ -10,13 +10,13 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Z Labs",
+  title: "Z Labs | Deep Intellect & Human Experience (Stealth)",
   description:
-    "A curated ecosystem for Bay Area PhDs bridging academic rigor, industrial innovation, and venture creation.",
+    "A private, selective ecosystem for PhDs bridging the gap between AI research and global product impact. Currently in stealth mode.",
   openGraph: {
-    title: "Z Labs",
+    title: "Z Labs | Deep Intellect & Human Experience (Stealth)",
     description:
-      "The convergence of deep intellect and human experience for Bay Area PhDs and elite tech professionals.",
+      "A private, selective ecosystem for PhDs bridging the gap between AI research and global product impact. Currently in stealth mode.",
     type: "website"
   }
 };
