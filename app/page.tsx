@@ -206,10 +206,10 @@ export default function Home() {
           Z Labs{" "}
           <sup className="stealth-tag">[ Stealth Mode ]</sup>
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
+        <p className="mt-6 max-w-4xl text-lg leading-8 text-ink/65">
           A forthcoming ecosystem for Bay Area PhDs. We are quietly building
           the foundation for AI-native experience, the knowledge economy, and
-          next-gen VC.
+          <span className="whitespace-nowrap"> next-gen VC</span>.
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <InviteForm
