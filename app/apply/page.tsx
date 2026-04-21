@@ -5,7 +5,7 @@ import { ApplicationForm } from "./application-form";
 export const metadata = {
   title: "Join the Z Labs Waitlist",
   description:
-    "Join the priority waitlist for Z Labs, a forthcoming ecosystem for Bay Area PhDs working across HCI, AI, and product impact."
+    "Join the priority waitlist for Z Labs, a forthcoming ecosystem for Bay Area PhDs working across AI-native experience, the knowledge economy, and next-gen VC."
 };
 
 export default function ApplyPage() {
@@ -30,7 +30,8 @@ export default function ApplyPage() {
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-ink/65">
               Share the basics, one representative work, and the question
-              you are quietly carrying into the next phase of HCI and AI.
+              you are quietly carrying into the next phase of AI-native
+              experience, the knowledge economy, and next-gen VC.
             </p>
             <div className="mt-8 border-t border-ink/10 pt-5 text-sm leading-6 text-ink/55">
               Submitting sends your profile directly to Z Labs for quiet

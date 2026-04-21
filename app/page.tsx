@@ -3,7 +3,7 @@ import { InviteForm } from "./invite-form";
 const chips = [
   "Research salons",
   "Founder matching",
-  "AI / HCI / Biotech",
+  "AI-native / Knowledge / VC",
   "Bay Area gatherings"
 ];
 
@@ -11,7 +11,7 @@ const featured = [
   {
     title: "A private ecosystem for deep technical minds",
     meta: "Featured",
-    text: "A quiet foundation for Bay Area PhDs working across HCI, AI, and product impact.",
+    text: "A quiet foundation for Bay Area PhDs shaping AI-native experience, the knowledge economy, and the next wave of venture creation.",
     keywords: ["Stealth curation", "Research depth", "Patient infrastructure"],
     href: "#membership",
     visual: "gradient-aurora",
@@ -20,7 +20,7 @@ const featured = [
   {
     title: "Z Dinners",
     meta: "Stealth gathering",
-    text: "Small, private tables for Bay Area PhDs, technical founders, and research operators moving between HCI and AI.",
+    text: "Off-record dinners where researchers, operators, and founders compare signals, test unfinished ideas, and find sharp company before the market catches up.",
     keywords: ["Private table", "Slow trust", "Bay Area"],
     href: "/apply",
     visual: "gradient-dinners",
@@ -32,14 +32,14 @@ const ecosystemValues = [
   {
     service: "Service 1",
     title: "Elite Mentorship",
-    text: "Future Initiative: Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and UXR excellence.",
+    text: "Future Initiative: Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and career excellence.",
     outcome:
       "For PhDs and research operators moving from credential depth to visible industry leverage."
   },
   {
     service: "Service 2",
     title: "Intellectual Assets",
-    text: "Future Initiative: Curated insights at the intersection of HCI and AI, delivered through high-stakes workshops, executive briefings, and field reports.",
+    text: "Future Initiative: Curated insights across AI-native experience, the knowledge economy, and next-gen VC, delivered through high-stakes workshops, executive briefings, and field reports.",
     outcome:
       "For teams that need sharp human-centered judgment around emerging technical shifts."
   },
@@ -54,23 +54,23 @@ const ecosystemValues = [
 
 const stories = [
   {
-    title: "HCI researchers mapping the next interface layer",
-    meta: "HCI x AI",
+    title: "Researchers mapping the next AI-native experience layer",
+    meta: "AI-native experience",
     text: "For people studying how humans will collaborate with model-native systems.",
     visual: "gradient-salon",
     visualLabel: "Interface futures"
   },
   {
     title: "PhDs translating lab insight into product judgment",
-    meta: "Research translation",
-    text: "For builders carrying rigorous methods into ambiguous product and venture terrain.",
+    meta: "Knowledge economy",
+    text: "For builders carrying rigorous methods into ambiguous product and knowledge terrain.",
     visual: "gradient-workspace",
     visualLabel: "Lab to product"
   },
   {
     title: "A trust layer for deep technical people in motion",
-    meta: "Stealth community",
-    text: "For researchers, operators, and founders who need slower rooms with sharper context.",
+    meta: "Next-gen VC",
+    text: "For researchers, operators, and founders who need slower rooms with sharper context around the next generation of venture building.",
     visual: "gradient-bridge",
     visualLabel: "Trust infrastructure"
   }
@@ -208,7 +208,8 @@ export default function Home() {
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-8 text-ink/65">
           A forthcoming ecosystem for Bay Area PhDs. We are quietly building
-          the foundation for the next convergence of HCI and AI.
+          the foundation for AI-native experience, the knowledge economy, and
+          next-gen VC.
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <InviteForm
