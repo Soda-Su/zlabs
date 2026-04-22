@@ -3,6 +3,12 @@ import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+const siteUrl = "https://thezlabs.org";
+const siteTitle =
+  "Z Labs | AI-native Experience, Knowledge Economy, Next-gen VC";
+const siteDescription =
+  "A Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC. Currently in stealth mode.";
+
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -10,14 +16,27 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Z Labs | Deep Intellect & Human Experience (Stealth)",
-  description:
-    "A private, selective ecosystem for PhDs working across AI-native experience, the knowledge economy, and next-gen VC. Currently in stealth mode.",
+  metadataBase: new URL(siteUrl),
+  title: siteTitle,
+  description: siteDescription,
+  alternates: {
+    canonical: "/"
+  },
+  robots: {
+    index: true,
+    follow: true
+  },
   openGraph: {
-    title: "Z Labs | Deep Intellect & Human Experience (Stealth)",
-    description:
-      "A private, selective ecosystem for PhDs working across AI-native experience, the knowledge economy, and next-gen VC. Currently in stealth mode.",
+    title: siteTitle,
+    description: siteDescription,
+    url: siteUrl,
+    siteName: "Z Labs",
     type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteDescription
   }
 };
 

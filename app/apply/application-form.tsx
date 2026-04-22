@@ -59,7 +59,7 @@ export function ApplicationForm() {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          subject: `Z Labs waitlist profile: ${values.fullName}`,
+          subject: `Z Labs beta profile: ${values.fullName}`,
           fullName: values.fullName,
           email: values.email,
           linkedin: values.linkedin,
@@ -71,12 +71,12 @@ export function ApplicationForm() {
       });
 
       if (!response.ok) {
-        throw new Error("Waitlist profile could not be submitted.");
+        throw new Error("Beta profile could not be submitted.");
       }
 
       setState("success");
       setMessage(
-        "Z Labs is in a period of research and curation. Your profile is in our priority waitlist. We will reach out when the timeline aligns."
+        "Z Labs is in a period of research and curation. Your profile is in our beta access list. We will reach out when the timeline aligns."
       );
       setValues({ ...initialValues, email: values.email });
     } catch (error) {
@@ -84,7 +84,7 @@ export function ApplicationForm() {
       setMessage(
         error instanceof Error
           ? error.message
-          : "Waitlist profile could not be submitted."
+          : "Beta profile could not be submitted."
       );
     }
   }
@@ -149,7 +149,7 @@ export function ApplicationForm() {
           disabled={state === "loading" || state === "success"}
           className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-ink px-5 text-sm font-medium text-white transition duration-300 hover:bg-zlabs-blue-deep focus:outline-none focus:ring-2 focus:ring-zlabs-blue-deep focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {state === "loading" ? "Submitting" : "Join the Waitlist"}
+          {state === "loading" ? "Submitting" : "Join the Beta"}
           <ArrowRight
             aria-hidden="true"
             className="h-4 w-4 transition duration-300 group-hover:translate-x-1"

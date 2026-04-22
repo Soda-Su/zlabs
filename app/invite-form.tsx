@@ -13,8 +13,8 @@ type InviteFormProps = {
 };
 
 export function InviteForm({
-  placeholder = "Join the Z Labs waitlist",
-  buttonLabel = "Join the Waitlist",
+  placeholder = "Join the Z Labs beta",
+  buttonLabel = "Join the Beta",
   variant = "hero"
 }: InviteFormProps) {
   const [email, setEmail] = useState("");
@@ -30,12 +30,12 @@ export function InviteForm({
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
       setState("error");
-      setMessage("Enter a valid email to join the waitlist.");
+      setMessage("Enter a valid email to request beta access.");
       return;
     }
 
     setState("success");
-    setMessage("Opening waitlist.");
+    setMessage("Opening beta access.");
     window.location.href = `/apply?email=${encodeURIComponent(trimmedEmail)}`;
   }
 

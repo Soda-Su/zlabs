@@ -1,5 +1,7 @@
 import { InviteForm } from "./invite-form";
 
+const siteUrl = "https://thezlabs.org";
+
 const chips = [
   "Research salons",
   "Founder matching",
@@ -171,8 +173,73 @@ function ImageCard({
 }
 
 export default function Home() {
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "@id": `${siteUrl}/#organization`,
+      name: "Z Labs",
+      url: `${siteUrl}/`,
+      email: "chatwithsoda@gmail.com",
+      description:
+        "A Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.",
+      foundingDate: "2026",
+      foundingLocation: {
+        "@type": "Place",
+        name: "San Francisco, California"
+      },
+      areaServed: {
+        "@type": "Place",
+        name: "San Francisco Bay Area"
+      },
+      knowsAbout: [
+        "AI-native experience",
+        "knowledge economy",
+        "next-gen VC",
+        "Bay Area PhDs",
+        "Z Dinners"
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: `${siteUrl}/`,
+      name: "Z Labs",
+      description:
+        "A Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.",
+      publisher: {
+        "@id": `${siteUrl}/#organization`
+      },
+      inLanguage: "en-US"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "@id": `${siteUrl}/#about-page`,
+      url: `${siteUrl}/`,
+      name: "Z Labs",
+      description:
+        "An editorial-style overview of Z Labs, its Bay Area focus, and its work across AI-native experience, the knowledge economy, and next-gen VC.",
+      isPartOf: {
+        "@id": `${siteUrl}/#website`
+      },
+      about: {
+        "@id": `${siteUrl}/#organization`
+      },
+      audience: {
+        "@type": "Audience",
+        audienceType: "Bay Area PhDs, researchers, operators, and founders"
+      }
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-alabaster text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <header className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <a href="#" className="brand-mark">
           <span className="z-mark">Z</span>
@@ -192,11 +259,11 @@ export default function Home() {
             Stories
           </a>
           <a className="quiet-link" href="#membership">
-            Waitlist
+            Beta
           </a>
         </nav>
         <a className="quiet-link text-ink/70" href="/apply">
-          Join the Waitlist
+          Join the Beta
         </a>
       </header>
 
@@ -213,8 +280,8 @@ export default function Home() {
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <InviteForm
-            placeholder="Join the Z Labs waitlist"
-            buttonLabel="Join the Waitlist"
+            placeholder="Join the Z Labs beta"
+            buttonLabel="Join the Beta"
             variant="hero"
           />
         </div>
@@ -237,7 +304,7 @@ export default function Home() {
             className="quiet-link hidden text-sm text-ink/60 sm:inline"
             href="/apply"
           >
-            Join the Waitlist
+            Join the Beta
           </a>
         </div>
         <div className="grid gap-8 lg:grid-cols-[1.6fr_0.9fr] lg:items-start">
@@ -297,7 +364,7 @@ export default function Home() {
             className="quiet-link hidden text-sm text-ink/60 sm:inline"
             href="/apply"
           >
-            Join the Waitlist
+            Join the Beta
           </a>
         </div>
         <div className="grid gap-x-6 gap-y-10 md:grid-cols-3">
@@ -313,7 +380,7 @@ export default function Home() {
       >
         <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-end">
           <div>
-            <p className="text-sm text-ink/55">For future members</p>
+            <p className="text-sm text-ink/55">For beta members</p>
             <h2 className="mt-2 max-w-2xl text-4xl leading-tight sm:text-5xl">
               Intelligence with a social life.
             </h2>
@@ -321,7 +388,7 @@ export default function Home() {
           <div>
             <p className="max-w-2xl leading-7 text-ink/65">
               Z Labs is in a long-term period of research and curation,
-              preparing a selective room for PhDs, research operators, and
+              preparing a selective beta for PhDs, research operators, and
               technical founders with durable trust and high-quality execution.
             </p>
             <div className="mt-7 flex flex-col gap-3 text-lg text-ink/75 sm:flex-row sm:flex-wrap">

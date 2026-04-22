@@ -14,16 +14,16 @@ npm run dev
 
 Then open `http://localhost:3000`.
 
-## Waitlist Flow
+## Beta Flow
 
-The homepage email field validates locally and opens the waitlist page with
+The homepage email field validates locally and opens the beta access page with
 the email prefilled:
 
 ```text
 /apply?email=name@company.com
 ```
 
-## Priority Waitlist
+## Selective Beta Access
 
 The `/apply` page collects a lightweight profile and submits it to Formspree,
 which sends the profile to `chatwithsoda@gmail.com`.

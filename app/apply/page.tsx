@@ -1,11 +1,49 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { ApplicationForm } from "./application-form";
 
-export const metadata = {
-  title: "Join the Z Labs Waitlist",
-  description:
-    "Join the priority waitlist for Z Labs, a forthcoming ecosystem for Bay Area PhDs working across AI-native experience, the knowledge economy, and next-gen VC."
+const siteUrl = "https://thezlabs.org";
+const applyTitle = "Join the Z Labs Beta | Researcher and Founder Access";
+const applyDescription =
+  "Request beta access to Z Labs, a Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.";
+
+const orientationItems = [
+  {
+    question: "What is Z Labs?",
+    answer:
+      "Z Labs is a Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC."
+  },
+  {
+    question: "Who is it for?",
+    answer:
+      "It is built for people moving between research depth, product judgment, company building, and venture formation without losing rigor."
+  },
+  {
+    question: "What is Z Dinners?",
+    answer:
+      "Z Dinners are private tables for comparing signals, pressure-testing unfinished ideas, and building trust before the rest of the market catches up."
+  }
+] as const;
+
+export const metadata: Metadata = {
+  title: applyTitle,
+  description: applyDescription,
+  alternates: {
+    canonical: "/apply"
+  },
+  openGraph: {
+    title: applyTitle,
+    description: applyDescription,
+    url: `${siteUrl}/apply`,
+    siteName: "Z Labs",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: applyTitle,
+    description: applyDescription
+  }
 };
 
 export default function ApplyPage() {
@@ -22,11 +60,11 @@ export default function ApplyPage() {
       </header>
 
       <section className="mx-auto max-w-[1180px] px-4 pb-16 pt-16 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
+        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
-            <p className="text-sm text-ink/55">Priority waitlist</p>
+            <p className="text-sm text-ink/55">Selective beta access</p>
             <h1 className="mt-3 max-w-xl text-5xl leading-[1.02] sm:text-6xl">
-              Join the quiet foundation.
+              Join the quiet beta.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-ink/65">
               Share the basics, one representative work, and the question
@@ -34,11 +72,41 @@ export default function ApplyPage() {
               experience, the knowledge economy, and next-gen VC.
             </p>
             <div className="mt-8 border-t border-ink/10 pt-5 text-sm leading-6 text-ink/55">
-              Submitting sends your profile directly to Z Labs for quiet
+              Submitting sends your beta profile directly to Z Labs for quiet
               review.
             </div>
           </div>
-          <div className="rounded-md border border-ink/10 bg-white p-4 sm:p-6">
+          <div className="text-sm text-ink/50 lg:text-right">
+            A short read before you request access.
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-0 border-t border-ink/10 lg:grid-cols-3 lg:gap-8 lg:border-t-0">
+          {orientationItems.map((item, index) => (
+            <article
+              key={item.question}
+              className={`border-b border-ink/10 py-7 lg:border-b-0 lg:py-0 ${
+                index === 0 ? "lg:pr-8" : index === 1 ? "lg:px-8" : "lg:pl-8"
+              }`}
+            >
+              <h2 className="max-w-sm text-2xl leading-tight text-ink">
+                {item.question}
+              </h2>
+              <p className="mt-4 max-w-md leading-7 text-ink/65">
+                {item.answer}
+              </p>
+            </article>
+          ))}
+        </div>
+
+        <div className="mt-14 rounded-md border border-ink/10 bg-white p-4 sm:p-6">
+          <div className="mb-6 border-b border-ink/10 pb-5">
+            <p className="text-sm text-ink/55">Beta profile</p>
+            <h2 className="mt-2 text-3xl leading-tight text-ink sm:text-4xl">
+              Share a concise introduction.
+            </h2>
+          </div>
+          <div>
             <Suspense fallback={<p className="text-sm text-ink/55">Loading form...</p>}>
               <ApplicationForm />
             </Suspense>
