@@ -21,6 +21,10 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 ## Public URLs
 - ${siteUrl}/
 - ${siteUrl}/apply
+- ${siteUrl}/stories/academic-to-tech
+
+## Editorial
+- Academic to Tech, without losing the plot: ${siteUrl}/stories/academic-to-tech
 
 ## Contact
 - chatwithsoda@gmail.com

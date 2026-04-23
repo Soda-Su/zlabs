@@ -34,21 +34,21 @@ const ecosystemValues = [
   {
     service: "Service 1",
     title: "Elite Mentorship",
-    text: "Future Initiative: Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and career excellence.",
+    text: "Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and career excellence.",
     outcome:
       "For PhDs and research operators moving from credential depth to visible industry leverage."
   },
   {
     service: "Service 2",
     title: "Intellectual Assets",
-    text: "Future Initiative: Curated insights across AI-native experience, the knowledge economy, and next-gen VC, delivered through high-stakes workshops, executive briefings, and field reports.",
+    text: "Curated insights across AI-native experience, the knowledge economy, and next-gen VC, delivered through high-stakes workshops, executive briefings, and field reports.",
     outcome:
       "For teams that need sharp human-centered judgment around emerging technical shifts."
   },
   {
     service: "Service 3",
     title: "Strategic Thinktank",
-    text: "Future Initiative: Rapid deployment of PhD-led consulting squads to solve complex human-centered challenges for product, research, and venture leaders.",
+    text: "Rapid deployment of PhD-led consulting squads to solve complex human-centered challenges for product, research, and venture leaders.",
     outcome:
       "For tech organizations facing ambiguous problems where expertise, speed, and taste all matter."
   }
@@ -56,25 +56,29 @@ const ecosystemValues = [
 
 const stories = [
   {
-    title: "Researchers mapping the next AI-native experience layer",
-    meta: "AI-native experience",
-    text: "For people studying how humans will collaborate with model-native systems.",
-    visual: "gradient-salon",
-    visualLabel: "Interface futures"
+    title: "Academic to Tech, without losing the plot",
+    meta: "Editorial",
+    highlight: "Field guide",
+    text: "A practical field guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
+    visual: "gradient-academic-tech",
+    visualLabel: "Academic to Tech",
+    href: "/stories/academic-to-tech"
   },
   {
     title: "PhDs translating lab insight into product judgment",
     meta: "Knowledge economy",
     text: "For builders carrying rigorous methods into ambiguous product and knowledge terrain.",
     visual: "gradient-workspace",
-    visualLabel: "Lab to product"
+    visualLabel: "Lab to product",
+    status: "Coming soon"
   },
   {
     title: "A trust layer for deep technical people in motion",
     meta: "Next-gen VC",
     text: "For researchers, operators, and founders who need slower rooms with sharper context around the next generation of venture building.",
     visual: "gradient-bridge",
-    visualLabel: "Trust infrastructure"
+    visualLabel: "Trust infrastructure",
+    status: "Coming soon"
   }
 ];
 
@@ -86,6 +90,8 @@ function ImageCard({
   text,
   keywords,
   href,
+  status,
+  highlight,
   compact = false,
   large = false
 }: {
@@ -96,6 +102,8 @@ function ImageCard({
   text?: string;
   keywords?: string[];
   href?: string;
+  status?: string;
+  highlight?: string;
   compact?: boolean;
   large?: boolean;
 }) {
@@ -121,7 +129,13 @@ function ImageCard({
         </div>
       </div>
       <div className="mt-4">
-        <p className="text-sm text-ink/55">{meta}</p>
+        <div className="flex items-center gap-2">
+          <p className="text-sm text-ink/55">{meta}</p>
+          {highlight ? (
+            <span className="story-status story-status-lead">{highlight}</span>
+          ) : null}
+          {status ? <span className="story-status">{status}</span> : null}
+        </div>
         <h3
           className={
             large
@@ -160,7 +174,9 @@ function ImageCard({
   );
 
   return (
-    <article className="editorial-card">
+    <article
+      className={`editorial-card ${status ? "editorial-card-muted" : ""}`}
+    >
       {href ? (
         <a className="block focus:outline-none" href={href}>
           {content}
