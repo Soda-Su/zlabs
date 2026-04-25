@@ -22,9 +22,13 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 - ${siteUrl}/
 - ${siteUrl}/apply
 - ${siteUrl}/stories/academic-to-tech
+- ${siteUrl}/stories/genai-knowledge-workers
+- ${siteUrl}/stories/a-quieter-room-for-serious-people
 
 ## Editorial
 - Academic to Tech, without losing the plot: ${siteUrl}/stories/academic-to-tech
+- GenAI and the Knowledge Worker: ${siteUrl}/stories/genai-knowledge-workers
+- A quieter room for serious people: ${siteUrl}/stories/a-quieter-room-for-serious-people
 
 ## Contact
 - chatwithsoda@gmail.com

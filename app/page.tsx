@@ -3,11 +3,19 @@ import { InviteForm } from "./invite-form";
 const siteUrl = "https://thezlabs.org";
 
 const chips = [
-  "Research salons",
-  "Founder matching",
-  "AI-native / Knowledge / VC",
-  "Bay Area gatherings"
-];
+  {
+    label: "Academic to Tech",
+    href: "/stories/academic-to-tech"
+  },
+  {
+    label: "Knowledge Work",
+    href: "/stories/genai-knowledge-workers"
+  },
+  {
+    label: "Social Thesis",
+    href: "/stories/a-quieter-room-for-serious-people"
+  }
+] as const;
 
 const featured = [
   {
@@ -32,21 +40,21 @@ const featured = [
 
 const ecosystemValues = [
   {
-    service: "Service 1",
+    service: "01",
     title: "Elite Mentorship",
     text: "Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and career excellence.",
     outcome:
       "For PhDs and research operators moving from credential depth to visible industry leverage."
   },
   {
-    service: "Service 2",
+    service: "02",
     title: "Intellectual Assets",
     text: "Curated insights across AI-native experience, the knowledge economy, and next-gen VC, delivered through high-stakes workshops, executive briefings, and field reports.",
     outcome:
       "For teams that need sharp human-centered judgment around emerging technical shifts."
   },
   {
-    service: "Service 3",
+    service: "03",
     title: "Strategic Thinktank",
     text: "Rapid deployment of PhD-led consulting squads to solve complex human-centered challenges for product, research, and venture leaders.",
     outcome:
@@ -59,26 +67,29 @@ const stories = [
     title: "Academic to Tech, without losing the plot",
     meta: "Editorial",
     highlight: "Field guide",
-    text: "A practical field guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
+    text: "A practical guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
     visual: "gradient-academic-tech",
     visualLabel: "Academic to Tech",
-    href: "/stories/academic-to-tech"
+    href: "/stories/academic-to-tech",
+    footerLabel: "Read essay"
   },
   {
-    title: "PhDs translating lab insight into product judgment",
-    meta: "Knowledge economy",
-    text: "For builders carrying rigorous methods into ambiguous product and knowledge terrain.",
-    visual: "gradient-workspace",
-    visualLabel: "Lab to product",
-    status: "Coming soon"
+    title: "GenAI and the Knowledge Worker",
+    meta: "Knowledge work",
+    text: "A field guide to what GenAI makes cheap, what it makes more valuable, and why judgment becomes the scarcer layer of work.",
+    visual: "gradient-signal",
+    visualLabel: "GenAI at Work",
+    href: "/stories/genai-knowledge-workers",
+    footerLabel: "Read essay"
   },
   {
-    title: "A trust layer for deep technical people in motion",
-    meta: "Next-gen VC",
-    text: "For researchers, operators, and founders who need slower rooms with sharper context around the next generation of venture building.",
+    title: "A quieter room for serious people",
+    meta: "Social thesis",
+    text: "A thesis on what real knowledge sharing requires when most communities optimize for noise, visibility, and weak ties.",
     visual: "gradient-bridge",
-    visualLabel: "Trust infrastructure",
-    status: "Coming soon"
+    visualLabel: "\"A Quieter Room\"",
+    href: "/stories/a-quieter-room-for-serious-people",
+    footerLabel: "Read essay"
   }
 ];
 
@@ -92,6 +103,7 @@ function ImageCard({
   href,
   status,
   highlight,
+  footerLabel,
   compact = false,
   large = false
 }: {
@@ -104,6 +116,7 @@ function ImageCard({
   href?: string;
   status?: string;
   highlight?: string;
+  footerLabel?: string;
   compact?: boolean;
   large?: boolean;
 }) {
@@ -167,6 +180,11 @@ function ImageCard({
                 {keyword}
               </span>
             ))}
+          </div>
+        ) : null}
+        {footerLabel ? (
+          <div className="mt-5">
+            <span className="editorial-link">{footerLabel}</span>
           </div>
         ) : null}
       </div>
@@ -258,7 +276,6 @@ export default function Home() {
       />
       <header className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <a href="#" className="brand-mark">
-          <span className="z-mark">Z</span>
           <span className="brand-text">Z Labs</span>
         </a>
         <nav
@@ -272,7 +289,7 @@ export default function Home() {
             Ecosystem
           </a>
           <a className="quiet-link" href="#stories">
-            Stories
+            Editorial
           </a>
           <a className="quiet-link" href="#membership">
             Beta
@@ -290,21 +307,22 @@ export default function Home() {
           <sup className="stealth-tag">[ Stealth Mode ]</sup>
         </h1>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-ink/65">
-          A forthcoming ecosystem for Bay Area PhDs. We are quietly building
-          the foundation for AI-native experience, the knowledge economy, and
+          A forthcoming ecosystem for Bay Area PhDs, quietly building the
+          social and editorial foundation for AI-native experience, the
+          knowledge economy, and
           <span className="whitespace-nowrap"> next-gen VC</span>.
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <InviteForm
-            placeholder="Join the Z Labs beta"
+            placeholder="Join Z Labs beta"
             buttonLabel="Join the Beta"
             variant="hero"
           />
         </div>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           {chips.map((chip) => (
-            <a key={chip} href="#featured" className="chip-link">
-              {chip}
+            <a key={chip.label} href={chip.href} className="chip-link">
+              {chip.label}
             </a>
           ))}
         </div>
@@ -332,6 +350,32 @@ export default function Home() {
       </section>
 
       <section
+        id="stories"
+        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+      >
+        <div className="mb-6 flex items-end justify-between gap-6">
+          <div>
+            <h2 className="text-2xl leading-tight sm:text-3xl">Editorial</h2>
+            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
+              Essays on research, translation, and the social infrastructure
+              around technical work.
+            </p>
+          </div>
+          <a
+            className="quiet-link hidden text-sm text-ink/60 sm:inline"
+            href="/apply"
+          >
+            Join the Beta
+          </a>
+        </div>
+        <div className="grid gap-x-6 gap-y-10 md:grid-cols-3">
+          {stories.map((story) => (
+            <ImageCard key={story.title} {...story} />
+          ))}
+        </div>
+      </section>
+
+      <section
         id="ecosystem"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
@@ -342,8 +386,8 @@ export default function Home() {
               The Vision
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-ink/65">
-              Z Labs is quietly shaping a translation layer for academic
-              expertise, frontier research judgment, and PhD-led execution.
+              Z Labs is shaping a translation layer for academic expertise,
+              frontier research judgment, and PhD-led execution.
             </p>
           </div>
           <div className="border-t border-ink/10">
@@ -371,26 +415,6 @@ export default function Home() {
       </section>
 
       <section
-        id="stories"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
-      >
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <h2 className="text-2xl leading-tight sm:text-3xl">Stories</h2>
-          <a
-            className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/apply"
-          >
-            Join the Beta
-          </a>
-        </div>
-        <div className="grid gap-x-6 gap-y-10 md:grid-cols-3">
-          {stories.map((story) => (
-            <ImageCard key={story.title} {...story} />
-          ))}
-        </div>
-      </section>
-
-      <section
         id="membership"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
@@ -403,9 +427,9 @@ export default function Home() {
           </div>
           <div>
             <p className="max-w-2xl leading-7 text-ink/65">
-              Z Labs is in a long-term period of research and curation,
-              preparing a selective beta for PhDs, research operators, and
-              technical founders with durable trust and high-quality execution.
+              Z Labs is in a long period of research and curation, preparing a
+              selective beta for PhDs, research operators, and technical
+              founders who move with trust and high-quality execution.
             </p>
             <div className="mt-7 flex flex-col gap-3 text-lg text-ink/75 sm:flex-row sm:flex-wrap">
               <span>50+ PhD Members</span>
@@ -413,6 +437,20 @@ export default function Home() {
               <span>10+ Top Tech Companies</span>
               <span className="hidden text-ink/30 sm:inline">|</span>
               <span>3 Ivy League Affiliations</span>
+            </div>
+            <div className="mt-8 border-t border-ink/10 pt-5">
+              <a
+                className="quiet-link inline-flex flex-wrap items-center gap-2 text-sm text-ink/62"
+                href="/stories/a-quieter-room-for-serious-people"
+              >
+                <span>
+                  &ldquo;A QUIETER ROOM FOR SERIOUS PEOPLE&rdquo;
+                </span>
+                <span className="text-ink/38">|</span>
+                <span className="text-ink/52">
+                  less noise, more trust, deeper knowledge sharing
+                </span>
+              </a>
             </div>
           </div>
         </div>
@@ -422,7 +460,6 @@ export default function Home() {
         <div className="mx-auto max-w-[1440px]">
           <div className="mx-auto max-w-xl">
             <a href="#" className="brand-mark justify-center">
-              <span className="z-mark">Z</span>
               <span className="brand-text">Z Labs</span>
             </a>
             <p className="mt-5 leading-7 text-ink/60">

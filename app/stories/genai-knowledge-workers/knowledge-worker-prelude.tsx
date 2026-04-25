@@ -25,69 +25,69 @@ type ResultProfile = {
 
 const scenes: Scene[] = [
   {
-    id: "question-shape",
-    prompt: "A question follows you home. Which version of it feels more alive?",
-    note: "Choose the one that gives you more energy, not the one that sounds more respectable.",
+    id: "first-instinct",
+    prompt: "A model opens beside your work. What do you want from it first?",
+    note: "Pick the answer that sounds most like your instinct, not the one that sounds smartest.",
     options: [
       {
-        label: "The open horizon",
-        detail: "I want to stay with the question until it reveals a deeper structure.",
+        label: "Sharpen the thinking",
+        detail: "I want it to pressure-test the draft so the ideas become cleaner and harder to fake.",
         delta: -2
       },
       {
-        label: "The useful edge",
-        detail: "I want to shape the question into something other people can act on soon.",
+        label: "Accelerate the first pass",
+        detail: "I want it to get me to a workable starting point fast so the rest of the system can move.",
         delta: 2
       }
     ]
   },
   {
-    id: "proof",
-    prompt: "When work lands well, what proof do you trust most?",
-    note: "Think instinctively. What makes the work feel real?",
+    id: "good-enough",
+    prompt: "The model gives you something plausible in thirty seconds. What happens next?",
+    note: "This is about where your standards and energy naturally go.",
     options: [
       {
-        label: "Durable citation",
-        detail: "A body of thought that holds up under scrutiny and lasts beyond the moment.",
+        label: "Slow down and interrogate it",
+        detail: "I immediately want to verify, reframe, and see whether the answer actually deserves trust.",
         delta: -2
       },
       {
-        label: "Adoption in motion",
-        detail: "A team, product, or decision starts behaving differently because of the work.",
+        label: "Route it into the workflow",
+        detail: "I want to use it as a live ingredient in a larger chain of decisions, teammates, and outputs.",
         delta: 2
       }
     ]
   },
   {
-    id: "daily-shape",
-    prompt: "At the end of a strong week, which sentence feels more satisfying?",
-    note: "This is about where your effort most naturally turns into meaning.",
+    id: "scarcity",
+    prompt: "As generated language becomes abundant, what feels scarcer to you?",
+    note: "Abundance is not the same thing as value. Listen for what still feels hard to replace.",
     options: [
       {
-        label: "I clarified something important",
-        detail: "The idea is cleaner, truer, and better defended than it was before.",
+        label: "Original judgment",
+        detail: "Taste, verification, and point of view feel like the layer that will matter more.",
         delta: -1
       },
       {
-        label: "I moved something forward",
-        detail: "The work turned into action, alignment, or a thing that now exists in the world.",
+        label: "Operational coordination",
+        detail: "The ability to direct models, people, and systems into coherent motion feels scarcer.",
         delta: 1
       }
     ]
   },
   {
-    id: "time-horizon",
-    prompt: "A difficult year still feels worth it if, by the end, you have...",
-    note: "This one is about time horizon more than ambition.",
+    id: "trusted-for",
+    prompt: "What do people most often trust you for?",
+    note: "Not your title. Your actual function in the room.",
     options: [
       {
-        label: "Followed the question farther",
-        detail: "Even if the payoff is subtle, the inquiry itself became sharper and truer.",
+        label: "Craft and discernment",
+        detail: "I am usually the one who notices what is weak, unclear, or too generic to stand.",
         delta: -1
       },
       {
-        label: "Turned ambiguity into movement",
-        detail: "Even if the answer is imperfect, something meaningful now exists in the world.",
+        label: "Direction and orchestration",
+        detail: "I am usually the one who turns ambiguity into process, sequencing, and forward motion.",
         delta: 1
       }
     ]
@@ -107,54 +107,54 @@ function normalize(value: number, min: number, max: number) {
 function getResultProfile(score: number): ResultProfile {
   if (score <= 20) {
     return {
-      label: "The Seminar Room",
-      eyebrow: "Depth seems to sharpen you.",
+      label: "The Craft Bench",
+      eyebrow: "You still orient around depth before motion.",
       summary:
-        "You look most at home where rigor has time to deepen before it performs. Long inquiry, careful standards of proof, and slower-blooming work may still be your clearest source of energy.",
-      tone: "Academic"
+        "You seem most alive where GenAI remains an instrument, not a substitute for authorship. Verification, style, original judgment, and hard-won clarity still feel like your home ground.",
+      tone: "Deep craft"
     };
   }
 
   if (score <= 40) {
     return {
-      label: "The Field Scholar",
-      eyebrow: "You lean academic, but not sealed off from the world.",
+      label: "The Systems Editor",
+      eyebrow: "You are open to leverage, but not at the expense of standards.",
       summary:
-        "You still seem nourished by serious inquiry, though you likely want that thought to stay porous to application. Translational research, strategy, and thoughtful hybrid roles may feel especially natural.",
-      tone: "Academic-leaning"
+        "You appear to welcome GenAI as a compressor of routine effort while keeping your center of gravity in critique, refinement, and intellectual quality control.",
+      tone: "Craft-leaning"
     };
   }
 
   if (score <= 60) {
     return {
-      label: "The Bridge Figure",
-      eyebrow: "You do not split neatly, and that is useful.",
+      label: "The Bridge Operator",
+      eyebrow: "You live between authorship and orchestration.",
       summary:
-        "You seem energized by both durable thought and real-world consequence. Roles that translate between research, product, and institutional decision-making may fit you unusually well.",
+        "You seem comfortable letting models carry some of the surface load while you hold the harder layer: framing, trust, and deciding what should happen next.",
       tone: "Between both"
     };
   }
 
   if (score <= 80) {
     return {
-      label: "The Applied Translator",
-      eyebrow: "You lean toward motion, but still care about depth.",
+      label: "The Workflow Architect",
+      eyebrow: "You think in systems as much as sentences.",
       summary:
-        "You appear most alive when ideas start changing what teams do. You likely prefer applied environments that still respect reasoning, nuance, and the quality of the underlying question.",
-      tone: "Industry-leaning"
+        "You appear energized by turning GenAI into coordinated leverage. The value you create may come less from solitary output and more from building clean flows between models, people, and decisions.",
+      tone: "Orchestration-leaning"
     };
   }
 
   return {
-    label: "The Product Studio",
-    eyebrow: "Momentum seems to feed you.",
+    label: "The Command Surface",
+    eyebrow: "You naturally read this shift as organizational, not merely personal.",
     summary:
-      "You look most energized where ambiguity turns into decisions, products, and visible consequence. Shorter feedback loops, execution, and shared movement may be where your work metabolizes best right now.",
-    tone: "Industry"
+      "You seem drawn to the layer where GenAI becomes infrastructure for execution. Your advantage may come from directing cognitive systems well, while keeping accountability and judgment in human hands.",
+    tone: "AI-leveraged orchestration"
   };
 }
 
-export function PathPrelude() {
+export function KnowledgeWorkerPrelude() {
   const [index, setIndex] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
 
@@ -193,7 +193,7 @@ export function PathPrelude() {
 
   return (
     <section className="mx-auto max-w-[1180px] px-4 pb-10 pt-10 sm:px-6 lg:px-8">
-      <div className="prelude-shell gradient-visual gradient-academic-tech">
+      <div className="prelude-shell gradient-visual gradient-signal">
         <div className="prelude-grid">
           <div className="prelude-copy">
             <p className="hero-kicker">Path Prelude</p>
@@ -202,8 +202,8 @@ export function PathPrelude() {
             </h2>
             <p className="prelude-dek">
               Four short scenes. No verdict, no performance. Just a gentler way
-              to notice whether your energy gathers closer to academic depth or
-              industry motion.
+              to notice whether you meet GenAI through deep craft or leveraged
+              orchestration.
             </p>
           </div>
 
@@ -263,8 +263,8 @@ export function PathPrelude() {
 
                 <div className="spectrum-shell">
                   <div className="spectrum-label-row">
-                    <span>Academic</span>
-                    <span>Industry</span>
+                    <span>Deep craft</span>
+                    <span>AI orchestration</span>
                   </div>
                   <div className="spectrum-track" aria-hidden="true">
                     <div className="spectrum-track-fill" />
@@ -274,9 +274,9 @@ export function PathPrelude() {
                     />
                   </div>
                   <div className="spectrum-chip-row" aria-hidden="true">
-                    <span>The Seminar Room</span>
-                    <span>The Bridge Figure</span>
-                    <span>The Product Studio</span>
+                    <span>The Craft Bench</span>
+                    <span>The Bridge Operator</span>
+                    <span>The Command Surface</span>
                   </div>
                 </div>
 

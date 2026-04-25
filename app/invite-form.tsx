@@ -13,7 +13,7 @@ type InviteFormProps = {
 };
 
 export function InviteForm({
-  placeholder = "Join the Z Labs beta",
+  placeholder = "Join Z Labs beta",
   buttonLabel = "Join the Beta",
   variant = "hero"
 }: InviteFormProps) {

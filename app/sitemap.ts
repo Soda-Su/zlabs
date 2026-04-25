@@ -21,6 +21,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.7
+    },
+    {
+      url: `${siteUrl}/stories/genai-knowledge-workers`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7
+    },
+    {
+      url: `${siteUrl}/stories/a-quieter-room-for-serious-people`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7
     }
   ];
 }

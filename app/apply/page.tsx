@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import { ApplicationForm } from "./application-form";
 
 const siteUrl = "https://thezlabs.org";
-const applyTitle = "Join the Z Labs Beta | Researcher and Founder Access";
+const applyTitle = "Join Z Labs Beta | Researcher and Founder Access";
 const applyDescription =
   "Request beta access to Z Labs, a Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.";
 
@@ -12,12 +12,12 @@ const orientationItems = [
   {
     question: "What is Z Labs?",
     answer:
-      "Z Labs is a Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC."
+      "Z Labs is a Bay Area project for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC."
   },
   {
     question: "Who is it for?",
     answer:
-      "It is built for people moving between research depth, product judgment, company building, and venture formation without losing rigor."
+      "It is for people moving between research depth, product judgment, company building, and venture formation without losing rigor."
   },
   {
     question: "What is Z Dinners?",
@@ -51,7 +51,6 @@ export default function ApplyPage() {
     <main className="min-h-screen bg-alabaster text-ink">
       <header className="mx-auto flex max-w-[1180px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <Link href="/" className="brand-mark">
-          <span className="z-mark">Z</span>
           <span className="brand-text">Z Labs</span>
         </Link>
         <Link className="quiet-link text-ink/70" href="/">
@@ -62,22 +61,22 @@ export default function ApplyPage() {
       <section className="mx-auto max-w-[1180px] px-4 pb-16 pt-16 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
-            <p className="text-sm text-ink/55">Selective beta access</p>
+            <p className="text-sm text-ink/55">Selective beta</p>
             <h1 className="mt-3 max-w-xl text-5xl leading-[1.02] sm:text-6xl">
-              Join the quiet beta.
+              Request quiet access.
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-8 text-ink/65">
-              Share the basics, one representative work, and the question
-              you are quietly carrying into the next phase of AI-native
-              experience, the knowledge economy, and next-gen VC.
+              Share the basics, one representative work, and the question you
+              are quietly carrying into the next phase of AI-native experience,
+              the knowledge economy, and next-gen VC.
             </p>
             <div className="mt-8 border-t border-ink/10 pt-5 text-sm leading-6 text-ink/55">
-              Submitting sends your beta profile directly to Z Labs for quiet
-              review.
+              A short note is enough. Submitting sends your beta profile
+              directly to Z Labs for quiet review.
             </div>
           </div>
-          <div className="text-sm text-ink/50 lg:text-right">
-            A short read before you request access.
+          <div className="max-w-sm text-sm leading-6 text-ink/50 lg:justify-self-end lg:text-right">
+            Read this as an invitation, not a formal application.
           </div>
         </div>
 
@@ -99,12 +98,16 @@ export default function ApplyPage() {
           ))}
         </div>
 
-        <div className="mt-14 rounded-md border border-ink/10 bg-white p-4 sm:p-6">
+        <div className="mt-14 rounded-md border border-ink/10 bg-white/85 p-4 shadow-[0_12px_32px_rgba(16,16,16,0.04)] backdrop-blur sm:p-6">
           <div className="mb-6 border-b border-ink/10 pb-5">
-            <p className="text-sm text-ink/55">Beta profile</p>
+            <p className="text-sm text-ink/55">Beta note</p>
             <h2 className="mt-2 text-3xl leading-tight text-ink sm:text-4xl">
-              Share a concise introduction.
+              A concise introduction is enough.
             </h2>
+            <p className="mt-3 max-w-2xl leading-7 text-ink/60">
+              We read for clarity, curiosity, and signal. Precision matters
+              more than performance.
+            </p>
           </div>
           <div>
             <Suspense fallback={<p className="text-sm text-ink/55">Loading form...</p>}>

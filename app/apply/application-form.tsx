@@ -76,7 +76,7 @@ export function ApplicationForm() {
 
       setState("success");
       setMessage(
-        "Z Labs is in a period of research and curation. Your profile is in our beta access list. We will reach out when the timeline aligns."
+        "Z Labs is in a period of research and curation. Your note is in our beta access queue. We will reach out when the timing aligns."
       );
       setValues({ ...initialValues, email: values.email });
     } catch (error) {
@@ -96,6 +96,7 @@ export function ApplicationForm() {
           label="Full name"
           value={values.fullName}
           onChange={(value) => updateField("fullName", value)}
+          placeholder="How you would like to be known"
           required
         />
         <Field
@@ -116,12 +117,14 @@ export function ApplicationForm() {
           label="Current role"
           value={values.currentRole}
           onChange={(value) => updateField("currentRole", value)}
+          placeholder="Researcher, founder, operator, student, etc."
           required
         />
         <Field
           label="Company / institution"
           value={values.company}
           onChange={(value) => updateField("company", value)}
+          placeholder="Current home base"
           required
         />
         <Field
@@ -149,7 +152,7 @@ export function ApplicationForm() {
           disabled={state === "loading" || state === "success"}
           className="group inline-flex h-12 items-center justify-center gap-2 rounded-md bg-ink px-5 text-sm font-medium text-white transition duration-300 hover:bg-zlabs-blue-deep focus:outline-none focus:ring-2 focus:ring-zlabs-blue-deep focus:ring-offset-2 focus:ring-offset-white disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {state === "loading" ? "Submitting" : "Join the Beta"}
+          {state === "loading" ? "Sending" : "Request beta access"}
           <ArrowRight
             aria-hidden="true"
             className="h-4 w-4 transition duration-300 group-hover:translate-x-1"

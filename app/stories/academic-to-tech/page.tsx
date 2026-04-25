@@ -103,7 +103,6 @@ export default function AcademicToTechStoryPage() {
 
       <header className="mx-auto flex max-w-[1180px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <Link href="/" className="brand-mark">
-          <span className="z-mark">Z</span>
           <span className="brand-text">Z Labs</span>
         </Link>
         <div className="flex items-center gap-6 text-ink/70">
@@ -139,6 +138,10 @@ export default function AcademicToTechStoryPage() {
               <span className="story-meta-divider">|</span>
               <span>11 min read</span>
             </div>
+            <p className="story-hero-note mt-6 max-w-2xl">
+              A practical field guide for translating research depth into hiring
+              signal, representative work, and cleaner career narrative.
+            </p>
           </div>
 
           <div className="story-hero-visual gradient-visual gradient-academic-tech">
@@ -504,9 +507,14 @@ export default function AcademicToTechStoryPage() {
 
           <aside className="story-aside">
             <div className="border-t border-ink/10 pt-5">
-              <p className="text-sm text-ink/55">For people in motion</p>
-              <p className="mt-3 max-w-sm leading-7 text-ink/65">
-                Z Labs is building quieter rooms for researchers, operators, and
+              <p className="text-sm text-ink/55">In this guide</p>
+              <ul className="story-aside-list mt-4">
+                <li>What academia actually trains well</li>
+                <li>How industry hiring reads signal</li>
+                <li>What proof artifacts change the conversation</li>
+              </ul>
+              <p className="mt-5 max-w-sm leading-7 text-ink/65">
+                Z Labs is making quieter rooms for researchers, operators, and
                 founders moving between research depth, product judgment, and
                 venture formation.
               </p>
