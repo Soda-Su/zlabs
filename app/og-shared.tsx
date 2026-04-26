@@ -52,6 +52,7 @@ export function OgTemplate({
     >
       <div
         style={{
+          display: "flex",
           position: "absolute",
           inset: "22px",
           borderRadius: "28px",
@@ -100,7 +101,7 @@ export function OgTemplate({
           >
             <div
               style={{
-                display: "inline-flex",
+                display: "flex",
                 alignItems: "center",
                 alignSelf: "flex-start",
                 padding: "12px 18px",
