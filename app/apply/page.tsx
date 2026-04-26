@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
+import {
+  absoluteUrl,
+  siteName,
+  siteUrl
+} from "../site-config";
 import { ApplicationForm } from "./application-form";
 
-const siteUrl = "https://thezlabs.org";
-const applyTitle = "Join Z Labs Beta | Researcher and Founder Access";
+const applyTitle = "Request Quiet Access | Z Labs Beta";
 const applyDescription =
-  "Request beta access to Z Labs, a Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.";
+  "Request quiet beta access to Z Labs, a Bay Area room for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.";
 
 const orientationItems = [
   {
@@ -29,6 +33,14 @@ const orientationItems = [
 export const metadata: Metadata = {
   title: applyTitle,
   description: applyDescription,
+  keywords: [
+    "Z Labs beta",
+    "Bay Area PhDs",
+    "researcher network",
+    "AI-native experience",
+    "knowledge economy",
+    "next-gen VC"
+  ],
   alternates: {
     canonical: "/apply"
   },
@@ -36,19 +48,79 @@ export const metadata: Metadata = {
     title: applyTitle,
     description: applyDescription,
     url: `${siteUrl}/apply`,
-    siteName: "Z Labs",
-    type: "website"
+    siteName,
+    type: "website",
+    images: [
+      {
+        url: `${siteUrl}/apply/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: applyTitle
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: applyTitle,
-    description: applyDescription
+    description: applyDescription,
+    images: [`${siteUrl}/apply/opengraph-image`]
   }
 };
 
 export default function ApplyPage() {
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${siteUrl}/apply#webpage`,
+      url: `${siteUrl}/apply`,
+      name: applyTitle,
+      description: applyDescription,
+      isPartOf: {
+        "@id": `${siteUrl}/#website`
+      },
+      about: {
+        "@id": `${siteUrl}/#organization`
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Apply",
+          item: absoluteUrl("/apply")
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: orientationItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer
+        }
+      }))
+    }
+  ];
+
   return (
     <main className="min-h-screen bg-alabaster text-ink">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <header className="mx-auto flex max-w-[1180px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <Link href="/" className="brand-mark">
           <span className="brand-text">Z Labs</span>

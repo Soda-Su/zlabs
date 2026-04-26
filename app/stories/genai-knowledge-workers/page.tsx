@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { KnowledgeWorkerPrelude } from "./knowledge-worker-prelude";
 
-const siteUrl = "https://thezlabs.org";
 const storyUrl = `${siteUrl}/stories/genai-knowledge-workers`;
+const articleTitle = "GenAI and the Knowledge Worker";
 const title = "GenAI and the Knowledge Worker | Z Labs Editorial";
 const description =
   "A Z Labs editorial on how GenAI changes knowledge work by making routine cognition cheaper and judgment, verification, and orchestration more valuable.";
@@ -44,6 +45,13 @@ const readingList = [
 export const metadata: Metadata = {
   title,
   description,
+  keywords: [
+    "GenAI and knowledge work",
+    "AI productivity",
+    "knowledge worker",
+    "judgment and verification",
+    "Z Labs editorial"
+  ],
   alternates: {
     canonical: "/stories/genai-knowledge-workers"
   },
@@ -51,43 +59,82 @@ export const metadata: Metadata = {
     title,
     description,
     url: storyUrl,
-    siteName: "Z Labs",
-    type: "article"
+    siteName,
+    type: "article",
+    publishedTime: "2026-04-24",
+    modifiedTime: "2026-04-24",
+    images: [
+      {
+        url: `${siteUrl}/stories/genai-knowledge-workers/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: articleTitle
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description
+    description,
+    images: [`${siteUrl}/stories/genai-knowledge-workers/opengraph-image`]
   }
 };
 
 export default function GenAIKnowledgeWorkerStoryPage() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: title,
-    description,
-    datePublished: "2026-04-24",
-    dateModified: "2026-04-24",
-    author: {
-      "@type": "Organization",
-      name: "Z Labs Editorial"
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: articleTitle,
+      description,
+      image: `${siteUrl}/stories/genai-knowledge-workers/opengraph-image`,
+      datePublished: "2026-04-24",
+      dateModified: "2026-04-24",
+      inLanguage: "en-US",
+      articleSection: "Editorial",
+      author: {
+        "@type": "Organization",
+        name: "Z Labs Editorial"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: siteName,
+        url: siteUrl
+      },
+      mainEntityOfPage: storyUrl,
+      about: [
+        "Generative AI",
+        "Knowledge work",
+        "AI productivity",
+        "Judgment and verification",
+        "Knowledge economy"
+      ]
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Z Labs",
-      url: siteUrl,
-      email: "chatwithsoda@gmail.com"
-    },
-    mainEntityOfPage: storyUrl,
-    about: [
-      "Generative AI",
-      "Knowledge work",
-      "AI productivity",
-      "Judgment and verification",
-      "Knowledge economy"
-    ]
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Editorial",
+          item: `${siteUrl}/#stories`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: articleTitle,
+          item: absoluteUrl("/stories/genai-knowledge-workers")
+        }
+      ]
+    }
+  ];
 
   return (
     <main className="story-shell text-ink">
@@ -120,7 +167,7 @@ export default function GenAIKnowledgeWorkerStoryPage() {
           <div>
             <p className="hero-kicker">Z Labs Editorial</p>
             <h1 className="mt-4 max-w-4xl text-5xl leading-[1.02] text-ink sm:text-6xl">
-              GenAI and the Knowledge Worker
+              {articleTitle}
             </h1>
             <p className="mt-6 max-w-3xl text-xl leading-8 text-ink/65">
               The first wave made generation abundant. The harder question is
@@ -142,7 +189,7 @@ export default function GenAIKnowledgeWorkerStoryPage() {
           <div className="story-hero-visual gradient-visual gradient-signal">
             <div className="story-visual-copy">
               <span className="story-visual-chip">Field guide</span>
-              <h2 className="story-visual-title">GenAI and the Knowledge Worker</h2>
+              <h2 className="story-visual-title">{articleTitle}</h2>
               <p className="story-visual-caption">
                 Cheap cognition, expensive judgment.
               </p>

@@ -190,6 +190,162 @@ input {
   opacity: 0.86;
 }
 
+.editorial-card-secondary .image-frame {
+  opacity: 0.94;
+}
+
+.editorial-card-secondary .image-frame {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.62);
+}
+
+.editorial-card-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.editorial-card-secondary:hover .image-plane {
+  transform: scale(1.015);
+}
+
+.editorial-card-secondary .editorial-link {
+  color: rgba(16, 16, 16, 0.62);
+}
+
+.editorial-card-subdued:hover {
+  transform: translateY(-1px);
+}
+
+.editorial-card-subdued .image-frame {
+  opacity: 0.94;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.56);
+  background-color: #eceae6;
+}
+
+.editorial-card-subdued:hover .image-frame {
+  box-shadow: 0 8px 24px rgba(16, 16, 16, 0.07);
+}
+
+.editorial-card-subdued .image-plane {
+  filter: saturate(0.58) brightness(0.98) contrast(0.94);
+}
+
+.editorial-card-subdued:hover .image-plane {
+  transform: scale(1.012);
+  filter: saturate(0.62) brightness(0.99) contrast(0.95);
+}
+
+.editorial-card-subdued p:not(.story-status),
+.editorial-card-subdued h3 {
+  color: rgba(16, 16, 16, 0.9);
+}
+
+.editorial-card-subdued .editorial-link {
+  color: rgba(16, 16, 16, 0.58);
+}
+
+.featured-panel {
+  min-width: 0;
+  border: 1px solid rgba(16, 16, 16, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(249, 248, 246, 0.92));
+  box-shadow: 0 8px 24px rgba(16, 16, 16, 0.04);
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.featured-panel:hover {
+  transform: translateY(-1px);
+  border-color: rgba(16, 16, 16, 0.12);
+  box-shadow: 0 12px 30px rgba(16, 16, 16, 0.05);
+}
+
+.featured-panel-link {
+  display: grid;
+  gap: 0.95rem;
+  padding: 0.85rem;
+}
+
+.featured-panel-visual {
+  position: relative;
+  min-height: 8.5rem;
+  border: 1px solid rgba(16, 16, 16, 0.08);
+  border-radius: 6px;
+  filter: saturate(0.52) brightness(0.98) contrast(0.94);
+}
+
+.featured-panel-visual::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.36));
+  content: "";
+}
+
+.featured-panel-label {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.64);
+  padding: 0 0.55rem;
+  color: rgba(16, 16, 16, 0.6);
+  font-size: 0.74rem;
+  line-height: 1;
+  backdrop-filter: blur(8px);
+}
+
+.featured-panel-copy {
+  min-width: 0;
+}
+
+.featured-panel-meta {
+  margin: 0;
+  color: rgba(16, 16, 16, 0.42);
+  font-size: 0.78rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.featured-panel-title {
+  margin: 0.4rem 0 0;
+  max-width: 20ch;
+  color: rgba(16, 16, 16, 0.88);
+  font-size: 1.26rem;
+  font-weight: 540;
+  line-height: 1.16;
+  transition: color 220ms ease;
+}
+
+.featured-panel:hover .featured-panel-title {
+  color: rgba(16, 16, 16, 0.94);
+}
+
+.featured-panel-text {
+  margin: 0.7rem 0 0;
+  max-width: 36rem;
+  color: rgba(16, 16, 16, 0.56);
+  font-size: 0.93rem;
+  line-height: 1.68;
+}
+
+.featured-panel-keywords {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+}
+
+.featured-panel .keyword-pill {
+  min-height: 1.55rem;
+  color: rgba(16, 16, 16, 0.46);
+  font-size: 0.71rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
 .editorial-link {
   display: inline-flex;
   align-items: center;
@@ -395,6 +551,18 @@ input {
 .visual-pill-large {
   padding: 1rem 1.8rem;
   font-size: 2rem;
+}
+
+.visual-pill-subdued {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.62);
+  color: rgba(16, 16, 16, 0.62);
+  box-shadow: 0 6px 18px rgba(16, 16, 16, 0.04);
+}
+
+.visual-pill-secondary {
+  padding: 0.72rem 1rem;
+  font-size: 1.06rem;
 }
 
 .keyword-pill {
@@ -1211,6 +1379,17 @@ input {
   .thesis-compare {
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: stretch;
+  }
+
+  .featured-panel-link {
+    grid-template-columns: minmax(10.5rem, 11.5rem) minmax(0, 1fr);
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .featured-panel-visual {
+    min-height: 100%;
+    height: 100%;
   }
 
   .thesis-diagram-card + .thesis-diagram-card {

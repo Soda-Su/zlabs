@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 
-const siteUrl = "https://thezlabs.org";
 const storyUrl = `${siteUrl}/stories/a-quieter-room-for-serious-people`;
-const title = "A quieter room for serious people | Z Labs Editorial";
+const articleTitle = "A Quieter Room for Serious People";
+const title = "A Quieter Room for Serious People | Z Labs Editorial";
 const description =
   "A Z Labs thesis on what real knowledge sharing requires in an age of noisy communities, weak ties, and constant professional performance.";
 
@@ -43,6 +44,14 @@ const readingList = [
 export const metadata: Metadata = {
   title,
   description,
+  keywords: [
+    "social thesis",
+    "knowledge sharing",
+    "research community",
+    "technical culture",
+    "trust infrastructure",
+    "Z Labs editorial"
+  ],
   alternates: {
     canonical: "/stories/a-quieter-room-for-serious-people"
   },
@@ -50,43 +59,82 @@ export const metadata: Metadata = {
     title,
     description,
     url: storyUrl,
-    siteName: "Z Labs",
-    type: "article"
+    siteName,
+    type: "article",
+    publishedTime: "2026-04-25",
+    modifiedTime: "2026-04-25",
+    images: [
+      {
+        url: `${siteUrl}/stories/a-quieter-room-for-serious-people/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: articleTitle
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description
+    description,
+    images: [`${siteUrl}/stories/a-quieter-room-for-serious-people/opengraph-image`]
   }
 };
 
 export default function AQuieterRoomStoryPage() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: title,
-    description,
-    datePublished: "2026-04-25",
-    dateModified: "2026-04-25",
-    author: {
-      "@type": "Organization",
-      name: "Z Labs Editorial"
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: articleTitle,
+      description,
+      image: `${siteUrl}/stories/a-quieter-room-for-serious-people/opengraph-image`,
+      datePublished: "2026-04-25",
+      dateModified: "2026-04-25",
+      inLanguage: "en-US",
+      articleSection: "Editorial",
+      author: {
+        "@type": "Organization",
+        name: "Z Labs Editorial"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: siteName,
+        url: siteUrl
+      },
+      mainEntityOfPage: storyUrl,
+      about: [
+        "Knowledge sharing",
+        "Community design",
+        "Trust",
+        "Social infrastructure",
+        "Technical culture"
+      ]
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Z Labs",
-      url: siteUrl,
-      email: "chatwithsoda@gmail.com"
-    },
-    mainEntityOfPage: storyUrl,
-    about: [
-      "Knowledge sharing",
-      "Community design",
-      "Trust",
-      "Social infrastructure",
-      "Technical culture"
-    ]
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Editorial",
+          item: `${siteUrl}/#stories`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: articleTitle,
+          item: absoluteUrl("/stories/a-quieter-room-for-serious-people")
+        }
+      ]
+    }
+  ];
 
   return (
     <main className="story-shell text-ink">
@@ -113,7 +161,7 @@ export default function AQuieterRoomStoryPage() {
         <div className="thesis-hero">
           <div className="thesis-hero-copy">
             <p className="hero-kicker">Z Labs Editorial</p>
-            <h1 className="thesis-title">A quieter room for serious people</h1>
+            <h1 className="thesis-title">{articleTitle}</h1>
             <p className="thesis-dek">
               Most communities are optimized for visibility, reach, and light
               exchange. That is not the same thing as a room where serious

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { PathPrelude } from "./path-prelude";
 
-const siteUrl = "https://thezlabs.org";
 const storyUrl = `${siteUrl}/stories/academic-to-tech`;
-const title = "Academic to Tech | Z Labs Editorial";
+const articleTitle = "Academic to Tech, Without Losing the Plot";
+const title = "Academic to Tech, Without Losing the Plot | Z Labs Editorial";
 const description =
   "A Z Labs editorial on moving from academia into tech without flattening your rigor, with practical guidance on role mapping, portfolio proof, and industry signal.";
 
@@ -49,6 +50,13 @@ const readingList = [
 export const metadata: Metadata = {
   title,
   description,
+  keywords: [
+    "academic to tech",
+    "PhD careers",
+    "research translation",
+    "career narrative",
+    "Z Labs editorial"
+  ],
   alternates: {
     canonical: "/stories/academic-to-tech"
   },
@@ -56,43 +64,82 @@ export const metadata: Metadata = {
     title,
     description,
     url: storyUrl,
-    siteName: "Z Labs",
-    type: "article"
+    siteName,
+    type: "article",
+    publishedTime: "2026-04-22",
+    modifiedTime: "2026-04-22",
+    images: [
+      {
+        url: `${siteUrl}/stories/academic-to-tech/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: articleTitle
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title,
-    description
+    description,
+    images: [`${siteUrl}/stories/academic-to-tech/opengraph-image`]
   }
 };
 
 export default function AcademicToTechStoryPage() {
-  const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: title,
-    description,
-    datePublished: "2026-04-22",
-    dateModified: "2026-04-22",
-    author: {
-      "@type": "Organization",
-      name: "Z Labs Editorial"
+  const structuredData = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: articleTitle,
+      description,
+      image: `${siteUrl}/stories/academic-to-tech/opengraph-image`,
+      datePublished: "2026-04-22",
+      dateModified: "2026-04-22",
+      inLanguage: "en-US",
+      articleSection: "Editorial",
+      author: {
+        "@type": "Organization",
+        name: "Z Labs Editorial"
+      },
+      publisher: {
+        "@type": "Organization",
+        name: siteName,
+        url: siteUrl
+      },
+      mainEntityOfPage: storyUrl,
+      about: [
+        "Academic to tech transition",
+        "PhD careers",
+        "AI-native experience",
+        "Knowledge economy",
+        "Next-gen VC"
+      ]
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Z Labs",
-      url: siteUrl,
-      email: "chatwithsoda@gmail.com"
-    },
-    mainEntityOfPage: storyUrl,
-    about: [
-      "Academic to tech transition",
-      "PhD careers",
-      "AI-native experience",
-      "Knowledge economy",
-      "Next-gen VC"
-    ]
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: siteUrl
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Editorial",
+          item: `${siteUrl}/#stories`
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: articleTitle,
+          item: absoluteUrl("/stories/academic-to-tech")
+        }
+      ]
+    }
+  ];
 
   return (
     <main className="story-shell text-ink">
@@ -125,7 +172,7 @@ export default function AcademicToTechStoryPage() {
           <div>
             <p className="hero-kicker">Z Labs Editorial</p>
             <h1 className="mt-4 max-w-4xl text-5xl leading-[1.02] text-ink sm:text-6xl">
-              Academic to Tech, without losing the plot
+              {articleTitle}
             </h1>
             <p className="mt-6 max-w-3xl text-xl leading-8 text-ink/65">
               The move out of academia is rarely a story about becoming less

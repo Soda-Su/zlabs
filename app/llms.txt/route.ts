@@ -1,12 +1,17 @@
-const siteUrl = "https://thezlabs.org";
+import {
+  contactEmail,
+  editorialArticles,
+  siteUrl,
+  xiaohongshuHandle
+} from "../site-config";
 
 export function GET() {
   const body = `# Z Labs
 
-Z Labs is a Bay Area ecosystem for PhDs, researchers, operators, and founders.
+Z Labs is a quieter Bay Area room for PhDs, researchers, operators, and founders.
 
 ## What it is
-Z Labs is a selective beta building a quieter room for deep technical people working across AI-native experience, the knowledge economy, and next-gen VC.
+Z Labs is a selective beta with an editorial and social thesis around research depth, AI-native experience, the knowledge economy, and next-gen VC.
 
 ## Who it is for
 It is for Bay Area PhDs, researchers, operators, and founders moving between research depth, product judgment, company building, and venture formation.
@@ -21,17 +26,17 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 ## Public URLs
 - ${siteUrl}/
 - ${siteUrl}/apply
-- ${siteUrl}/stories/academic-to-tech
-- ${siteUrl}/stories/genai-knowledge-workers
-- ${siteUrl}/stories/a-quieter-room-for-serious-people
+- ${siteUrl}/feed.xml
+${editorialArticles.map((article) => `- ${siteUrl}${article.path}`).join("\n")}
 
 ## Editorial
-- Academic to Tech, without losing the plot: ${siteUrl}/stories/academic-to-tech
-- GenAI and the Knowledge Worker: ${siteUrl}/stories/genai-knowledge-workers
-- A quieter room for serious people: ${siteUrl}/stories/a-quieter-room-for-serious-people
+${editorialArticles
+  .map((article) => `- ${article.title}: ${siteUrl}${article.path}`)
+  .join("\n")}
 
 ## Contact
-- chatwithsoda@gmail.com
+- Email: ${contactEmail}
+- Xiaohongshu / 小红书: ${xiaohongshuHandle}
 `;
 
   return new Response(body, {

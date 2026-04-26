@@ -1,37 +1,28 @@
 import { InviteForm } from "./invite-form";
-
-const siteUrl = "https://thezlabs.org";
-
-const chips = [
-  {
-    label: "Academic to Tech",
-    href: "/stories/academic-to-tech"
-  },
-  {
-    label: "Knowledge Work",
-    href: "/stories/genai-knowledge-workers"
-  },
-  {
-    label: "Social Thesis",
-    href: "/stories/a-quieter-room-for-serious-people"
-  }
-] as const;
+import {
+  absoluteUrl,
+  contactEmail,
+  siteDescription,
+  siteName,
+  siteUrl,
+  xiaohongshuHandle
+} from "./site-config";
 
 const featured = [
   {
-    title: "A private ecosystem for deep technical minds",
-    meta: "Featured",
-    text: "A quiet foundation for Bay Area PhDs shaping AI-native experience, the knowledge economy, and the next wave of venture creation.",
-    keywords: ["Stealth curation", "Research depth", "Patient infrastructure"],
-    href: "#membership",
+    title: "Z Labs",
+    meta: "Private Circle",
+    text: "A quieter Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI-native experience, the knowledge economy, and next-gen VC.",
+    keywords: ["Bay Area room", "Research depth", "Patient trust"],
+    href: "/apply",
     visual: "gradient-aurora",
-    visualLabel: "Z Labs Ecosystem (The Hub)"
+    visualLabel: "Z Labs"
   },
   {
     title: "Z Dinners",
-    meta: "Stealth gathering",
+    meta: "Stealth Gathering",
     text: "Off-record dinners where researchers, operators, and founders compare signals, test unfinished ideas, and find sharp company before the market catches up.",
-    keywords: ["Private table", "Slow trust", "Bay Area"],
+    keywords: ["Private table", "Slow trust", "Sharp company"],
     href: "/apply",
     visual: "gradient-dinners",
     visualLabel: "Z Dinners"
@@ -64,7 +55,7 @@ const ecosystemValues = [
 
 const stories = [
   {
-    title: "Academic to Tech, without losing the plot",
+    title: "Academic to Tech, Without Losing the Plot",
     meta: "Editorial",
     highlight: "Field guide",
     text: "A practical guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
@@ -83,7 +74,7 @@ const stories = [
     footerLabel: "Read essay"
   },
   {
-    title: "A quieter room for serious people",
+    title: "A Quieter Room for Serious People",
     meta: "Social thesis",
     text: "A thesis on what real knowledge sharing requires when most communities optimize for noise, visibility, and weak ties.",
     visual: "gradient-bridge",
@@ -105,7 +96,9 @@ function ImageCard({
   highlight,
   footerLabel,
   compact = false,
-  large = false
+  large = false,
+  secondary = false,
+  subdued = false
 }: {
   title: string;
   meta: string;
@@ -119,6 +112,8 @@ function ImageCard({
   footerLabel?: string;
   compact?: boolean;
   large?: boolean;
+  secondary?: boolean;
+  subdued?: boolean;
 }) {
   const content = (
     <>
@@ -128,6 +123,8 @@ function ImageCard({
         className={
           large
             ? "image-frame aspect-[4/3]"
+            : subdued
+              ? "image-frame aspect-[16/8.5]"
             : compact
               ? "image-frame aspect-[16/9]"
               : "image-frame aspect-square"
@@ -135,7 +132,17 @@ function ImageCard({
       >
         <div className={`image-plane gradient-visual ${visual}`}>
           <div
-            className={large ? "visual-pill visual-pill-large" : "visual-pill"}
+            className={
+              large
+                ? subdued
+                  ? "visual-pill visual-pill-large visual-pill-subdued"
+                  : "visual-pill visual-pill-large"
+                : secondary
+                  ? "visual-pill visual-pill-secondary"
+                  : subdued
+                    ? "visual-pill visual-pill-subdued"
+                  : "visual-pill"
+            }
           >
             {visualLabel}
           </div>
@@ -153,9 +160,13 @@ function ImageCard({
           className={
             large
               ? "mt-2 max-w-2xl text-3xl leading-tight text-ink sm:text-4xl"
+              : subdued
+                ? "mt-2 max-w-xl text-[1.28rem] leading-tight text-ink"
               : compact
-                ? "mt-2 max-w-xl text-2xl leading-tight text-ink"
-              : "mt-2 text-xl leading-tight text-ink"
+                ? secondary
+                  ? "mt-2 max-w-lg text-[1.4rem] leading-tight text-ink"
+                  : "mt-2 max-w-xl text-2xl leading-tight text-ink"
+                : "mt-2 text-xl leading-tight text-ink"
           }
         >
           {title}
@@ -165,9 +176,13 @@ function ImageCard({
             className={
               large
                 ? "mt-4 max-w-2xl leading-7 text-ink/65"
+                : subdued
+                  ? "mt-3 max-w-xl text-[0.92rem] leading-6 text-ink/58"
                 : compact
-                  ? "mt-3 max-w-xl leading-7 text-ink/65"
-                : "mt-3 max-w-md text-sm leading-6 text-ink/65"
+                  ? secondary
+                    ? "mt-3 max-w-lg text-[0.96rem] leading-6 text-ink/60"
+                    : "mt-3 max-w-xl leading-7 text-ink/65"
+                  : "mt-3 max-w-md text-sm leading-6 text-ink/65"
             }
           >
             {text}
@@ -193,7 +208,7 @@ function ImageCard({
 
   return (
     <article
-      className={`editorial-card ${status ? "editorial-card-muted" : ""}`}
+      className={`editorial-card ${status ? "editorial-card-muted" : ""} ${secondary ? "editorial-card-secondary" : ""} ${subdued ? "editorial-card-subdued" : ""}`}
     >
       {href ? (
         <a className="block focus:outline-none" href={href}>
@@ -206,17 +221,60 @@ function ImageCard({
   );
 }
 
+function FeaturedPanel({
+  title,
+  meta,
+  text,
+  keywords,
+  href,
+  visual,
+  visualLabel
+}: {
+  title: string;
+  meta: string;
+  text: string;
+  keywords: string[];
+  href: string;
+  visual: string;
+  visualLabel: string;
+}) {
+  return (
+    <article className="featured-panel">
+      <a className="featured-panel-link" href={href}>
+        <div
+          aria-label={visualLabel}
+          role="img"
+          className={`featured-panel-visual gradient-visual ${visual}`}
+        >
+          <span className="featured-panel-label">{visualLabel}</span>
+        </div>
+        <div className="featured-panel-copy">
+          <p className="featured-panel-meta">{meta}</p>
+          <h3 className="featured-panel-title">{title}</h3>
+          <p className="featured-panel-text">{text}</p>
+          <div className="featured-panel-keywords">
+            {keywords.map((keyword) => (
+              <span key={keyword} className="keyword-pill">
+                {keyword}
+              </span>
+            ))}
+          </div>
+        </div>
+      </a>
+    </article>
+  );
+}
+
 export default function Home() {
   const structuredData = [
     {
       "@context": "https://schema.org",
       "@type": "Organization",
       "@id": `${siteUrl}/#organization`,
-      name: "Z Labs",
+      name: siteName,
       url: `${siteUrl}/`,
-      email: "chatwithsoda@gmail.com",
-      description:
-        "A Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.",
+      email: contactEmail,
+      description: siteDescription,
       foundingDate: "2026",
       foundingLocation: {
         "@type": "Place",
@@ -232,6 +290,14 @@ export default function Home() {
         "next-gen VC",
         "Bay Area PhDs",
         "Z Dinners"
+      ],
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "editorial inquiries",
+          email: contactEmail,
+          availableLanguage: ["English", "Chinese"]
+        }
       ]
     },
     {
@@ -239,9 +305,8 @@ export default function Home() {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
       url: `${siteUrl}/`,
-      name: "Z Labs",
-      description:
-        "A Bay Area ecosystem for PhDs, researchers, operators, and founders working across AI-native experience, the knowledge economy, and next-gen VC.",
+      name: siteName,
+      description: siteDescription,
       publisher: {
         "@id": `${siteUrl}/#organization`
       },
@@ -249,12 +314,12 @@ export default function Home() {
     },
     {
       "@context": "https://schema.org",
-      "@type": "AboutPage",
-      "@id": `${siteUrl}/#about-page`,
+      "@type": "CollectionPage",
+      "@id": `${siteUrl}/#collection-page`,
       url: `${siteUrl}/`,
       name: "Z Labs",
       description:
-        "An editorial-style overview of Z Labs, its Bay Area focus, and its work across AI-native experience, the knowledge economy, and next-gen VC.",
+        "A public editorial overview of Z Labs, its Bay Area focus, and its work across AI-native experience, the knowledge economy, and next-gen VC.",
       isPartOf: {
         "@id": `${siteUrl}/#website`
       },
@@ -264,7 +329,27 @@ export default function Home() {
       audience: {
         "@type": "Audience",
         audienceType: "Bay Area PhDs, researchers, operators, and founders"
-      }
+      },
+      hasPart: stories.map((story) => ({
+        "@type": "Article",
+        headline: story.title,
+        url: absoluteUrl(story.href)
+      }))
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "@id": `${siteUrl}/#editorial-list`,
+      name: "Z Labs Editorial",
+      itemListOrder: "https://schema.org/ItemListOrderAscending",
+      numberOfItems: stories.length,
+      itemListElement: stories.map((story, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: absoluteUrl(story.href),
+        name: story.title,
+        description: story.text
+      }))
     }
   ];
 
@@ -282,14 +367,14 @@ export default function Home() {
           aria-label="Primary navigation"
           className="hidden items-center gap-7 text-ink/70 md:flex"
         >
+          <a className="quiet-link" href="#stories">
+            Editorial
+          </a>
           <a className="quiet-link" href="#featured">
-            Featured
+            How We Gather
           </a>
           <a className="quiet-link" href="#ecosystem">
             Ecosystem
-          </a>
-          <a className="quiet-link" href="#stories">
-            Editorial
           </a>
           <a className="quiet-link" href="#membership">
             Beta
@@ -307,10 +392,9 @@ export default function Home() {
           <sup className="stealth-tag">[ Stealth Mode ]</sup>
         </h1>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-ink/65">
-          A forthcoming ecosystem for Bay Area PhDs, quietly building the
-          social and editorial foundation for AI-native experience, the
-          knowledge economy, and
-          <span className="whitespace-nowrap"> next-gen VC</span>.
+          A private Bay Area room for PhDs, researchers, operators, and
+          founders comparing notes on AI-native experience, the knowledge
+          economy, and <span className="whitespace-nowrap">next-gen VC</span>.
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <InviteForm
@@ -318,34 +402,6 @@ export default function Home() {
             buttonLabel="Join the Beta"
             variant="hero"
           />
-        </div>
-        <div className="mt-6 flex flex-wrap justify-center gap-2">
-          {chips.map((chip) => (
-            <a key={chip.label} href={chip.href} className="chip-link">
-              {chip.label}
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="featured"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
-      >
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <h2 className="text-2xl leading-tight sm:text-3xl">Featured</h2>
-          <a
-            className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/apply"
-          >
-            Join the Beta
-          </a>
-        </div>
-        <div className="grid gap-8 lg:grid-cols-[1.6fr_0.9fr] lg:items-start">
-          <ImageCard {...featured[0]} large />
-          <div className="lg:pt-0">
-            <ImageCard {...featured[1]} compact />
-          </div>
         </div>
       </section>
 
@@ -368,9 +424,38 @@ export default function Home() {
             Join the Beta
           </a>
         </div>
-        <div className="grid gap-x-6 gap-y-10 md:grid-cols-3">
-          {stories.map((story) => (
-            <ImageCard key={story.title} {...story} />
+        <div className="grid gap-8 lg:grid-cols-[1.6fr_0.9fr] lg:items-start">
+          <ImageCard {...stories[0]} large />
+          <div className="grid gap-8">
+            <ImageCard {...stories[1]} compact secondary />
+            <ImageCard {...stories[2]} compact secondary />
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="featured"
+        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+      >
+        <div className="mb-6 flex items-end justify-between gap-6">
+          <div>
+            <h2 className="text-2xl leading-tight sm:text-3xl">
+              How We Gather
+            </h2>
+            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
+              The room itself, and one way it begins to take form.
+            </p>
+          </div>
+          <a
+            className="quiet-link hidden text-sm text-ink/60 sm:inline"
+            href="/apply"
+          >
+            Join the Beta
+          </a>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2">
+          {featured.map((item) => (
+            <FeaturedPanel key={item.title} {...item} />
           ))}
         </div>
       </section>
@@ -381,8 +466,7 @@ export default function Home() {
       >
         <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
           <div>
-            <p className="text-sm text-ink/55">Stealth thesis</p>
-            <h2 className="mt-2 max-w-xl text-3xl leading-tight sm:text-4xl">
+            <h2 className="max-w-xl text-3xl leading-tight sm:text-4xl">
               The Vision
             </h2>
             <p className="mt-5 max-w-xl leading-7 text-ink/65">
@@ -462,15 +546,16 @@ export default function Home() {
             <a href="#" className="brand-mark justify-center">
               <span className="brand-text">Z Labs</span>
             </a>
-            <p className="mt-5 leading-7 text-ink/60">
+            <p className="mt-5 text-lg leading-8 text-ink/58">
               Est. 2026. Built with patience in San Francisco.
             </p>
-            <a
-              className="quiet-link mt-4 inline-flex text-sm text-ink/60"
-              href="mailto:chatwithsoda@gmail.com"
-            >
-              chatwithsoda@gmail.com
-            </a>
+            <p className="mt-3 text-sm leading-6 text-ink/50">
+              <a className="quiet-link" href={`mailto:${contactEmail}`}>
+                Email: {contactEmail}
+              </a>
+              <span className="px-2 text-ink/28">|</span>
+              <span>Xiaohongshu / 小红书: {xiaohongshuHandle}</span>
+            </p>
           </div>
         </div>
       </footer>
