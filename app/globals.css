@@ -95,6 +95,72 @@ input {
   animation: fadeUp 620ms ease-out 120ms both;
 }
 
+.apply-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  background: rgba(247, 247, 247, 0.72);
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.apply-modal-panel {
+  width: min(1120px, 100%);
+  margin: 2rem auto;
+  border: 1px solid rgba(16, 16, 16, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 28px 90px rgba(16, 16, 16, 0.1);
+}
+
+.apply-modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.apply-modal-close {
+  display: inline-flex;
+  height: 2.5rem;
+  width: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(16, 16, 16, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.82);
+  color: rgba(16, 16, 16, 0.62);
+  transition: border-color 220ms ease, color 220ms ease, background 220ms ease;
+}
+
+.apply-modal-close:hover {
+  border-color: rgba(16, 16, 16, 0.18);
+  background: #ffffff;
+  color: rgba(16, 16, 16, 0.86);
+}
+
+.apply-modal-body {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.25rem;
+}
+
+.apply-modal-note {
+  border-bottom: 1px solid rgba(16, 16, 16, 0.08);
+  padding-bottom: 1rem;
+}
+
+.apply-modal-form {
+  min-width: 0;
+}
+
 .application-form {
   color: var(--ink);
 }
@@ -344,6 +410,94 @@ input {
   color: rgba(16, 16, 16, 0.46);
   font-size: 0.71rem;
   background: rgba(255, 255, 255, 0.5);
+}
+
+.affiliation-rail {
+  margin-top: 1.55rem;
+}
+
+.affiliation-rail-vision {
+  margin-top: 1rem;
+  margin-bottom: 0.15rem;
+  max-width: 100%;
+}
+
+.affiliation-logo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem 0.8rem;
+  max-width: 100%;
+}
+
+.affiliation-logo-item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  opacity: 0.68;
+  filter: grayscale(1) contrast(1.04);
+}
+
+.affiliation-logo-item-strong {
+  opacity: 0.76;
+  filter: grayscale(1) contrast(1.08);
+}
+
+.affiliation-logo-mark {
+  display: block;
+  width: 100%;
+  max-width: 8.2rem;
+  height: 1.12rem;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.membership-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.membership-stats {
+  display: grid;
+  gap: 0.95rem;
+  margin-top: 1.8rem;
+}
+
+.membership-stat {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 0.55rem;
+  padding-bottom: 0.15rem;
+}
+
+.membership-stat-value {
+  color: rgba(16, 16, 16, 0.82);
+  font-size: 1.85rem;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.membership-stat-label {
+  color: rgba(16, 16, 16, 0.58);
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.membership-thesis-link {
+  margin-top: 2rem;
+}
+
+.membership-thesis-title {
+  color: rgba(16, 16, 16, 0.84);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
+}
+
+.membership-thesis-copy {
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .editorial-link {
@@ -1385,6 +1539,48 @@ input {
     grid-template-columns: minmax(10.5rem, 11.5rem) minmax(0, 1fr);
     align-items: center;
     gap: 1rem;
+  }
+
+  .apply-modal-overlay {
+    padding: 2rem;
+  }
+
+  .apply-modal-panel {
+    margin: 3rem auto;
+  }
+
+  .apply-modal-header {
+    padding: 1.5rem 1.5rem 1.15rem;
+  }
+
+  .apply-modal-body {
+    grid-template-columns: minmax(15rem, 0.34fr) minmax(0, 1fr);
+    gap: 1.75rem;
+    padding: 1.5rem;
+  }
+
+  .apply-modal-note {
+    border-bottom: 0;
+    border-right: 1px solid rgba(16, 16, 16, 0.08);
+    padding-bottom: 0;
+    padding-right: 1.75rem;
+  }
+
+  .affiliation-logo-row {
+    flex-wrap: nowrap;
+    gap: 0.6rem 0.85rem;
+  }
+
+  .membership-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.3rem;
+  }
+
+  .membership-stat {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 0.35rem;
+    min-height: 4.2rem;
   }
 
   .featured-panel-visual {

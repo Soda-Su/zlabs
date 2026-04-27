@@ -1,4 +1,6 @@
-import { InviteForm } from "./invite-form";
+import Image from "next/image";
+import { HeroInvite } from "./hero-invite";
+import { HomeApplyShell } from "./home-apply-shell";
 import {
   absoluteUrl,
   contactEmail,
@@ -83,6 +85,68 @@ const stories = [
     footerLabel: "Read essay"
   }
 ];
+
+const affiliations = [
+  {
+    name: "Harvard",
+    src: "/logos/affiliations/harvard.svg",
+    width: 220,
+    height: 40,
+    maxWidth: "6.8rem",
+    tone: "strong"
+  },
+  {
+    name: "MIT",
+    src: "/logos/affiliations/mit.svg",
+    width: 180,
+    height: 40,
+    maxWidth: "6.5rem"
+  },
+  {
+    name: "Stanford",
+    src: "/logos/affiliations/stanford.png",
+    width: 768,
+    height: 251,
+    maxWidth: "5.6rem"
+  },
+  {
+    name: "Google",
+    src: "/logos/affiliations/google.svg",
+    width: 164,
+    height: 40,
+    maxWidth: "5.4rem"
+  },
+  {
+    name: "Netflix",
+    src: "/logos/affiliations/netflix.svg",
+    width: 176,
+    height: 40,
+    maxWidth: "4.4rem"
+  },
+  {
+    name: "ByteDance",
+    src: "/logos/affiliations/bytedance.svg",
+    width: 128,
+    height: 40,
+    maxWidth: "5.5rem",
+    tone: "strong"
+  }
+] as const;
+
+const membershipStats = [
+  {
+    value: "50+",
+    label: "PhD Members"
+  },
+  {
+    value: "10+",
+    label: "Top Tech Companies"
+  },
+  {
+    value: "3",
+    label: "Ivy League Affiliations"
+  }
+] as const;
 
 function ImageCard({
   title,
@@ -354,7 +418,8 @@ export default function Home() {
   ];
 
   return (
-    <main className="min-h-screen bg-alabaster text-ink">
+    <HomeApplyShell>
+      <main className="min-h-screen bg-alabaster text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -397,11 +462,7 @@ export default function Home() {
           economy, and <span className="whitespace-nowrap">next-gen VC</span>.
         </p>
         <div className="mt-9 w-full max-w-3xl">
-          <InviteForm
-            placeholder="Join Z Labs beta"
-            buttonLabel="Join the Beta"
-            variant="hero"
-          />
+          <HeroInvite />
         </div>
       </section>
 
@@ -491,6 +552,34 @@ export default function Home() {
                   <p className="mt-4 max-w-2xl text-sm leading-6 text-ink/50">
                     {item.outcome}
                   </p>
+                  {item.service === "01" ? (
+                    <div
+                      className="affiliation-rail affiliation-rail-vision"
+                      aria-label="Selected affiliations"
+                    >
+                      <div className="affiliation-logo-row">
+                        {affiliations.map((logo) => (
+                          <div
+                            key={logo.name}
+                            className={`affiliation-logo-item${
+                              logo.tone === "strong"
+                                ? " affiliation-logo-item-strong"
+                                : ""
+                            }`}
+                          >
+                            <Image
+                              src={logo.src}
+                              alt={logo.name}
+                              width={logo.width}
+                              height={logo.height}
+                              className="affiliation-logo-mark"
+                              style={{ maxWidth: logo.maxWidth }}
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
               </article>
             ))}
@@ -502,36 +591,36 @@ export default function Home() {
         id="membership"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
             <p className="text-sm text-ink/55">For beta members</p>
             <h2 className="mt-2 max-w-2xl text-4xl leading-tight sm:text-5xl">
               Intelligence with a social life.
             </h2>
           </div>
-          <div>
-            <p className="max-w-2xl leading-7 text-ink/65">
+          <div className="membership-stack">
+            <p className="max-w-2xl text-[1.02rem] leading-8 text-ink/65">
               Z Labs is in a long period of research and curation, preparing a
               selective beta for PhDs, research operators, and technical
               founders who move with trust and high-quality execution.
             </p>
-            <div className="mt-7 flex flex-col gap-3 text-lg text-ink/75 sm:flex-row sm:flex-wrap">
-              <span>50+ PhD Members</span>
-              <span className="hidden text-ink/30 sm:inline">|</span>
-              <span>10+ Top Tech Companies</span>
-              <span className="hidden text-ink/30 sm:inline">|</span>
-              <span>3 Ivy League Affiliations</span>
+            <div className="membership-stats" aria-label="Membership summary">
+              {membershipStats.map((item) => (
+                <div key={item.label} className="membership-stat">
+                  <div className="membership-stat-value">{item.value}</div>
+                  <div className="membership-stat-label">{item.label}</div>
+                </div>
+              ))}
             </div>
-            <div className="mt-8 border-t border-ink/10 pt-5">
+            <div className="membership-thesis-link border-t border-ink/10 pt-5">
               <a
-                className="quiet-link inline-flex flex-wrap items-center gap-2 text-sm text-ink/62"
+                className="quiet-link inline-flex flex-col items-start gap-1 text-sm text-ink/62"
                 href="/stories/a-quieter-room-for-serious-people"
               >
-                <span>
+                <span className="membership-thesis-title">
                   &ldquo;A QUIETER ROOM FOR SERIOUS PEOPLE&rdquo;
                 </span>
-                <span className="text-ink/38">|</span>
-                <span className="text-ink/52">
+                <span className="membership-thesis-copy text-ink/52">
                   less noise, more trust, deeper knowledge sharing
                 </span>
               </a>
@@ -559,6 +648,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </main>
+      </main>
+    </HomeApplyShell>
   );
 }

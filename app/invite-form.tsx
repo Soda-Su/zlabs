@@ -10,12 +10,14 @@ type InviteFormProps = {
   placeholder?: string;
   buttonLabel?: string;
   variant?: "hero" | "footer";
+  onValidEmail?: (email: string) => void;
 };
 
 export function InviteForm({
   placeholder = "Join Z Labs beta",
   buttonLabel = "Join the Beta",
-  variant = "hero"
+  variant = "hero",
+  onValidEmail
 }: InviteFormProps) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState<SubmitState>("idle");
@@ -36,6 +38,12 @@ export function InviteForm({
 
     setState("success");
     setMessage("Opening beta access.");
+
+    if (onValidEmail) {
+      onValidEmail(trimmedEmail);
+      return;
+    }
+
     window.location.href = `/apply?email=${encodeURIComponent(trimmedEmail)}`;
   }
 

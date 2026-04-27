@@ -2,7 +2,7 @@
 
 import type { FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
@@ -29,12 +29,19 @@ const initialValues: FormValues = {
 
 const formspreeEndpoint = "https://formspree.io/f/xbdqaydw";
 
-export function ApplicationForm() {
+export function ApplicationForm({
+  initialEmailOverride
+}: {
+  initialEmailOverride?: string;
+}) {
   const searchParams = useSearchParams();
-  const initialEmail = useMemo(
-    () => searchParams.get("email")?.trim() ?? "",
-    [searchParams]
-  );
+  const initialEmail = useMemo(() => {
+    if (typeof initialEmailOverride === "string") {
+      return initialEmailOverride.trim();
+    }
+
+    return searchParams.get("email")?.trim() ?? "";
+  }, [initialEmailOverride, searchParams]);
   const [values, setValues] = useState<FormValues>({
     ...initialValues,
     email: initialEmail
@@ -45,6 +52,12 @@ export function ApplicationForm() {
   function updateField(field: keyof FormValues, value: string) {
     setValues((current) => ({ ...current, [field]: value }));
   }
+
+  useEffect(() => {
+    setValues((current) =>
+      current.email === initialEmail ? current : { ...current, email: initialEmail }
+    );
+  }, [initialEmail]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
