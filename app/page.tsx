@@ -86,7 +86,16 @@ const stories = [
   }
 ];
 
-const affiliations = [
+type Affiliation = {
+  name: string;
+  src: string;
+  width: number;
+  height: number;
+  maxWidth: string;
+  tone?: "strong";
+};
+
+const affiliations: Affiliation[] = [
   {
     name: "Harvard",
     src: "/logos/affiliations/harvard.svg",
@@ -131,7 +140,7 @@ const affiliations = [
     maxWidth: "5.5rem",
     tone: "strong"
   }
-] as const;
+];
 
 const membershipStats = [
   {
