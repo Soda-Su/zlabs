@@ -3,6 +3,7 @@
 import type { MouseEvent, ReactNode } from "react";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
+import posthog from "posthog-js";
 import { ApplicationForm } from "./apply/application-form";
 
 export function HomeApplyShell({
@@ -23,7 +24,7 @@ export function HomeApplyShell({
 
     function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        closeModal();
       }
     }
 
@@ -60,6 +61,12 @@ export function HomeApplyShell({
   function openModal(nextEmail = "") {
     setEmail(nextEmail);
     setIsOpen(true);
+    posthog.capture("apply_modal_opened", { email_prefilled: nextEmail !== "" });
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+    posthog.capture("apply_modal_dismissed");
   }
 
   function handleApplyLinkCapture(event: MouseEvent<HTMLDivElement>) {
@@ -105,7 +112,7 @@ export function HomeApplyShell({
         <div
           className="apply-modal-overlay"
           role="presentation"
-          onClick={() => setIsOpen(false)}
+          onClick={closeModal}
         >
           <div
             role="dialog"
@@ -131,7 +138,7 @@ export function HomeApplyShell({
                 type="button"
                 aria-label="Close beta access form"
                 className="apply-modal-close"
-                onClick={() => setIsOpen(false)}
+                onClick={closeModal}
               >
                 <X className="h-5 w-5" aria-hidden="true" />
               </button>

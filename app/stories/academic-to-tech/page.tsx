@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { PathPrelude } from "./path-prelude";
+import { StoryViewTracker } from "../story-view-tracker";
 
 const storyUrl = `${siteUrl}/stories/academic-to-tech`;
 const articleTitle = "Academic to Tech, Without Losing the Plot";
@@ -162,6 +163,7 @@ export default function AcademicToTechStoryPage() {
         </div>
       </header>
 
+      <StoryViewTracker slug="academic-to-tech" title={articleTitle} />
       <PathPrelude />
 
       <section

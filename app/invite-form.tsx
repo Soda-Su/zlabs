@@ -3,6 +3,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import { ArrowRight, Mail } from "lucide-react";
+import posthog from "posthog-js";
 
 type SubmitState = "idle" | "success" | "error";
 
@@ -38,6 +39,9 @@ export function InviteForm({
 
     setState("success");
     setMessage("Opening beta access.");
+
+    posthog.identify(trimmedEmail, { email: trimmedEmail });
+    posthog.capture("beta_email_submitted", { variant, email: trimmedEmail });
 
     if (onValidEmail) {
       onValidEmail(trimmedEmail);

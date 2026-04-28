@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, siteName, siteUrl } from "../../site-config";
+import { StoryViewTracker } from "../story-view-tracker";
 
 const storyUrl = `${siteUrl}/stories/a-quieter-room-for-serious-people`;
 const articleTitle = "A Quieter Room for Serious People";
@@ -157,6 +158,7 @@ export default function AQuieterRoomStoryPage() {
         </div>
       </header>
 
+      <StoryViewTracker slug="a-quieter-room-for-serious-people" title={articleTitle} />
       <section className="mx-auto max-w-[1180px] px-4 pb-8 pt-12 sm:px-6 lg:px-8">
         <div className="thesis-hero">
           <div className="thesis-hero-copy">

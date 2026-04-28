@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { KnowledgeWorkerPrelude } from "./knowledge-worker-prelude";
+import { StoryViewTracker } from "../story-view-tracker";
 
 const storyUrl = `${siteUrl}/stories/genai-knowledge-workers`;
 const articleTitle = "GenAI and the Knowledge Worker";
@@ -157,6 +158,7 @@ export default function GenAIKnowledgeWorkerStoryPage() {
         </div>
       </header>
 
+      <StoryViewTracker slug="genai-knowledge-workers" title={articleTitle} />
       <KnowledgeWorkerPrelude />
 
       <section

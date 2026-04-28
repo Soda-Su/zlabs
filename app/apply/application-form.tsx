@@ -4,6 +4,7 @@ import type { FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
 import { ArrowRight } from "lucide-react";
+import posthog from "posthog-js";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
@@ -87,12 +88,26 @@ export function ApplicationForm({
         throw new Error("Beta profile could not be submitted.");
       }
 
+      posthog.identify(values.email, {
+        email: values.email,
+        name: values.fullName,
+        current_role: values.currentRole,
+        company: values.company,
+      });
+      posthog.capture("beta_profile_submitted", {
+        current_role: values.currentRole,
+        company: values.company,
+      });
       setState("success");
       setMessage(
         "Z Labs is in a period of research and curation. Your note is in our beta access queue. We will reach out when the timing aligns."
       );
       setValues({ ...initialValues, email: values.email });
     } catch (error) {
+      posthog.captureException(error);
+      posthog.capture("beta_profile_submission_failed", {
+        error_message: error instanceof Error ? error.message : "Unknown error",
+      });
       setState("error");
       setMessage(
         error instanceof Error
