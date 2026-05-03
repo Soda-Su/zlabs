@@ -1,38 +1,30 @@
 <wizard-report>
 # PostHog post-wizard report
 
-The wizard has completed a deep integration of PostHog analytics into the Z Labs Next.js App Router project. Here is a summary of all changes made:
-
-**Initialization:**
-- Created `instrumentation-client.ts` at the project root — initializes `posthog-js` with the reverse proxy (`/ingest`), `defaults: "2026-01-30"`, and `capture_exceptions: true` for automatic error tracking.
-- Updated `next.config.mjs` to add PostHog reverse proxy rewrites (`/ingest/static/*`, `/ingest/array/*`, `/ingest/:path*`) and `skipTrailingSlashRedirect: true`.
-- Set `NEXT_PUBLIC_POSTHOG_KEY` and `NEXT_PUBLIC_POSTHOG_HOST` in `.env.local`.
-
-**Event tracking:**
+The wizard has completed a deep integration of your project. The project already had a solid PostHog foundation in place — `posthog-js` was installed, `instrumentation-client.ts` initialized PostHog using the `NEXT_PUBLIC_POSTHOG_KEY` env variable, and `next.config.mjs` had the reverse-proxy rewrites configured. Several critical events were already being captured across the conversion funnel. The wizard verified and updated the environment variables, added the missing `story_cta_clicked` event via a new `StoryCTALink` client component, and connected it across all three story pages.
 
 | Event | Description | File |
 |---|---|---|
-| `beta_email_submitted` | User submits their email in the hero or footer invite form to begin the beta access flow. Properties: `variant`, `email`. Also calls `posthog.identify`. | `app/invite-form.tsx` |
-| `apply_modal_opened` | The beta access application modal opens on the home page. Properties: `email_prefilled`. | `app/home-apply-shell.tsx` |
-| `apply_modal_dismissed` | User closes the beta access application modal without submitting (overlay click, X button, or Escape key). | `app/home-apply-shell.tsx` |
-| `beta_profile_submitted` | User successfully submits the full beta access application form. Properties: `current_role`, `company`. Also calls `posthog.identify` with name, email, role, company. | `app/apply/application-form.tsx` |
-| `beta_profile_submission_failed` | Beta access application form submission fails. Properties: `error_message`. Also calls `posthog.captureException`. | `app/apply/application-form.tsx` |
-| `story_viewed` | User views an editorial story page. Properties: `story_slug`, `story_title`. | `app/stories/academic-to-tech/page.tsx`, `app/stories/genai-knowledge-workers/page.tsx`, `app/stories/a-quieter-room-for-serious-people/page.tsx` |
+| `beta_email_submitted` | User enters email in hero or footer invite form | `app/invite-form.tsx` |
+| `apply_modal_opened` | Apply modal opens (with `email_prefilled` flag) | `app/home-apply-shell.tsx` |
+| `apply_modal_dismissed` | Apply modal closed without submitting | `app/home-apply-shell.tsx` |
+| `beta_profile_submitted` | Full beta application successfully submitted | `app/apply/application-form.tsx` |
+| `beta_profile_submission_failed` | Beta application submission failed (with error message) | `app/apply/application-form.tsx` |
+| `story_viewed` | User viewed a story page (with slug and title) | `app/stories/story-view-tracker.tsx` |
+| `story_cta_clicked` | User clicked "Share your beta profile" CTA from a story aside | `app/stories/story-cta-link.tsx` |
 
-**New files created:**
-- `instrumentation-client.ts` — PostHog initialization
-- `app/stories/story-view-tracker.tsx` — Minimal client component for story view tracking
+User identification (`posthog.identify`) is called in `invite-form.tsx` on valid email submit and in `application-form.tsx` on successful profile submission. Exception capture (`posthog.captureException`) is called in `application-form.tsx` on submission errors.
 
 ## Next steps
 
 We've built some insights and a dashboard for you to keep an eye on user behavior, based on the events we just instrumented:
 
-- **Dashboard — Analytics basics:** https://us.posthog.com/project/401536/dashboard/1521006
-- **Beta conversion funnel** (story viewed → email submitted → modal opened → profile submitted): https://us.posthog.com/project/401536/insights/4LF4unca
-- **Beta email submissions over time:** https://us.posthog.com/project/401536/insights/kuT9wbCZ
-- **Beta profiles submitted over time:** https://us.posthog.com/project/401536/insights/3CBiZVgC
-- **Story views by story** (breakdown by `story_slug`): https://us.posthog.com/project/401536/insights/oEcFskle
-- **Apply modal: opened vs dismissed:** https://us.posthog.com/project/401536/insights/xbjUUaYL
+- **Dashboard — Analytics basics**: https://us.posthog.com/project/401536/dashboard/1521103
+- **Beta conversion funnel** (email → modal → profile submit): https://us.posthog.com/project/401536/insights/o5yroh8T
+- **Story views over time** (broken down by story slug): https://us.posthog.com/project/401536/insights/dozXDohy
+- **Story-to-application funnel** (viewed → CTA → submitted): https://us.posthog.com/project/401536/insights/QRguLExH
+- **Apply modal: opened vs dismissed**: https://us.posthog.com/project/401536/insights/nsgQqL9u
+- **Beta submission errors** (successes vs failures): https://us.posthog.com/project/401536/insights/qWncWeGO
 
 ### Agent skill
 

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { PathPrelude } from "./path-prelude";
 import { StoryViewTracker } from "../story-view-tracker";
+import { StoryCTALink } from "../story-cta-link";
 
 const storyUrl = `${siteUrl}/stories/academic-to-tech`;
 const articleTitle = "Academic to Tech, Without Losing the Plot";
@@ -568,9 +569,14 @@ export default function AcademicToTechStoryPage() {
                 venture formation.
               </p>
               <div className="mt-6 flex flex-col gap-3 text-sm">
-                <Link className="quiet-link text-ink/70" href="/apply">
+                <StoryCTALink
+                  href="/apply"
+                  slug="academic-to-tech"
+                  label="Share your beta profile"
+                  className="quiet-link text-ink/70"
+                >
                   Share your beta profile
-                </Link>
+                </StoryCTALink>
                 <Link className="quiet-link text-ink/70" href="/#stories">
                   Back to Stories
                 </Link>

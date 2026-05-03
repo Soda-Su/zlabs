@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, siteName, siteUrl } from "../../site-config";
 import { StoryViewTracker } from "../story-view-tracker";
+import { StoryCTALink } from "../story-cta-link";
 
 const storyUrl = `${siteUrl}/stories/a-quieter-room-for-serious-people`;
 const articleTitle = "A Quieter Room for Serious People";
@@ -401,9 +402,14 @@ export default function AQuieterRoomStoryPage() {
                 between research depth, technical judgment, and ambitious work.
               </p>
               <div className="mt-6 flex flex-col gap-3 text-sm">
-                <Link className="quiet-link text-ink/70" href="/apply">
+                <StoryCTALink
+                  href="/apply"
+                  slug="a-quieter-room-for-serious-people"
+                  label="Share your beta profile"
+                  className="quiet-link text-ink/70"
+                >
                   Share your beta profile
-                </Link>
+                </StoryCTALink>
                 <Link className="quiet-link text-ink/70" href="/#stories">
                   Back to Stories
                 </Link>
