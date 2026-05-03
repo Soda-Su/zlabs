@@ -26,6 +26,7 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 ## Public URLs
 - ${siteUrl}/
 - ${siteUrl}/apply
+- ${siteUrl}/dinners/startup-culture
 - ${siteUrl}/feed.xml
 ${editorialArticles.map((article) => `- ${siteUrl}${article.path}`).join("\n")}
 

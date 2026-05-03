@@ -15,6 +15,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.8
     },
+    {
+      url: `${siteUrl}/dinners/startup-culture`,
+      lastModified: "2026-05-02",
+      changeFrequency: "weekly",
+      priority: 0.84
+    },
     ...editorialArticles.map((article) => ({
       url: `${siteUrl}${article.path}`,
       lastModified: article.modifiedTime,

@@ -12,22 +12,26 @@ import {
 
 const featured = [
   {
+    title: "Z Dinners",
+    meta: "Stealth Gathering",
+    text: "The first table begins with one live question: what changes when you move between startup and big tech cultures, and how much of your work is really shaped by the room around you?",
+    keywords: ["Now convening", "By invitation in SF", "Startup x big tech"],
+    href: "/dinners/startup-culture",
+    visual: "gradient-dinners-evening",
+    visualLabel: "First Gathering",
+    status: "First Gathering",
+    footerLabel: "See first dinner",
+    spotlight: true
+  },
+  {
     title: "Z Labs",
     meta: "Private Circle",
     text: "A quieter Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI-native experience, the knowledge economy, and next-gen VC.",
     keywords: ["Bay Area room", "Research depth", "Patient trust"],
     href: "/apply",
     visual: "gradient-aurora",
-    visualLabel: "Z Labs"
-  },
-  {
-    title: "Z Dinners",
-    meta: "Stealth Gathering",
-    text: "Off-record dinners where researchers, operators, and founders compare signals, test unfinished ideas, and find sharp company before the market catches up.",
-    keywords: ["Private table", "Slow trust", "Sharp company"],
-    href: "/apply",
-    visual: "gradient-dinners",
-    visualLabel: "Z Dinners"
+    visualLabel: "Z Labs",
+    footerLabel: "Join the beta"
   }
 ];
 
@@ -301,7 +305,10 @@ function FeaturedPanel({
   keywords,
   href,
   visual,
-  visualLabel
+  visualLabel,
+  status,
+  footerLabel,
+  spotlight = false
 }: {
   title: string;
   meta: string;
@@ -310,9 +317,12 @@ function FeaturedPanel({
   href: string;
   visual: string;
   visualLabel: string;
+  status?: string;
+  footerLabel?: string;
+  spotlight?: boolean;
 }) {
   return (
-    <article className="featured-panel">
+    <article className={`featured-panel${spotlight ? " featured-panel-spotlight" : ""}`}>
       <a className="featured-panel-link" href={href}>
         <div
           aria-label={visualLabel}
@@ -322,7 +332,18 @@ function FeaturedPanel({
           <span className="featured-panel-label">{visualLabel}</span>
         </div>
         <div className="featured-panel-copy">
-          <p className="featured-panel-meta">{meta}</p>
+          <div className="flex flex-wrap items-center gap-2">
+            <p className="featured-panel-meta">{meta}</p>
+            {status ? (
+              <span
+                className={`story-status story-status-lead${
+                  spotlight ? " story-status-spotlight" : ""
+                }`}
+              >
+                {status}
+              </span>
+            ) : null}
+          </div>
           <h3 className="featured-panel-title">{title}</h3>
           <p className="featured-panel-text">{text}</p>
           <div className="featured-panel-keywords">
@@ -332,6 +353,11 @@ function FeaturedPanel({
               </span>
             ))}
           </div>
+          {footerLabel ? (
+            <div className="mt-5">
+              <span className="editorial-link">{footerLabel}</span>
+            </div>
+          ) : null}
         </div>
       </a>
     </article>
@@ -513,17 +539,17 @@ export default function Home() {
               How We Gather
             </h2>
             <p className="mt-2 max-w-2xl leading-7 text-ink/60">
-              The room itself, and one way it begins to take form.
+              The room itself, and the first table now taking shape.
             </p>
           </div>
           <a
             className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/apply"
+            href="/dinners/startup-culture"
           >
-            Join the Beta
+            See first dinner
           </a>
         </div>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid gap-4 lg:grid-cols-2">
           {featured.map((item) => (
             <FeaturedPanel key={item.title} {...item} />
           ))}

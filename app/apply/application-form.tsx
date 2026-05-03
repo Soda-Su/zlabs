@@ -11,20 +11,24 @@ type SubmitState = "idle" | "loading" | "success" | "error";
 type FormValues = {
   fullName: string;
   email: string;
+  wechat: string;
   linkedin: string;
   currentRole: string;
   company: string;
   representativeWork: string;
+  dinnerInterest: string;
   quietQuestion: string;
 };
 
 const initialValues: FormValues = {
   fullName: "",
   email: "",
+  wechat: "",
   linkedin: "",
   currentRole: "",
   company: "",
   representativeWork: "",
+  dinnerInterest: "",
   quietQuestion: ""
 };
 
@@ -43,9 +47,13 @@ export function ApplicationForm({
 
     return searchParams.get("email")?.trim() ?? "";
   }, [initialEmailOverride, searchParams]);
+  const initialDinnerInterest = useMemo(() => {
+    return searchParams.get("interest") === "startup-culture-dinner" ? "yes" : "";
+  }, [searchParams]);
   const [values, setValues] = useState<FormValues>({
     ...initialValues,
-    email: initialEmail
+    email: initialEmail,
+    dinnerInterest: initialDinnerInterest
   });
   const [state, setState] = useState<SubmitState>("idle");
   const [message, setMessage] = useState("");
@@ -56,9 +64,16 @@ export function ApplicationForm({
 
   useEffect(() => {
     setValues((current) =>
-      current.email === initialEmail ? current : { ...current, email: initialEmail }
+      current.email === initialEmail &&
+      current.dinnerInterest === initialDinnerInterest
+        ? current
+        : {
+            ...current,
+            email: initialEmail,
+            dinnerInterest: initialDinnerInterest || current.dinnerInterest
+          }
     );
-  }, [initialEmail]);
+  }, [initialDinnerInterest, initialEmail]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -76,10 +91,12 @@ export function ApplicationForm({
           subject: `Z Labs beta profile: ${values.fullName}`,
           fullName: values.fullName,
           email: values.email,
+          wechat: values.wechat,
           linkedin: values.linkedin,
           currentRole: values.currentRole,
           company: values.company,
           representativeWork: values.representativeWork,
+          dinnerInterest: values.dinnerInterest,
           quietQuestion: values.quietQuestion
         })
       });
@@ -92,11 +109,12 @@ export function ApplicationForm({
         email: values.email,
         name: values.fullName,
         current_role: values.currentRole,
-        company: values.company,
+        company: values.company
       });
       posthog.capture("beta_profile_submitted", {
         current_role: values.currentRole,
         company: values.company,
+        dinner_interest: values.dinnerInterest || "unspecified"
       });
       setState("success");
       setMessage(
@@ -106,7 +124,7 @@ export function ApplicationForm({
     } catch (error) {
       posthog.captureException(error);
       posthog.capture("beta_profile_submission_failed", {
-        error_message: error instanceof Error ? error.message : "Unknown error",
+        error_message: error instanceof Error ? error.message : "Unknown error"
       });
       setState("error");
       setMessage(
@@ -133,6 +151,12 @@ export function ApplicationForm({
           value={values.email}
           onChange={(value) => updateField("email", value)}
           required
+        />
+        <Field
+          label="WeChat"
+          value={values.wechat}
+          onChange={(value) => updateField("wechat", value)}
+          placeholder="Optional, if you prefer event invitations there"
         />
         <Field
           label="LinkedIn"
@@ -166,6 +190,25 @@ export function ApplicationForm({
       </div>
 
       <div className="mt-5 grid gap-5">
+        <SelectField
+          label="Would you like to be considered for the current startup culture dinner?"
+          value={values.dinnerInterest}
+          onChange={(value) => updateField("dinnerInterest", value)}
+          options={[
+            {
+              value: "",
+              label: "Optional"
+            },
+            {
+              value: "yes",
+              label: "Yes, I would like to be considered"
+            },
+            {
+              value: "not-now",
+              label: "Not specifically"
+            }
+          ]}
+        />
         <TextArea
           label="What question are you quietly working on that Z Labs should understand?"
           value={values.quietQuestion}
@@ -256,6 +299,43 @@ function TextArea({
         onChange={(event) => onChange(event.target.value)}
         className="field-input resize-y"
       />
+    </label>
+  );
+}
+
+function SelectField({
+  label,
+  value,
+  onChange,
+  options,
+  required = false
+}: {
+  label: string;
+  value: string;
+  onChange: (value: string) => void;
+  options: Array<{
+    value: string;
+    label: string;
+  }>;
+  required?: boolean;
+}) {
+  return (
+    <label className="field-label">
+      <span>
+        {label} {required ? <span aria-hidden="true">*</span> : null}
+      </span>
+      <select
+        required={required}
+        value={value}
+        onChange={(event) => onChange(event.target.value)}
+        className="field-input"
+      >
+        {options.map((option) => (
+          <option key={option.value || "empty"} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
     </label>
   );
 }
