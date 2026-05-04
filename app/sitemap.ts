@@ -21,6 +21,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.84
     },
+    {
+      url: `${siteUrl}/dinners/room-worth-staying`,
+      lastModified: "2026-05-03",
+      changeFrequency: "weekly",
+      priority: 0.86
+    },
     ...editorialArticles.map((article) => ({
       url: `${siteUrl}${article.path}`,
       lastModified: article.modifiedTime,

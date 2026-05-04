@@ -14,9 +14,9 @@ const featured = [
   {
     title: "Z Dinners",
     meta: "Stealth Gathering",
-    text: "The first table begins with one live question: what changes when you move between startup and big tech cultures, and how much of your work is really shaped by the room around you?",
-    keywords: ["Now convening", "By invitation in SF", "Startup x big tech"],
-    href: "/dinners/startup-culture",
+    text: "The first table begins with a quieter question: what makes a team, a room, or a company feel worth staying in once the surface signals wear off?",
+    keywords: ["Now convening", "By invitation in SF", "Rooms worth staying in"],
+    href: "/dinners/room-worth-staying",
     visual: "gradient-dinners-evening",
     visualLabel: "First Gathering",
     status: "First Gathering",
@@ -544,7 +544,7 @@ export default function Home() {
           </div>
           <a
             className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/dinners/startup-culture"
+            href="/dinners/room-worth-staying"
           >
             See first dinner
           </a>

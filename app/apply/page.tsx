@@ -145,7 +145,7 @@ export default function ApplyPage() {
             <div className="mt-8 border-t border-ink/10 pt-5 text-sm leading-6 text-ink/55">
               A short note is enough. Submitting sends your beta profile
               directly to Z Labs for quiet review. If you are responding to the
-              current startup culture dinner, you can note that here too.
+              current Z Dinners gathering, you can note that here too.
             </div>
           </div>
           <div className="max-w-sm text-sm leading-6 text-ink/50 lg:justify-self-end lg:text-right">

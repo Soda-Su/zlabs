@@ -40,6 +40,10 @@ export function ApplicationForm({
   initialEmailOverride?: string;
 }) {
   const searchParams = useSearchParams();
+  const dinnerInterestContext = useMemo(
+    () => searchParams.get("interest")?.trim() ?? "",
+    [searchParams]
+  );
   const initialEmail = useMemo(() => {
     if (typeof initialEmailOverride === "string") {
       return initialEmailOverride.trim();
@@ -48,8 +52,8 @@ export function ApplicationForm({
     return searchParams.get("email")?.trim() ?? "";
   }, [initialEmailOverride, searchParams]);
   const initialDinnerInterest = useMemo(() => {
-    return searchParams.get("interest") === "startup-culture-dinner" ? "yes" : "";
-  }, [searchParams]);
+    return dinnerInterestContext.endsWith("-dinner") ? "yes" : "";
+  }, [dinnerInterestContext]);
   const [values, setValues] = useState<FormValues>({
     ...initialValues,
     email: initialEmail,
@@ -97,6 +101,7 @@ export function ApplicationForm({
           company: values.company,
           representativeWork: values.representativeWork,
           dinnerInterest: values.dinnerInterest,
+          dinnerInterestContext: dinnerInterestContext || "none",
           quietQuestion: values.quietQuestion
         })
       });
@@ -114,13 +119,18 @@ export function ApplicationForm({
       posthog.capture("beta_profile_submitted", {
         current_role: values.currentRole,
         company: values.company,
-        dinner_interest: values.dinnerInterest || "unspecified"
+        dinner_interest: values.dinnerInterest || "unspecified",
+        dinner_interest_context: dinnerInterestContext || "none"
       });
       setState("success");
       setMessage(
         "Z Labs is in a period of research and curation. Your note is in our beta access queue. We will reach out when the timing aligns."
       );
-      setValues({ ...initialValues, email: values.email });
+      setValues({
+        ...initialValues,
+        email: values.email,
+        dinnerInterest: initialDinnerInterest
+      });
     } catch (error) {
       posthog.captureException(error);
       posthog.capture("beta_profile_submission_failed", {
@@ -191,7 +201,7 @@ export function ApplicationForm({
 
       <div className="mt-5 grid gap-5">
         <SelectField
-          label="Would you like to be considered for the current startup culture dinner?"
+          label="Would you like to be considered for the current or next Z Dinners gathering?"
           value={values.dinnerInterest}
           onChange={(value) => updateField("dinnerInterest", value)}
           options={[
