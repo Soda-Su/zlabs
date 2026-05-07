@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   absoluteUrl,
+  contactEmail,
   siteName,
   siteUrl
 } from "../../site-config";
@@ -11,6 +12,9 @@ const pageUrl = absoluteUrl(pagePath);
 const pageTitle = "Z Dinners | What Makes a Room Worth Staying In";
 const pageDescription =
   "The first Z Dinners gathering asks a quieter question: what makes a team, room, or company feel worth staying in? A small invited table in San Francisco.";
+const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
+  "Z Dinners No. 1 interest"
+)}`;
 
 const posterSignals = [
   "First gathering",
@@ -356,6 +360,15 @@ export default function RoomWorthStayingPage() {
                   Return to Z Labs
                 </Link>
               </div>
+              <p className="mt-5 max-w-xl text-sm leading-6 text-ink/52">
+                Already applied to Z Labs?{" "}
+                <a
+                  href={fastLaneMailto}
+                  className="quiet-link text-ink/70"
+                >
+                  Email Soda directly for this table.
+                </a>
+              </p>
             </div>
           </div>
         </div>
