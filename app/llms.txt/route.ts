@@ -26,6 +26,7 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 ## Public URLs
 - ${siteUrl}/
 - ${siteUrl}/apply
+- ${siteUrl}/dinners/designer-researcher-builder-or-whatever
 - ${siteUrl}/dinners/room-worth-staying
 - ${siteUrl}/dinners/startup-culture
 - ${siteUrl}/feed.xml

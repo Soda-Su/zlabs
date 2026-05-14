@@ -12,16 +12,27 @@ import {
 
 const featured = [
   {
-    title: "Z Dinners",
+    title: "Z Dinners: Between Startup, Big Tech, and What Comes Next",
     meta: "Stealth Gathering",
-    text: "The first table begins with a quieter question: what makes a team, a room, or a company feel worth staying in once the surface signals wear off?",
-    keywords: ["Now convening", "By invitation in SF", "Rooms worth staying in"],
+    text: "The first table begins with a wider question: what really changes between startup, big tech, and the less-scripted paths that might come after either one?",
+    keywords: ["Now convening", "By invitation in SF", "Startup x big tech x beyond"],
     href: "/dinners/room-worth-staying",
     visual: "gradient-dinners-evening",
     visualLabel: "First Gathering",
     status: "First Gathering",
     footerLabel: "See first dinner",
     spotlight: true
+  },
+  {
+    title: "Z Dinners: Designer, Researcher, Builder, or Whatever?",
+    meta: "Stealth Gathering",
+    text: "A second table on what happens when the actual work spills across categories faster than titles can keep up.",
+    keywords: ["Now forming", "By invitation in SF", "Research x design x build"],
+    href: "/apply?interest=designer-researcher-builder-dinner",
+    visual: "gradient-salon",
+    visualLabel: "Second Gathering",
+    status: "Second Gathering",
+    footerLabel: "Request quiet access"
   },
   {
     title: "Z Labs",
@@ -530,33 +541,6 @@ export default function Home() {
       </section>
 
       <section
-        id="featured"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
-      >
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-2xl leading-tight sm:text-3xl">
-              How We Gather
-            </h2>
-            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
-              The room itself, and the first table now taking shape.
-            </p>
-          </div>
-          <a
-            className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/dinners/room-worth-staying"
-          >
-            See first dinner
-          </a>
-        </div>
-        <div className="grid gap-4 lg:grid-cols-2">
-          {featured.map((item) => (
-            <FeaturedPanel key={item.title} {...item} />
-          ))}
-        </div>
-      </section>
-
-      <section
         id="ecosystem"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
@@ -617,6 +601,40 @@ export default function Home() {
                   ) : null}
                 </div>
               </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="featured"
+        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+      >
+        <div className="mb-6 flex items-end justify-between gap-6">
+          <div>
+            <h2 className="text-2xl leading-tight sm:text-3xl">
+              How We Gather
+            </h2>
+            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
+              The room itself, and the tables now taking shape.
+            </p>
+          </div>
+          <a
+            className="quiet-link hidden text-sm text-ink/60 sm:inline"
+            href="/dinners/room-worth-staying"
+          >
+            See first dinner
+          </a>
+        </div>
+        <div className="overflow-x-auto pb-2 snap-x snap-mandatory">
+          <div className="flex w-max gap-4 pr-4">
+            {featured.map((item) => (
+              <div
+                key={item.title}
+                className="flex w-[min(88vw,37rem)] shrink-0 snap-start self-stretch lg:w-[32rem]"
+              >
+                <FeaturedPanel {...item} />
+              </div>
             ))}
           </div>
         </div>

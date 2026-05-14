@@ -7,18 +7,18 @@ import {
   siteUrl
 } from "../../site-config";
 
-const pagePath = "/dinners/room-worth-staying";
+const pagePath = "/dinners/designer-researcher-builder-or-whatever";
 const pageUrl = absoluteUrl(pagePath);
-const pageTitle = "Z Dinners | Between Startup, Big Tech, and What Comes Next";
+const pageTitle = "Z Dinners | Designer, Researcher, Builder, or Whatever?";
 const pageDescription =
-  "The first Z Dinners gathering opens a wider question: what changes across startup, big tech, and whatever comes next? A small invited table in San Francisco.";
+  "The second Z Dinners gathering asks a different kind of identity question: designer, researcher, builder, or something blurrier in between? A small invited table in San Francisco.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 1 interest"
+  "Z Dinners No. 2 interest"
 )}`;
-const dinnerInterestPath = "/apply?interest=between-startup-big-tech-dinner";
+const dinnerInterestPath = "/apply?interest=designer-researcher-builder-dinner";
 
 const posterSignals = [
-  "First gathering",
+  "Second gathering",
   "Six invited seats",
   "San Francisco",
   "By invitation"
@@ -27,26 +27,26 @@ const posterSignals = [
 const tableNotes = [
   {
     eyebrow: "Why now",
-    title: "Career maps have gotten less linear.",
-    text: "For a lot of smart people, the question is no longer just startup or big tech. It is how to read each kind of environment clearly, what each one gives, what each one quietly costs, and what comes after either path stops fitting."
+    title: "The labels stopped feeling precise.",
+    text: "A lot of smart people still introduce themselves as designers, researchers, or builders. The actual work looks messier than that now. Roles are stretching, overlapping, and quietly mutating faster than the titles can keep up."
   },
   {
     eyebrow: "In the room",
     title: "Six invited seats.",
-    text: "Researchers, operators, product people, and founders comparing firsthand experience across larger companies, startups, and more self-directed paths that sit somewhere beyond both."
+    text: "People who have worked across product, research, design, and building, or who no longer feel fully described by any one of those categories."
   },
   {
     eyebrow: "The tone",
-    title: "More honesty, less positioning.",
-    text: "Not a networking mixer. Not a glossy career panel. Just a smaller dinner where people can talk plainly about what each world feels like from the inside, and what they are moving toward now."
+    title: "More candor, less self-branding.",
+    text: "Not a networking mixer. Not a panel on career paths. Just a smaller dinner where people can talk honestly about the work they actually do, the labels they still use, and the ones they may have outgrown."
   }
 ] as const;
 
 const conversationAngles = [
-  "What does big tech still do better than people like to admit?",
-  "What does startup life give you that larger companies usually cannot?",
-  "How do you tell when a path is stretching you in the right way, versus just wearing you down?",
-  "If neither startup nor big tech feels like the final answer, what might come next?"
+  "At what point does a title stop accurately describing the work you actually do?",
+  "Which boundaries between design, research, and building still feel real, and which ones are mostly habit?",
+  "What kinds of people are becoming more valuable precisely because they do not fit one clean category?",
+  "If your role is getting blurrier, what helps you explain your value without flattening yourself?"
 ] as const;
 
 export const metadata: Metadata = {
@@ -54,9 +54,8 @@ export const metadata: Metadata = {
   description: pageDescription,
   keywords: [
     "Z Dinners",
-    "startup",
-    "big tech",
-    "career transitions",
+    "design research builder",
+    "career identity",
     "San Francisco dinner",
     "Bay Area operators",
     "private dinner invitation"
@@ -87,7 +86,7 @@ export const metadata: Metadata = {
   }
 };
 
-export default function RoomWorthStayingPage() {
+export default function DesignerResearcherBuilderPage() {
   const structuredData = [
     {
       "@context": "https://schema.org",
@@ -166,18 +165,19 @@ export default function RoomWorthStayingPage() {
                 ))}
               </div>
               <h1 className="mt-6 max-w-4xl text-5xl leading-[0.98] text-ink sm:text-6xl lg:text-7xl">
-                Between startup,
+                Designer, researcher,
                 <br className="hidden sm:block" />
-                big tech, and what comes next.
+                builder, or whatever?
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The first Z Dinners table begins with a wider question: what
-                really changes as you move between startup, big tech, and the
-                less-scripted paths that might come after either one?
+                The second Z Dinners table begins with a different kind of
+                question: when the real work keeps spilling across categories,
+                what do our labels still help explain, and what do they start to
+                hide?
               </p>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/52">
-                A dinner for people comparing not just companies, but ways of
-                building a life around work.
+                A dinner for people whose titles are still neat on LinkedIn,
+                but less neat in real life.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">
@@ -203,9 +203,9 @@ export default function RoomWorthStayingPage() {
                     Tonight&apos;s table
                   </p>
                   <p className="mt-3 max-w-sm text-[1.02rem] leading-7 text-ink/72">
-                    Six invited seats. A small cross-section of people who have
-                    seen different kinds of companies from the inside, and are
-                    still figuring out what kind of path they want next.
+                    Six invited seats. People whose work has drifted between
+                    research, design, product, and building, and who are trying
+                    to name that drift more honestly.
                   </p>
                 </article>
                 <article className="border-b border-ink/8 pb-5">
@@ -213,9 +213,9 @@ export default function RoomWorthStayingPage() {
                     Why this one
                   </p>
                   <p className="mt-3 max-w-sm text-[1.02rem] leading-7 text-ink/72">
-                    People are good at debating startup versus big tech from a
-                    distance. They are less good at saying what those worlds
-                    actually feel like once you have lived inside them.
+                    People keep using old labels because they are legible. They
+                    also know, privately, that those labels are describing less
+                    and less of the real work.
                   </p>
                 </article>
                 <article>
@@ -224,7 +224,8 @@ export default function RoomWorthStayingPage() {
                   </p>
                   <p className="mt-3 max-w-sm text-[1.02rem] leading-7 text-ink/72">
                     Private dinner, selective invitation, and a conversation
-                    more interested in discernment than certainty.
+                    more interested in truthful self-description than tidy
+                    positioning.
                   </p>
                 </article>
               </div>
@@ -238,21 +239,21 @@ export default function RoomWorthStayingPage() {
           <div>
             <p className="text-sm text-ink/55">Why this dinner</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
-              The categories no longer feel complete.
+              The work changed faster than the titles.
             </h2>
           </div>
           <div className="max-w-3xl space-y-6">
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              Plenty of people can describe startup and big tech as if they are
-              two clean options. In practice, the experience is more uneven
-              than that. Some people feel sharpened by one, stalled by the
-              other, or quietly done with both.
+              In a lot of teams, the actual work no longer sits neatly inside
+              one discipline. Researchers prototype. Designers write. Builders
+              shape product thinking. Operators do synthesis that used to live
+              somewhere else.
             </p>
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              Z Dinners exists to take that more candid question and place it
-              around a smaller table, where people can compare what each world
-              rewards, what it asks from them, and what they are starting to
-              imagine beyond those defaults.
+              Z Dinners exists to take that blur seriously and place it around
+              a smaller table, where people can compare what they still call
+              themselves, what they are actually becoming, and what kinds of
+              work demand a less rigid identity.
             </p>
           </div>
         </div>
@@ -298,12 +299,12 @@ export default function RoomWorthStayingPage() {
           <div>
             <p className="text-sm text-ink/55">A few questions</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
-              Conversation cues, not networking talk.
+              Conversation cues, not portfolio talk.
             </h2>
             <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
               Questions people usually learn to ask only after they have spent
-              enough time inside a few different systems and started wondering
-              what those systems are really optimizing for.
+              enough time doing work that no longer fits cleanly under one
+              heading.
             </p>
           </div>
 
@@ -333,13 +334,13 @@ export default function RoomWorthStayingPage() {
             <div>
               <p className="text-sm text-ink/55">A seat at the table</p>
               <h2 className="mt-2 max-w-xl text-4xl leading-tight sm:text-5xl">
-                If this sounds like your table, let us know.
+                If this sounds uncomfortably familiar, let us know.
               </h2>
               <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
-                This first gathering is being convened by invitation in San
-                Francisco. If you have moved through startup, big tech, or are
-                now imagining something beyond both, we would be glad to hear
-                from you.
+                This second gathering is being convened by invitation in San
+                Francisco. If your work already spills across categories, or
+                you have been trying to name yourself more truthfully, we would
+                be glad to hear from you.
               </p>
             </div>
 

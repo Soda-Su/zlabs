@@ -9,7 +9,7 @@ import { ApplicationForm } from "./apply/application-form";
 import { contactEmail } from "./site-config";
 
 const dinnerPromptStorageKey = "zlabs:dinner-prompt-dismissed:v1";
-const dinnerPromptTheme = "room-worth-staying";
+const dinnerPromptTheme = "between-startup-big-tech";
 const dinnerPromptDelayMs = 1400;
 const dinnerPromptCooldownMs = 1000 * 60 * 60 * 24 * 7;
 const dinnerFastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
@@ -208,13 +208,13 @@ export function HomeApplyShell({
                   id="home-dinner-title"
                   className="mt-2 max-w-2xl text-3xl leading-tight text-ink sm:text-4xl"
                 >
-                  What makes a room worth staying in.
+                  Between startup, big tech, and what comes next.
                 </h2>
                 <p className="mt-4 max-w-2xl leading-7 text-ink/62">
                   Our first private dinner is taking shape for mid-June in San
                   Francisco: six invited seats, one honest conversation about
-                  the kinds of teams and environments people actually choose to
-                  stay in.
+                  what each path gives, what each one quietly costs, and what
+                  might come after either world stops fitting.
                 </p>
               </div>
               <button
@@ -238,9 +238,9 @@ export function HomeApplyShell({
               </div>
 
               <p className="max-w-2xl text-[1.02rem] leading-7 text-ink/66">
-                A quieter invitation than a splashy launch. If this question
-                feels close to your own experience, we would be glad to hear
-                from you.
+                A quieter invitation than a splashy launch. If you have lived
+                across startup, big tech, or are thinking seriously about what
+                comes next, we would be glad to hear from you.
               </p>
 
               <div className="flex flex-wrap gap-3">
@@ -252,7 +252,7 @@ export function HomeApplyShell({
                   Read the invitation
                 </Link>
                 <Link
-                  href="/apply?interest=room-worth-staying-dinner"
+                  href="/apply?interest=between-startup-big-tech-dinner"
                   className="inline-flex h-12 items-center justify-center rounded-md border border-ink/12 bg-white/72 px-5 text-sm text-ink/68 transition duration-300 hover:border-ink/18 hover:bg-white"
                   onClick={() => handleDinnerPromptCta("apply")}
                 >
