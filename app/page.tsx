@@ -42,7 +42,7 @@ const featured = [
     href: "/apply",
     visual: "gradient-aurora",
     visualLabel: "Z Labs",
-    footerLabel: "Join the beta"
+    footerLabel: "Request quiet access"
   }
 ];
 
