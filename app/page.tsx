@@ -689,7 +689,7 @@ export default function Home() {
               <span className="brand-text">Z Labs</span>
             </a>
             <p className="mt-5 text-lg leading-8 text-ink/58">
-              Est. 2026. Built with patience in San Francisco.
+              Est. 2026. With patience in San Francisco.
             </p>
             <p className="mt-4 max-w-2xl text-xs leading-5 text-ink/34">
               The Z Labs is currently an independent, non-commercial space for
