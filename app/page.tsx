@@ -698,6 +698,11 @@ export default function Home() {
               <span className="px-2 text-ink/28">|</span>
               <span>Xiaohongshu / 小红书: {xiaohongshuHandle}</span>
             </p>
+            <p className="mt-4 max-w-2xl text-xs leading-5 text-ink/42">
+              The Z Labs is currently an independent, non-commercial space for
+              knowledge exchange and personal research. It does not offer
+              commercial services or conduct business activities at this time.
+            </p>
           </div>
         </div>
       </footer>
