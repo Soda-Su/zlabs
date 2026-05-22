@@ -129,6 +129,10 @@ export function ArchetypeExperience({
   const tuneAccessoryOptions = archetype?.allowedAccessories ?? ["none"];
   const cardHref = resultState ? buildCardHref(resultState) : "#";
 
+  function getShareHref(state: ResultState) {
+    return `/ai-archetype?${serializeResultState(state).toString()}`;
+  }
+
   function startQuiz() {
     setAnswers([]);
     setStepIndex(0);
@@ -221,11 +225,43 @@ export function ArchetypeExperience({
       return;
     }
 
-    await navigator.clipboard.writeText(window.location.href);
+    const url = new URL(getShareHref(resultState), window.location.origin);
+
+    await navigator.clipboard.writeText(url.toString());
     setCopied(true);
     window.setTimeout(() => setCopied(false), 1400);
 
     posthog.capture("ai_archetype_link_copied", {
+      archetype: resultState.archetype
+    });
+  }
+
+  async function downloadCard() {
+    if (!resultState || typeof window === "undefined") {
+      return;
+    }
+
+    try {
+      const response = await fetch(cardHref);
+
+      if (!response.ok) {
+        throw new Error(`Card download failed with status ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const objectUrl = window.URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = objectUrl;
+      anchor.download = `${resultState.archetype}-avatar-card.png`;
+      document.body.append(anchor);
+      anchor.click();
+      anchor.remove();
+      window.URL.revokeObjectURL(objectUrl);
+    } catch {
+      window.open(cardHref, "_blank", "noopener,noreferrer");
+    }
+
+    posthog.capture("ai_archetype_downloaded", {
       archetype: resultState.archetype
     });
   }
@@ -498,18 +534,15 @@ export function ArchetypeExperience({
                 </div>
 
                 <div className="archetype-action-row">
-                  <a
+                  <button
+                    type="button"
                     className="archetype-cta"
-                    href={cardHref}
-                    download
-                    onClick={() =>
-                      posthog.capture("ai_archetype_downloaded", {
-                        archetype: resultState.archetype
-                      })
-                    }
+                    onClick={() => {
+                      void downloadCard();
+                    }}
                   >
                     Download avatar card
-                  </a>
+                  </button>
                   <button
                     type="button"
                     className="archetype-secondary"

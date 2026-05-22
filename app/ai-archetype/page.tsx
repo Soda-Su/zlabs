@@ -7,10 +7,14 @@ export const metadata: Metadata = {
     "A playful Z Labs quiz that turns your working instincts into a pixel-style AI archetype and downloadable avatar card."
 };
 
-export default function AiArchetypePage({
+export default async function AiArchetypePage({
   searchParams
 }: {
-  searchParams: Record<string, string | string[] | undefined>;
+  searchParams:
+    | Promise<Record<string, string | string[] | undefined>>
+    | Record<string, string | string[] | undefined>;
 }) {
-  return <ArchetypeExperience initialSearchParams={searchParams} />;
+  const resolvedSearchParams = await searchParams;
+
+  return <ArchetypeExperience initialSearchParams={resolvedSearchParams} />;
 }

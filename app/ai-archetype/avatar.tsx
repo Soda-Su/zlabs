@@ -29,6 +29,12 @@ type PixelRect = {
   h?: number;
 };
 
+type PixelLayerDefinition = {
+  rects: readonly PixelRect[];
+  fill: string;
+  opacity?: number;
+};
+
 const cell = 4;
 const viewBoxSize = 136;
 
@@ -77,6 +83,174 @@ function PixelLayer({
       shapeRendering="crispEdges"
     />
   ));
+}
+
+function pixelLayerMarkup(
+  rects: readonly PixelRect[],
+  fill: string,
+  opacity = 1
+) {
+  return rects
+    .map((rect) => {
+      const width = (rect.w ?? 1) * cell;
+      const height = (rect.h ?? 1) * cell;
+      const opacityAttr = opacity === 1 ? "" : ` opacity="${opacity}"`;
+
+      return `<rect x="${rect.x * cell}" y="${rect.y * cell}" width="${width}" height="${height}" fill="${fill}"${opacityAttr} shape-rendering="crispEdges" />`;
+    })
+    .join("");
+}
+
+function buildPixelLayers(archetype: ArchetypeId, recipe: AvatarRecipe): PixelLayerDefinition[] {
+  const {
+    definition,
+    palette,
+    hairTone,
+    headwear,
+    outfitDetails,
+    arms,
+    hands,
+    prop,
+    accessory
+  } = getAvatarArtData(archetype, recipe);
+
+  return [
+    {
+      rects: backgroundMarks(recipe.aura),
+      fill: palette.aura,
+      opacity: 0.3
+    },
+    {
+      rects: floorShadow,
+      fill: "rgba(16,16,16,0.12)"
+    },
+    {
+      rects: faceOutline,
+      fill: "#243047"
+    },
+    {
+      rects: insetPixels(faceOutline),
+      fill: palette.face
+    },
+    {
+      rects: hairPixels(definition.sprite.hair),
+      fill: hairTone.base
+    },
+    {
+      rects: hairHighlightPixels(definition.sprite.hair),
+      fill: hairTone.light,
+      opacity: 0.95
+    },
+    {
+      rects: topTrimPixels(definition.sprite.headwear),
+      fill: hairTone.light,
+      opacity: 0.6
+    },
+    {
+      rects: headwear.outline,
+      fill: "#243047"
+    },
+    {
+      rects: headwear.fill,
+      fill: palette.face
+    },
+    {
+      rects: headwear.accent,
+      fill: palette.accent
+    },
+    {
+      rects: neckPixels,
+      fill: palette.face
+    },
+    {
+      rects: arms,
+      fill: "#243047"
+    },
+    {
+      rects: insetPixels(arms),
+      fill: palette.body
+    },
+    {
+      rects: torsoOutline,
+      fill: "#243047"
+    },
+    {
+      rects: insetPixels(torsoOutline),
+      fill: palette.body
+    },
+    {
+      rects: outfitDetails.accent,
+      fill: palette.accent,
+      opacity: 0.95
+    },
+    {
+      rects: outfitDetails.trim,
+      fill: "rgba(255,255,255,0.24)",
+      opacity: 0.84
+    },
+    {
+      rects: legOutline,
+      fill: "#243047"
+    },
+    {
+      rects: insetPixels(legOutline),
+      fill: "#324566"
+    },
+    {
+      rects: shoeOutline,
+      fill: "#243047"
+    },
+    {
+      rects: insetPixels(shoeOutline),
+      fill: "#e7edf5"
+    },
+    {
+      rects: faceBrows(recipe.expression),
+      fill: "#243047"
+    },
+    {
+      rects: faceEyes(recipe.expression),
+      fill: "#243047"
+    },
+    {
+      rects: faceCheeks(recipe.expression),
+      fill: palette.accent,
+      opacity: 0.34
+    },
+    {
+      rects: faceMouth(recipe.expression),
+      fill: "#243047"
+    },
+    {
+      rects: hands,
+      fill: palette.face
+    },
+    {
+      rects: prop.outline,
+      fill: "#243047"
+    },
+    {
+      rects: prop.fill,
+      fill: "#f4f7fb"
+    },
+    {
+      rects: prop.accent,
+      fill: palette.accent
+    },
+    {
+      rects: accessory.outline,
+      fill: "#243047"
+    },
+    {
+      rects: accessory.fill,
+      fill: palette.aura,
+      opacity: 0.94
+    },
+    {
+      rects: accessory.accent,
+      fill: palette.accent
+    }
+  ];
 }
 
 const faceOutline = [
@@ -391,13 +565,7 @@ function topTrimPixels(headwear: SpriteHeadwear) {
   return [];
 }
 
-export function PixelAvatar({
-  archetype,
-  recipe,
-  size = 240,
-  className,
-  label
-}: PixelAvatarProps) {
+function getAvatarArtData(archetype: ArchetypeId, recipe: AvatarRecipe) {
   const definition = archetypeRegistry[archetype];
   const palette = paletteRegistry.find((item) => item.id === recipe.palette) ?? paletteRegistry[0];
   const hairTone = hairToneMap[definition.sprite.hairTone];
@@ -413,79 +581,208 @@ export function PixelAvatar({
   const prop = propPixels(definition.sprite.prop);
   const accessory = accessoryOverlay(recipe.accessory);
 
+  return {
+    definition,
+    palette,
+    hairTone,
+    headwear,
+    outfitDetails,
+    arms,
+    hands,
+    prop,
+    accessory
+  };
+}
+
+export function renderPixelAvatarSvgMarkup({
+  archetype,
+  recipe
+}: Pick<PixelAvatarProps, "archetype" | "recipe">) {
+  return `<svg viewBox="0 0 ${viewBoxSize} ${viewBoxSize}" width="100%" height="100%" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+<rect x="4" y="4" width="128" height="128" rx="18" fill="rgba(255,255,255,0.48)" stroke="rgba(16,16,16,0.08)" stroke-width="1" />
+${buildPixelLayers(archetype, recipe)
+  .map((layer) => pixelLayerMarkup(layer.rects, layer.fill, layer.opacity ?? 1))
+  .join("")}
+</svg>`;
+}
+
+export function ExportSafePixelAvatar({
+  archetype,
+  recipe,
+  size = 900
+}: Pick<PixelAvatarProps, "archetype" | "recipe"> & { size?: number }) {
+  const palette =
+    paletteRegistry.find((item) => item.id === recipe.palette) ??
+    paletteRegistry[0];
+  const scale = size / viewBoxSize;
+  const frameInset = Math.max(32, Math.round(size * 0.09));
+
   return (
     <div
-      aria-label={label ?? `${definition.title} avatar`}
+      aria-label={`${archetypeRegistry[archetype].title} avatar`}
+      role="img"
+      style={{
+        width: size,
+        height: size,
+        display: "flex",
+        position: "relative",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: Math.round(size * 0.15),
+        border: "2px solid rgba(23,23,23,0.08)",
+        background: palette.background,
+        overflow: "hidden"
+      }}
+    >
+      <div
+        style={{
+          position: "absolute",
+          inset: `${frameInset}px`,
+          display: "flex",
+          borderRadius: Math.round(size * 0.12),
+          border: "2px solid rgba(255,255,255,0.68)"
+        }}
+      />
+      <div
+        style={{
+          width: viewBoxSize * scale,
+          height: viewBoxSize * scale,
+          display: "flex",
+          position: "relative"
+        }}
+      >
+        {buildPixelLayers(archetype, recipe).flatMap((layer, layerIndex) =>
+          layer.rects.map((rect, rectIndex) => (
+            <div
+              key={`${layerIndex}-${rectKey(rect, rectIndex)}`}
+              style={{
+                position: "absolute",
+                display: "flex",
+                left: rect.x * cell * scale,
+                top: rect.y * cell * scale,
+                width: (rect.w ?? 1) * cell * scale,
+                height: (rect.h ?? 1) * cell * scale,
+                background: layer.fill,
+                opacity: layer.opacity ?? 1
+              }}
+            />
+          ))
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function PixelAvatar({
+  archetype,
+  recipe,
+  size = 240,
+  className,
+  label
+}: PixelAvatarProps) {
+  return (
+    <div
+      aria-label={label ?? `${archetypeRegistry[archetype].title} avatar`}
       role="img"
       className={className}
       style={{
         width: size,
         height: size,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
         borderRadius: "26px",
         border: "1px solid rgba(16,16,16,0.08)",
-        background: frameGradient(recipe.frame, palette.background),
+        background: frameGradient(
+          recipe.frame,
+          (
+            paletteRegistry.find((item) => item.id === recipe.palette) ??
+            paletteRegistry[0]
+          ).background
+        ),
         boxShadow:
           "inset 0 1px 0 rgba(255,255,255,0.72), 0 18px 50px rgba(16,16,16,0.08)",
         padding: "12px"
       }}
     >
-      <svg
-        viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
-        width="100%"
-        height="100%"
-        aria-hidden="true"
-      >
-        <rect
-          x="4"
-          y="4"
-          width="128"
-          height="128"
-          rx="18"
-          fill="rgba(255,255,255,0.48)"
-          stroke="rgba(16,16,16,0.08)"
-          strokeWidth="1"
-        />
-        <PixelLayer rects={backgroundMarks(recipe.aura)} fill={palette.aura} opacity={0.3} />
-        <PixelLayer rects={floorShadow} fill="rgba(16,16,16,0.12)" />
-        <PixelLayer rects={faceOutline} fill="#243047" />
-        <PixelLayer rects={insetPixels(faceOutline)} fill={palette.face} />
-        <PixelLayer rects={hairPixels(definition.sprite.hair)} fill={hairTone.base} />
-        <PixelLayer
-          rects={hairHighlightPixels(definition.sprite.hair)}
-          fill={hairTone.light}
-          opacity={0.95}
-        />
-        <PixelLayer
-          rects={topTrimPixels(definition.sprite.headwear)}
-          fill={hairTone.light}
-          opacity={0.6}
-        />
-        <PixelLayer rects={headwear.outline} fill="#243047" />
-        <PixelLayer rects={headwear.fill} fill={palette.face} />
-        <PixelLayer rects={headwear.accent} fill={palette.accent} />
-        <PixelLayer rects={neckPixels} fill={palette.face} />
-        <PixelLayer rects={arms} fill="#243047" />
-        <PixelLayer rects={insetPixels(arms)} fill={palette.body} />
-        <PixelLayer rects={torsoOutline} fill="#243047" />
-        <PixelLayer rects={insetPixels(torsoOutline)} fill={palette.body} />
-        <PixelLayer rects={outfitDetails.accent} fill={palette.accent} opacity={0.95} />
-        <PixelLayer rects={outfitDetails.trim} fill="rgba(255,255,255,0.24)" opacity={0.84} />
-        <PixelLayer rects={legOutline} fill="#243047" />
-        <PixelLayer rects={insetPixels(legOutline)} fill="#324566" />
-        <PixelLayer rects={shoeOutline} fill="#243047" />
-        <PixelLayer rects={insetPixels(shoeOutline)} fill="#e7edf5" />
-        <PixelLayer rects={faceBrows(recipe.expression)} fill="#243047" />
-        <PixelLayer rects={faceEyes(recipe.expression)} fill="#243047" />
-        <PixelLayer rects={faceCheeks(recipe.expression)} fill={palette.accent} opacity={0.34} />
-        <PixelLayer rects={faceMouth(recipe.expression)} fill="#243047" />
-        <PixelLayer rects={hands} fill={palette.face} />
-        <PixelLayer rects={prop.outline} fill="#243047" />
-        <PixelLayer rects={prop.fill} fill="#f4f7fb" />
-        <PixelLayer rects={prop.accent} fill={palette.accent} />
-        <PixelLayer rects={accessory.outline} fill="#243047" />
-        <PixelLayer rects={accessory.fill} fill={palette.aura} opacity={0.94} />
-        <PixelLayer rects={accessory.accent} fill={palette.accent} />
-      </svg>
+      <PixelAvatarSvg archetype={archetype} recipe={recipe} />
     </div>
+  );
+}
+
+export function PixelAvatarSvg({
+  archetype,
+  recipe
+}: Pick<PixelAvatarProps, "archetype" | "recipe">) {
+  const {
+    definition,
+    palette,
+    hairTone,
+    headwear,
+    outfitDetails,
+    arms,
+    hands,
+    prop,
+    accessory
+  } = getAvatarArtData(archetype, recipe);
+
+  return (
+    <svg
+      viewBox={`0 0 ${viewBoxSize} ${viewBoxSize}`}
+      width="100%"
+      height="100%"
+      aria-hidden="true"
+    >
+      <rect
+        x="4"
+        y="4"
+        width="128"
+        height="128"
+        rx="18"
+        fill="rgba(255,255,255,0.48)"
+        stroke="rgba(16,16,16,0.08)"
+        strokeWidth="1"
+      />
+      <PixelLayer rects={backgroundMarks(recipe.aura)} fill={palette.aura} opacity={0.3} />
+      <PixelLayer rects={floorShadow} fill="rgba(16,16,16,0.12)" />
+      <PixelLayer rects={faceOutline} fill="#243047" />
+      <PixelLayer rects={insetPixels(faceOutline)} fill={palette.face} />
+      <PixelLayer rects={hairPixels(definition.sprite.hair)} fill={hairTone.base} />
+      <PixelLayer
+        rects={hairHighlightPixels(definition.sprite.hair)}
+        fill={hairTone.light}
+        opacity={0.95}
+      />
+      <PixelLayer
+        rects={topTrimPixels(definition.sprite.headwear)}
+        fill={hairTone.light}
+        opacity={0.6}
+      />
+      <PixelLayer rects={headwear.outline} fill="#243047" />
+      <PixelLayer rects={headwear.fill} fill={palette.face} />
+      <PixelLayer rects={headwear.accent} fill={palette.accent} />
+      <PixelLayer rects={neckPixels} fill={palette.face} />
+      <PixelLayer rects={arms} fill="#243047" />
+      <PixelLayer rects={insetPixels(arms)} fill={palette.body} />
+      <PixelLayer rects={torsoOutline} fill="#243047" />
+      <PixelLayer rects={insetPixels(torsoOutline)} fill={palette.body} />
+      <PixelLayer rects={outfitDetails.accent} fill={palette.accent} opacity={0.95} />
+      <PixelLayer rects={outfitDetails.trim} fill="rgba(255,255,255,0.24)" opacity={0.84} />
+      <PixelLayer rects={legOutline} fill="#243047" />
+      <PixelLayer rects={insetPixels(legOutline)} fill="#324566" />
+      <PixelLayer rects={shoeOutline} fill="#243047" />
+      <PixelLayer rects={insetPixels(shoeOutline)} fill="#e7edf5" />
+      <PixelLayer rects={faceBrows(recipe.expression)} fill="#243047" />
+      <PixelLayer rects={faceEyes(recipe.expression)} fill="#243047" />
+      <PixelLayer rects={faceCheeks(recipe.expression)} fill={palette.accent} opacity={0.34} />
+      <PixelLayer rects={faceMouth(recipe.expression)} fill="#243047" />
+      <PixelLayer rects={hands} fill={palette.face} />
+      <PixelLayer rects={prop.outline} fill="#243047" />
+      <PixelLayer rects={prop.fill} fill="#f4f7fb" />
+      <PixelLayer rects={prop.accent} fill={palette.accent} />
+      <PixelLayer rects={accessory.outline} fill="#243047" />
+      <PixelLayer rects={accessory.fill} fill={palette.aura} opacity={0.94} />
+      <PixelLayer rects={accessory.accent} fill={palette.accent} />
+    </svg>
   );
 }
