@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test:unit": "mkdir -p .test-dist && node node_modules/typescript/bin/tsc --ignoreConfig --outDir .test-dist --module node16 --target es2020 --lib es2020,dom --moduleResolution node16 --esModuleInterop --skipLibCheck --types node app/ai-archetype/types.ts app/ai-archetype/data.ts app/ai-archetype/logic.ts app/ai-archetype/logic.test.ts && node --test .test-dist/logic.test.js"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

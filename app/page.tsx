@@ -1,13 +1,13 @@
 import Image from "next/image";
 import { HeroInvite } from "./hero-invite";
 import { HomeApplyShell } from "./home-apply-shell";
+import { HomeArchetypeTeaser } from "./home-archetype-teaser";
 import {
   absoluteUrl,
   contactEmail,
   siteDescription,
   siteName,
-  siteUrl,
-  xiaohongshuHandle
+  siteUrl
 } from "./site-config";
 
 const featured = [
@@ -478,6 +478,9 @@ export default function Home() {
           aria-label="Primary navigation"
           className="hidden items-center gap-7 text-ink/70 md:flex"
         >
+          <a className="quiet-link" href="/ai-archetype">
+            Play
+          </a>
           <a className="quiet-link" href="#stories">
             Editorial
           </a>
@@ -510,6 +513,10 @@ export default function Home() {
         <div className="mt-9 w-full max-w-3xl">
           <HeroInvite />
         </div>
+      </section>
+
+      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
+        <HomeArchetypeTeaser />
       </section>
 
       <section

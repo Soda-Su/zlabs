@@ -1,7 +1,7 @@
 "use client";
 
 import type { MouseEvent, ReactNode } from "react";
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 import posthog from "posthog-js";
@@ -25,6 +25,38 @@ export function HomeApplyShell({
   const [isDinnerPromptOpen, setIsDinnerPromptOpen] = useState(false);
   const [email, setEmail] = useState("");
   const isAnyModalOpen = isOpen || isDinnerPromptOpen;
+
+  const persistDinnerPromptDismissal = useCallback(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    window.localStorage.setItem(
+      dinnerPromptStorageKey,
+      String(Date.now())
+    );
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+    posthog.capture("apply_modal_dismissed");
+  }, []);
+
+  const closeDinnerPrompt = useCallback(() => {
+    setIsDinnerPromptOpen(false);
+    persistDinnerPromptDismissal();
+    posthog.capture("dinner_prompt_dismissed", {
+      theme: dinnerPromptTheme
+    });
+  }, [persistDinnerPromptDismissal]);
+
+  const openModal = useCallback((nextEmail = "") => {
+    persistDinnerPromptDismissal();
+    setEmail(nextEmail);
+    setIsDinnerPromptOpen(false);
+    setIsOpen(true);
+    posthog.capture("apply_modal_opened", { email_prefilled: nextEmail !== "" });
+  }, [persistDinnerPromptDismissal]);
 
   useEffect(() => {
     if (!isAnyModalOpen) {
@@ -51,7 +83,7 @@ export function HomeApplyShell({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isAnyModalOpen, isOpen]);
+  }, [closeDinnerPrompt, closeModal, isAnyModalOpen, isOpen]);
 
   useEffect(() => {
     if (typeof window === "undefined" || isAnyModalOpen) {
@@ -101,26 +133,13 @@ export function HomeApplyShell({
         handleOpen as EventListener
       );
     };
-  }, []);
+  }, [openModal]);
 
   const description = useMemo(
     () =>
       "Share the basics, one representative work, and the question you are quietly carrying into the next phase of AI-native experience, the knowledge economy, and next-gen VC.",
     []
   );
-
-  function openModal(nextEmail = "") {
-    persistDinnerPromptDismissal();
-    setEmail(nextEmail);
-    setIsDinnerPromptOpen(false);
-    setIsOpen(true);
-    posthog.capture("apply_modal_opened", { email_prefilled: nextEmail !== "" });
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-    posthog.capture("apply_modal_dismissed");
-  }
 
   function handleApplyLinkCapture(event: MouseEvent<HTMLDivElement>) {
     if (
@@ -156,25 +175,6 @@ export function HomeApplyShell({
 
     const url = new URL(href, window.location.origin);
     openModal(url.searchParams.get("email")?.trim() ?? "");
-  }
-
-  function persistDinnerPromptDismissal() {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    window.localStorage.setItem(
-      dinnerPromptStorageKey,
-      String(Date.now())
-    );
-  }
-
-  function closeDinnerPrompt() {
-    setIsDinnerPromptOpen(false);
-    persistDinnerPromptDismissal();
-    posthog.capture("dinner_prompt_dismissed", {
-      theme: dinnerPromptTheme
-    });
   }
 
   function handleDinnerPromptCta(cta: "details" | "apply" | "email") {
