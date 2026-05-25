@@ -48,6 +48,16 @@ export const editorialArticles: EditorialArticle[] = [
     publishedTime: "2026-04-25",
     modifiedTime: "2026-04-25",
     section: "Editorial"
+  },
+  {
+    slug: "what-ai-anxiety-is-really-about",
+    path: "/stories/what-ai-anxiety-is-really-about",
+    title: "What AI Anxiety Is Really About",
+    description:
+      "A calmer Z Labs editorial on why AI anxiety is often a reasonable response to shifting norms of trust, judgment, and value across individuals and organizations.",
+    publishedTime: "2026-05-23",
+    modifiedTime: "2026-05-23",
+    section: "Editorial"
   }
 ];
 

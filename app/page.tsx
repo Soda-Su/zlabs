@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { HeroInvite } from "./hero-invite";
 import { HomeApplyShell } from "./home-apply-shell";
 import { HomeArchetypeTeaser } from "./home-archetype-teaser";
+import { visionPillars } from "./vision/content";
 import {
   absoluteUrl,
   contactEmail,
@@ -46,34 +46,11 @@ const featured = [
   }
 ];
 
-const ecosystemValues = [
-  {
-    service: "01",
-    title: "Elite Mentorship",
-    text: "Professional translation of academic rigor into industry-leading portfolios, research leadership narratives, and career excellence.",
-    outcome:
-      "For PhDs and research operators moving from credential depth to visible industry leverage."
-  },
-  {
-    service: "02",
-    title: "Intellectual Assets",
-    text: "Curated insights across AI-native experience, the knowledge economy, and next-gen VC, delivered through high-stakes workshops, executive briefings, and field reports.",
-    outcome:
-      "For teams that need sharp human-centered judgment around emerging technical shifts."
-  },
-  {
-    service: "03",
-    title: "Strategic Thinktank",
-    text: "Rapid deployment of PhD-led consulting squads to solve complex human-centered challenges for product, research, and venture leaders.",
-    outcome:
-      "For tech organizations facing ambiguous problems where expertise, speed, and taste all matter."
-  }
-];
-
 const stories = [
   {
     title: "Academic to Tech, Without Losing the Plot",
     meta: "Editorial",
+    featured: true,
     highlight: "Field guide",
     text: "A practical guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
     visual: "gradient-academic-tech",
@@ -83,7 +60,8 @@ const stories = [
   },
   {
     title: "GenAI and the Knowledge Worker",
-    meta: "Knowledge work",
+    meta: "Editorial",
+    highlight: "Knowledge work",
     text: "A field guide to what GenAI makes cheap, what it makes more valuable, and why judgment becomes the scarcer layer of work.",
     visual: "gradient-signal",
     visualLabel: "GenAI at Work",
@@ -92,68 +70,23 @@ const stories = [
   },
   {
     title: "A Quieter Room for Serious People",
-    meta: "Social thesis",
+    meta: "Editorial",
+    highlight: "Social thesis",
     text: "A thesis on what real knowledge sharing requires when most communities optimize for noise, visibility, and weak ties.",
     visual: "gradient-bridge",
     visualLabel: "\"A Quieter Room\"",
     href: "/stories/a-quieter-room-for-serious-people",
     footerLabel: "Read essay"
-  }
-];
-
-type Affiliation = {
-  name: string;
-  src: string;
-  width: number;
-  height: number;
-  maxWidth: string;
-  tone?: "strong";
-};
-
-const affiliations: Affiliation[] = [
-  {
-    name: "Harvard",
-    src: "/logos/affiliations/harvard.svg",
-    width: 220,
-    height: 40,
-    maxWidth: "6.8rem",
-    tone: "strong"
   },
   {
-    name: "MIT",
-    src: "/logos/affiliations/mit.svg",
-    width: 180,
-    height: 40,
-    maxWidth: "6.5rem"
-  },
-  {
-    name: "Stanford",
-    src: "/logos/affiliations/stanford.png",
-    width: 768,
-    height: 251,
-    maxWidth: "5.6rem"
-  },
-  {
-    name: "Google",
-    src: "/logos/affiliations/google.svg",
-    width: 164,
-    height: 40,
-    maxWidth: "5.4rem"
-  },
-  {
-    name: "Netflix",
-    src: "/logos/affiliations/netflix.svg",
-    width: 176,
-    height: 40,
-    maxWidth: "4.4rem"
-  },
-  {
-    name: "ByteDance",
-    src: "/logos/affiliations/bytedance.svg",
-    width: 128,
-    height: 40,
-    maxWidth: "5.5rem",
-    tone: "strong"
+    title: "What AI Anxiety Is Really About",
+    meta: "Editorial",
+    highlight: "Calmer essay",
+    text: "A calmer essay on why AI anxiety often reflects shifting norms of trust, judgment, and value across both people and organizations.",
+    visual: "gradient-research",
+    visualLabel: "AI Anxiety",
+    href: "/stories/what-ai-anxiety-is-really-about",
+    footerLabel: "Read essay"
   }
 ];
 
@@ -181,7 +114,6 @@ function ImageCard({
   keywords,
   href,
   status,
-  highlight,
   footerLabel,
   compact = false,
   large = false,
@@ -196,7 +128,7 @@ function ImageCard({
   keywords?: string[];
   href?: string;
   status?: string;
-  highlight?: string;
+  featured?: boolean;
   footerLabel?: string;
   compact?: boolean;
   large?: boolean;
@@ -239,9 +171,6 @@ function ImageCard({
       <div className="mt-4">
         <div className="flex items-center gap-2">
           <p className="text-sm text-ink/55">{meta}</p>
-          {highlight ? (
-            <span className="story-status story-status-lead">{highlight}</span>
-          ) : null}
           {status ? <span className="story-status">{status}</span> : null}
         </div>
         <h3
@@ -306,6 +235,65 @@ function ImageCard({
         content
       )}
     </article>
+  );
+}
+
+const featuredStory = stories.find((story) => story.featured) ?? stories[0];
+const supportingStories = stories.filter((story) => story !== featuredStory);
+const latestStory = stories[stories.length - 1];
+
+function EditorialMiniItem({
+  title,
+  meta,
+  href,
+  footerLabel
+}: {
+  title: string;
+  meta: string;
+  href: string;
+  footerLabel?: string;
+}) {
+  return (
+    <article className="editorial-mini-item">
+      <a className="block focus:outline-none" href={href}>
+        <div className="flex items-center gap-2">
+          <p className="text-sm text-ink/55">{meta}</p>
+        </div>
+        <h3 className="editorial-mini-title mt-2">{title}</h3>
+        {footerLabel ? (
+          <div className="mt-4">
+            <span className="editorial-link">{footerLabel}</span>
+          </div>
+        ) : null}
+      </a>
+    </article>
+  );
+}
+
+function SectionIntro({
+  eyebrow,
+  title,
+  description,
+  ctaHref,
+  ctaLabel
+}: {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  ctaHref?: string;
+  ctaLabel?: string;
+}) {
+  return (
+    <div className="home-section-intro">
+      {eyebrow ? <p className="text-sm text-ink/55">{eyebrow}</p> : null}
+      <h2 className="home-section-title">{title}</h2>
+      <p className="home-section-description">{description}</p>
+      {ctaHref && ctaLabel ? (
+        <a className="home-section-cta quiet-link" href={ctaHref}>
+          {ctaLabel}
+        </a>
+      ) : null}
+    </div>
   );
 }
 
@@ -487,8 +475,8 @@ export default function Home() {
           <a className="quiet-link" href="#featured">
             How We Gather
           </a>
-          <a className="quiet-link" href="#ecosystem">
-            Ecosystem
+          <a className="quiet-link" href="/vision">
+            Vision
           </a>
           <a className="quiet-link" href="#membership">
             Beta
@@ -523,26 +511,28 @@ export default function Home() {
         id="stories"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-2xl leading-tight sm:text-3xl">Editorial</h2>
-            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
-              Essays on research, translation, and the social infrastructure
-              around technical work.
-            </p>
-          </div>
-          <a
-            className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/apply"
-          >
-            Join the Beta
-          </a>
-        </div>
-        <div className="grid gap-8 lg:grid-cols-[1.6fr_0.9fr] lg:items-start">
-          <ImageCard {...stories[0]} large />
-          <div className="grid gap-8">
-            <ImageCard {...stories[1]} compact secondary />
-            <ImageCard {...stories[2]} compact secondary />
+        <div className="home-section-shell">
+          <SectionIntro
+            title="Editorial"
+            description="Essays on research, translation, and the social infrastructure around technical work."
+            ctaHref={latestStory.href}
+            ctaLabel="Read latest"
+          />
+          <div className="home-section-content editorial-section-content">
+            <ImageCard {...featuredStory} large />
+            <div className="editorial-mini-stack">
+              {supportingStories.map((story) =>
+                story.href ? (
+                  <EditorialMiniItem
+                    key={story.href}
+                    title={story.title}
+                    meta={story.meta}
+                    href={story.href}
+                    footerLabel={story.footerLabel}
+                  />
+                ) : null
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -551,18 +541,15 @@ export default function Home() {
         id="ecosystem"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr]">
-          <div>
-            <h2 className="max-w-xl text-3xl leading-tight sm:text-4xl">
-              The Vision
-            </h2>
-            <p className="mt-5 max-w-xl leading-7 text-ink/65">
-              Z Labs is shaping a translation layer for academic expertise,
-              frontier research judgment, and PhD-led execution.
-            </p>
-          </div>
-          <div className="border-t border-ink/10">
-            {ecosystemValues.map((item) => (
+        <div className="home-section-shell">
+          <SectionIntro
+            title="The Vision"
+            description="Z Labs is building a translation layer between research depth, trustworthy judgment, and new forms of technical gathering."
+            ctaHref="/vision"
+            ctaLabel="Read the vision"
+          />
+          <div className="home-section-content border-t border-ink/10">
+            {visionPillars.map((item) => (
               <article
                 key={item.title}
                 className="group grid gap-4 border-b border-ink/10 py-7 transition duration-300 md:grid-cols-[0.32fr_1fr]"
@@ -575,37 +562,6 @@ export default function Home() {
                   <p className="mt-3 max-w-2xl leading-7 text-ink/65">
                     {item.text}
                   </p>
-                  <p className="mt-4 max-w-2xl text-sm leading-6 text-ink/50">
-                    {item.outcome}
-                  </p>
-                  {item.service === "01" ? (
-                    <div
-                      className="affiliation-rail affiliation-rail-vision"
-                      aria-label="Selected affiliations"
-                    >
-                      <div className="affiliation-logo-row">
-                        {affiliations.map((logo) => (
-                          <div
-                            key={logo.name}
-                            className={`affiliation-logo-item${
-                              logo.tone === "strong"
-                                ? " affiliation-logo-item-strong"
-                                : ""
-                            }`}
-                          >
-                            <Image
-                              src={logo.src}
-                              alt={logo.name}
-                              width={logo.width}
-                              height={logo.height}
-                              className="affiliation-logo-mark"
-                              style={{ maxWidth: logo.maxWidth }}
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  ) : null}
                 </div>
               </article>
             ))}
@@ -617,32 +573,24 @@ export default function Home() {
         id="featured"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
-        <div className="mb-6 flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-2xl leading-tight sm:text-3xl">
-              How We Gather
-            </h2>
-            <p className="mt-2 max-w-2xl leading-7 text-ink/60">
-              The room itself, and the tables now taking shape.
-            </p>
-          </div>
-          <a
-            className="quiet-link hidden text-sm text-ink/60 sm:inline"
-            href="/dinners/room-worth-staying"
-          >
-            See first dinner
-          </a>
-        </div>
-        <div className="overflow-x-auto pb-2 snap-x snap-mandatory">
-          <div className="flex w-max gap-4 pr-4">
-            {featured.map((item) => (
-              <div
-                key={item.title}
-                className="flex w-[min(88vw,37rem)] shrink-0 snap-start self-stretch lg:w-[32rem]"
-              >
-                <FeaturedPanel {...item} />
-              </div>
-            ))}
+        <div className="home-section-shell">
+          <SectionIntro
+            title="How We Gather"
+            description="The room itself, and the tables now taking shape."
+            ctaHref="/dinners/room-worth-staying"
+            ctaLabel="See first dinner"
+          />
+          <div className="home-section-content overflow-x-auto pb-2 snap-x snap-mandatory">
+            <div className="flex w-max gap-4 pr-4">
+              {featured.map((item) => (
+                <div
+                  key={item.title}
+                  className="flex w-[min(88vw,37rem)] shrink-0 snap-start self-stretch lg:w-[32rem]"
+                >
+                  <FeaturedPanel {...item} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -651,18 +599,16 @@ export default function Home() {
         id="membership"
         className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
       >
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start">
-          <div>
-            <p className="text-sm text-ink/55">For beta members</p>
-            <h2 className="mt-2 max-w-2xl text-4xl leading-tight sm:text-5xl">
-              Intelligence with a social life.
-            </h2>
-          </div>
-          <div className="membership-stack">
+        <div className="home-section-shell">
+          <SectionIntro
+            title="Intelligence with a social life."
+            description="Z Labs is in a long period of research and curation, preparing a selective beta for PhDs, research operators, and technical founders who move with trust and high-quality execution."
+          />
+          <div className="home-section-content membership-stack">
             <p className="max-w-2xl text-[1.02rem] leading-8 text-ink/65">
-              Z Labs is in a long period of research and curation, preparing a
-              selective beta for PhDs, research operators, and technical
-              founders who move with trust and high-quality execution.
+              The beta is intentionally slow. The point is not scale first. It
+              is to shape a room where serious people can compare notes with
+              more signal, more continuity, and less noise.
             </p>
             <div className="membership-stats" aria-label="Membership summary">
               {membershipStats.map((item) => (

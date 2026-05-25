@@ -308,6 +308,97 @@ input {
   color: rgba(16, 16, 16, 0.58);
 }
 
+.editorial-card-subdued {
+  padding-top: 0.15rem;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.editorial-card-subdued:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
+.home-section-shell {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.home-section-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.home-section-title {
+  max-width: 18ch;
+  color: rgba(16, 16, 16, 0.94);
+  font-size: clamp(1.7rem, 2vw, 2.35rem);
+  line-height: 1.08;
+}
+
+.home-section-description {
+  margin-top: 0.75rem;
+  max-width: 30rem;
+  color: rgba(16, 16, 16, 0.62);
+  line-height: 1.8;
+}
+
+.home-section-cta {
+  margin-top: 1.2rem;
+  display: inline-flex;
+  font-size: 0.92rem;
+  color: rgba(16, 16, 16, 0.62);
+}
+
+.home-section-content {
+  min-width: 0;
+}
+
+.editorial-section-content {
+  display: grid;
+  gap: 1.7rem;
+}
+
+.editorial-mini-stack {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.editorial-mini-item {
+  padding: 1.15rem 0 1.2rem;
+  border-bottom: 1px solid rgba(16, 16, 16, 0.08);
+}
+
+.editorial-mini-item .editorial-link {
+  color: rgba(16, 16, 16, 0.58);
+}
+
+.editorial-mini-item:hover .editorial-link {
+  color: var(--zlabs-blue);
+  transform: translateX(2px);
+}
+
+.editorial-mini-title {
+  max-width: 20rem;
+  color: rgba(16, 16, 16, 0.9);
+  font-size: 1.18rem;
+  line-height: 1.38;
+  transition: color 220ms ease;
+}
+
+.editorial-mini-item:hover .editorial-mini-title {
+  color: var(--zlabs-blue);
+}
+
+.editorial-archive-link {
+  display: inline-flex;
+  align-items: center;
+  padding-top: 1rem;
+  color: rgba(16, 16, 16, 0.6);
+  font-size: 0.92rem;
+}
+
 .featured-panel {
   display: flex;
   height: 100%;
@@ -620,6 +711,19 @@ input {
 .membership-stack {
   display: flex;
   flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .home-section-shell {
+    grid-template-columns: minmax(14rem, 0.76fr) minmax(0, 1.24fr);
+    gap: 2.5rem;
+    align-items: start;
+  }
+
+  .home-section-intro {
+    position: sticky;
+    top: 1.5rem;
+  }
 }
 
 .membership-stats {
