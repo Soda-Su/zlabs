@@ -1,6 +1,8 @@
 import { HeroInvite } from "./hero-invite";
 import { HomeApplyShell } from "./home-apply-shell";
 import { HomeArchetypeTeaser } from "./home-archetype-teaser";
+import { EditorialFilterControls } from "./editorial-filter-controls";
+import type { ReactNode } from "react";
 import { visionPillars } from "./vision/content";
 import {
   absoluteUrl,
@@ -12,24 +14,24 @@ import {
 
 const featured = [
   {
-    title: "Z Dinners: Between Startup, Big Tech, and What Comes Next",
+    title: "Z Dinners: Designer, Researcher, Builder, or Whatever?",
     meta: "Stealth Gathering",
-    text: "The first table begins with a wider question: what really changes between startup, big tech, and the less-scripted paths that might come after either one?",
-    keywords: ["Now convening", "By invitation in SF", "Startup x big tech x beyond"],
-    href: "/dinners/room-worth-staying",
-    visual: "gradient-dinners-evening",
+    text: "The first table begins with a question about what happens when the actual work spills across categories faster than titles can keep up.",
+    keywords: ["Now convening", "By invitation in SF", "Research x design x build"],
+    href: "/dinners/designer-researcher-builder-or-whatever",
+    visual: "gradient-salon",
     visualLabel: "First Gathering",
     status: "First Gathering",
     footerLabel: "See first dinner",
     spotlight: true
   },
   {
-    title: "Z Dinners: Designer, Researcher, Builder, or Whatever?",
+    title: "Z Dinners: Between Startup, Big Tech, and What Comes Next",
     meta: "Stealth Gathering",
-    text: "A second table on what happens when the actual work spills across categories faster than titles can keep up.",
-    keywords: ["Now forming", "By invitation in SF", "Research x design x build"],
-    href: "/apply?interest=designer-researcher-builder-dinner",
-    visual: "gradient-salon",
+    text: "A second table with a wider question: what really changes between startup, big tech, and the less-scripted paths that might come after either one?",
+    keywords: ["Now forming", "By invitation in SF", "Startup x big tech x beyond"],
+    href: "/apply?interest=between-startup-big-tech-dinner",
+    visual: "gradient-dinners-evening",
     visualLabel: "Second Gathering",
     status: "Second Gathering",
     footerLabel: "Request quiet access"
@@ -50,8 +52,10 @@ const stories = [
   {
     title: "Academic to Tech, Without Losing the Plot",
     meta: "Editorial",
+    category: "career",
     featured: true,
     highlight: "Field guide",
+    tags: ["PhD careers", "Hiring signal", "Portfolio"],
     text: "A practical guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
     visual: "gradient-academic-tech",
     visualLabel: "Academic to Tech",
@@ -61,7 +65,9 @@ const stories = [
   {
     title: "GenAI and the Knowledge Worker",
     meta: "Editorial",
+    category: "ai",
     highlight: "Knowledge work",
+    tags: ["GenAI", "Judgment", "Work"],
     text: "A field guide to what GenAI makes cheap, what it makes more valuable, and why judgment becomes the scarcer layer of work.",
     visual: "gradient-signal",
     visualLabel: "GenAI at Work",
@@ -71,7 +77,9 @@ const stories = [
   {
     title: "A Quieter Room for Serious People",
     meta: "Editorial",
+    category: "personal",
     highlight: "Social thesis",
+    tags: ["Community", "Trust", "Serious rooms"],
     text: "A thesis on what real knowledge sharing requires when most communities optimize for noise, visibility, and weak ties.",
     visual: "gradient-bridge",
     visualLabel: "\"A Quieter Room\"",
@@ -81,14 +89,45 @@ const stories = [
   {
     title: "What AI Anxiety Is Really About",
     meta: "Editorial",
+    category: "ai",
     highlight: "Calmer essay",
+    tags: ["AI anxiety", "Trust", "Adaptation"],
     text: "A calmer essay on why AI anxiety often reflects shifting norms of trust, judgment, and value across both people and organizations.",
     visual: "gradient-research",
     visualLabel: "AI Anxiety",
     href: "/stories/what-ai-anxiety-is-really-about",
     footerLabel: "Read essay"
+  },
+  {
+    title: "Too Many Ideas, Too Little Energy",
+    meta: "Editorial",
+    category: "personal",
+    highlight: "Founder note",
+    tags: ["Founder energy", "Ideas", "Attention"],
+    text: "A founder note on idea surplus, option debt, and the energy infrastructure required to let one important thing become real.",
+    visual: "gradient-workspace",
+    visualLabel: "Ideas x Energy",
+    href: "/stories/too-many-ideas-too-little-energy",
+    footerLabel: "Read essay"
   }
 ];
+
+const editorialCategories = [
+  {
+    id: "career",
+    title: "Career"
+  },
+  {
+    id: "ai",
+    title: "AI"
+  },
+  {
+    id: "personal",
+    title: "Personal"
+  }
+] as const;
+
+type EditorialStory = (typeof stories)[number];
 
 const membershipStats = [
   {
@@ -105,85 +144,75 @@ const membershipStats = [
   }
 ] as const;
 
+const latestStory = stories[stories.length - 1];
+const featuredStory = stories.find((story) => story.featured) ?? stories[0];
+const supportingStories = stories.filter((story) => story !== featuredStory);
+const firstStoryHrefByCategory = Object.fromEntries(
+  editorialCategories.map((category) => [
+    category.id,
+    stories.find((story) => story.category === category.id)?.href
+  ])
+) as Partial<Record<EditorialStory["category"], string>>;
+
+function getEditorialCategoryTitle(category: EditorialStory["category"]) {
+  return (
+    editorialCategories.find((item) => item.id === category)?.title ?? category
+  );
+}
+
 function ImageCard({
   title,
   meta,
   visual,
   visualLabel,
   text,
-  keywords,
+  tags,
   href,
-  status,
+  category,
+  categoryLabel,
+  targetId,
   footerLabel,
-  compact = false,
-  large = false,
-  secondary = false,
-  subdued = false
+  large = false
 }: {
   title: string;
   meta: string;
   visual: string;
   visualLabel: string;
   text?: string;
-  keywords?: string[];
+  tags?: readonly string[];
   href?: string;
-  status?: string;
-  featured?: boolean;
+  category?: EditorialStory["category"];
+  categoryLabel?: string;
+  targetId?: string;
   footerLabel?: string;
-  compact?: boolean;
+  featured?: boolean;
   large?: boolean;
-  secondary?: boolean;
-  subdued?: boolean;
 }) {
   const content = (
     <>
       <div
         aria-label={visualLabel}
         role="img"
-        className={
-          large
-            ? "image-frame aspect-[4/3]"
-            : subdued
-              ? "image-frame aspect-[16/8.5]"
-            : compact
-              ? "image-frame aspect-[16/9]"
-              : "image-frame aspect-square"
-        }
+        className={large ? "image-frame aspect-[4/3]" : "image-frame aspect-square"}
       >
         <div className={`image-plane gradient-visual ${visual}`}>
-          <div
-            className={
-              large
-                ? subdued
-                  ? "visual-pill visual-pill-large visual-pill-subdued"
-                  : "visual-pill visual-pill-large"
-                : secondary
-                  ? "visual-pill visual-pill-secondary"
-                  : subdued
-                    ? "visual-pill visual-pill-subdued"
-                  : "visual-pill"
-            }
-          >
+          <div className={large ? "visual-pill visual-pill-large" : "visual-pill"}>
             {visualLabel}
           </div>
         </div>
       </div>
       <div className="mt-4">
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <p className="text-sm text-ink/55">{meta}</p>
-          {status ? <span className="story-status">{status}</span> : null}
+          {categoryLabel ? (
+            <span className="story-status">{categoryLabel}</span>
+          ) : null}
         </div>
         <h3
           className={
             large
               ? "mt-2 max-w-2xl text-3xl leading-tight text-ink sm:text-4xl"
-              : subdued
-                ? "mt-2 max-w-xl text-[1.28rem] leading-tight text-ink"
-              : compact
-                ? secondary
-                  ? "mt-2 max-w-lg text-[1.4rem] leading-tight text-ink"
-                  : "mt-2 max-w-xl text-2xl leading-tight text-ink"
-                : "mt-2 text-xl leading-tight text-ink"
+              : "mt-2 text-xl leading-tight text-ink"
           }
         >
           {title}
@@ -193,23 +222,17 @@ function ImageCard({
             className={
               large
                 ? "mt-4 max-w-2xl leading-7 text-ink/65"
-                : subdued
-                  ? "mt-3 max-w-xl text-[0.92rem] leading-6 text-ink/58"
-                : compact
-                  ? secondary
-                    ? "mt-3 max-w-lg text-[0.96rem] leading-6 text-ink/60"
-                    : "mt-3 max-w-xl leading-7 text-ink/65"
-                  : "mt-3 max-w-md text-sm leading-6 text-ink/65"
+                : "mt-3 max-w-md text-sm leading-6 text-ink/65"
             }
           >
             {text}
           </p>
         ) : null}
-        {keywords && keywords.length > 0 ? (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {keywords.map((keyword) => (
-              <span key={keyword} className="keyword-pill">
-                {keyword}
+        {tags && tags.length > 0 ? (
+          <div className="editorial-tag-row">
+            {tags.map((tag) => (
+              <span key={tag} className="editorial-tag">
+                {tag}
               </span>
             ))}
           </div>
@@ -225,7 +248,9 @@ function ImageCard({
 
   return (
     <article
-      className={`editorial-card ${status ? "editorial-card-muted" : ""} ${secondary ? "editorial-card-secondary" : ""} ${subdued ? "editorial-card-subdued" : ""}`}
+      id={targetId}
+      className="editorial-card"
+      data-editorial-category={category}
     >
       {href ? (
         <a className="block focus:outline-none" href={href}>
@@ -238,28 +263,46 @@ function ImageCard({
   );
 }
 
-const featuredStory = stories.find((story) => story.featured) ?? stories[0];
-const supportingStories = stories.filter((story) => story !== featuredStory);
-const latestStory = stories[stories.length - 1];
-
 function EditorialMiniItem({
   title,
   meta,
+  tags,
   href,
+  category,
+  categoryLabel,
+  targetId,
   footerLabel
 }: {
   title: string;
   meta: string;
+  tags?: readonly string[];
   href: string;
+  category: EditorialStory["category"];
+  categoryLabel: string;
+  targetId?: string;
   footerLabel?: string;
 }) {
   return (
-    <article className="editorial-mini-item">
+    <article
+      id={targetId}
+      className="editorial-mini-item"
+      data-editorial-category={category}
+    >
       <a className="block focus:outline-none" href={href}>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <p className="text-sm text-ink/55">{meta}</p>
+          <span className="story-status">{categoryLabel}</span>
         </div>
         <h3 className="editorial-mini-title mt-2">{title}</h3>
+        {tags && tags.length > 0 ? (
+          <div className="editorial-tag-row">
+            {tags.map((tag) => (
+              <span key={tag} className="editorial-tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        ) : null}
         {footerLabel ? (
           <div className="mt-4">
             <span className="editorial-link">{footerLabel}</span>
@@ -275,13 +318,15 @@ function SectionIntro({
   title,
   description,
   ctaHref,
-  ctaLabel
+  ctaLabel,
+  children
 }: {
   eyebrow?: string;
   title: string;
   description: string;
   ctaHref?: string;
   ctaLabel?: string;
+  children?: ReactNode;
 }) {
   return (
     <div className="home-section-intro">
@@ -293,6 +338,7 @@ function SectionIntro({
           {ctaLabel}
         </a>
       ) : null}
+      {children}
     </div>
   );
 }
@@ -517,9 +563,21 @@ export default function Home() {
             description="Essays on research, translation, and the social infrastructure around technical work."
             ctaHref={latestStory.href}
             ctaLabel="Read latest"
-          />
+          >
+            <EditorialFilterControls categories={editorialCategories} />
+          </SectionIntro>
           <div className="home-section-content editorial-section-content">
-            <ImageCard {...featuredStory} large />
+            <ImageCard
+              {...featuredStory}
+              categoryLabel={getEditorialCategoryTitle(featuredStory.category)}
+              targetId={
+                firstStoryHrefByCategory[featuredStory.category] ===
+                featuredStory.href
+                  ? `editorial-${featuredStory.category}`
+                  : undefined
+              }
+              large
+            />
             <div className="editorial-mini-stack">
               {supportingStories.map((story) =>
                 story.href ? (
@@ -527,7 +585,15 @@ export default function Home() {
                     key={story.href}
                     title={story.title}
                     meta={story.meta}
+                    tags={story.tags}
                     href={story.href}
+                    category={story.category}
+                    categoryLabel={getEditorialCategoryTitle(story.category)}
+                    targetId={
+                      firstStoryHrefByCategory[story.category] === story.href
+                        ? `editorial-${story.category}`
+                        : undefined
+                    }
                     footerLabel={story.footerLabel}
                   />
                 ) : null
@@ -577,7 +643,7 @@ export default function Home() {
           <SectionIntro
             title="How We Gather"
             description="The room itself, and the tables now taking shape."
-            ctaHref="/dinners/room-worth-staying"
+            ctaHref="/dinners/designer-researcher-builder-or-whatever"
             ctaLabel="See first dinner"
           />
           <div className="home-section-content overflow-x-auto pb-2 snap-x snap-mandatory">

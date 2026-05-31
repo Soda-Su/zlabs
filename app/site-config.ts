@@ -58,6 +58,16 @@ export const editorialArticles: EditorialArticle[] = [
     publishedTime: "2026-05-23",
     modifiedTime: "2026-05-23",
     section: "Editorial"
+  },
+  {
+    slug: "too-many-ideas-too-little-energy",
+    path: "/stories/too-many-ideas-too-little-energy",
+    title: "Too Many Ideas, Too Little Energy",
+    description:
+      "A Z Labs editorial on the entrepreneurial state of having many viable ideas but limited energy, attention, recovery, and sequencing capacity.",
+    publishedTime: "2026-05-31",
+    modifiedTime: "2026-05-31",
+    section: "Editorial"
   }
 ];
 

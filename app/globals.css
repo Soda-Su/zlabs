@@ -216,6 +216,7 @@ input {
 .editorial-card {
   min-width: 0;
   border-radius: 8px;
+  scroll-margin-top: 1.5rem;
   transition: transform 260ms ease, filter 260ms ease;
 }
 
@@ -354,6 +355,39 @@ input {
   min-width: 0;
 }
 
+#stories {
+  position: relative;
+}
+
+.editorial-filter-list {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.editorial-filter-chip {
+  display: inline-flex;
+  min-height: 1.9rem;
+  align-items: center;
+  border: 1px solid rgba(16, 16, 16, 0.1);
+  border-radius: 999px;
+  padding: 0 0.72rem;
+  appearance: none;
+  background: transparent;
+  color: rgba(16, 16, 16, 0.58);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font: inherit;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.editorial-filter-chip:hover {
+  border-color: rgba(26, 102, 178, 0.28);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--zlabs-blue);
+}
+
 .editorial-section-content {
   display: grid;
   gap: 1.7rem;
@@ -366,8 +400,12 @@ input {
 }
 
 .editorial-mini-item {
-  padding: 1.15rem 0 1.2rem;
+  margin-inline: -0.7rem;
+  padding: 1.15rem 0.7rem 1.2rem;
   border-bottom: 1px solid rgba(16, 16, 16, 0.08);
+  border-radius: 8px;
+  scroll-margin-top: 1.5rem;
+  transition: opacity 180ms ease, background 180ms ease, filter 180ms ease;
 }
 
 .editorial-mini-item .editorial-link {
@@ -380,11 +418,78 @@ input {
 }
 
 .editorial-mini-title {
-  max-width: 20rem;
+  max-width: 23rem;
   color: rgba(16, 16, 16, 0.9);
   font-size: 1.18rem;
   line-height: 1.38;
   transition: color 220ms ease;
+}
+
+.editorial-tag-row {
+  margin-top: 0.85rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.editorial-tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.45rem;
+  border: 1px solid rgba(16, 16, 16, 0.08);
+  border-radius: 999px;
+  padding: 0 0.5rem;
+  color: rgba(16, 16, 16, 0.5);
+  font-size: 0.68rem;
+  line-height: 1;
+}
+
+#stories[data-editorial-filter="career"]
+  [data-editorial-category]:not([data-editorial-category="career"]),
+#stories[data-editorial-filter="ai"]
+  [data-editorial-category]:not([data-editorial-category="ai"]),
+#stories[data-editorial-filter="personal"]
+  [data-editorial-category]:not([data-editorial-category="personal"]) {
+  opacity: 0.34;
+  filter: saturate(0.35);
+}
+
+#stories[data-editorial-filter="career"] [data-editorial-category="career"],
+#stories[data-editorial-filter="ai"] [data-editorial-category="ai"],
+#stories[data-editorial-filter="personal"] [data-editorial-category="personal"] {
+  opacity: 1;
+  filter: none;
+}
+
+#stories[data-editorial-filter="career"]
+  [data-editorial-category="career"].editorial-mini-item,
+#stories[data-editorial-filter="ai"]
+  [data-editorial-category="ai"].editorial-mini-item,
+#stories[data-editorial-filter="personal"]
+  [data-editorial-category="personal"].editorial-mini-item {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.74),
+    rgba(255, 255, 255, 0.18)
+  );
+}
+
+#stories[data-editorial-filter="career"]
+  [data-editorial-category="career"].editorial-card
+  .image-frame,
+#stories[data-editorial-filter="ai"]
+  [data-editorial-category="ai"].editorial-card
+  .image-frame,
+#stories[data-editorial-filter="personal"]
+  [data-editorial-category="personal"].editorial-card
+  .image-frame {
+  box-shadow: 0 0 0 2px rgba(26, 102, 178, 0.2);
+}
+
+.editorial-filter-chip[aria-pressed="true"] {
+  border-color: rgba(26, 102, 178, 0.32);
+  background: #ffffff;
+  color: var(--zlabs-blue);
 }
 
 .editorial-mini-item:hover .editorial-mini-title {

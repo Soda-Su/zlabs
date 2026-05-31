@@ -11,14 +11,14 @@ const pagePath = "/dinners/room-worth-staying";
 const pageUrl = absoluteUrl(pagePath);
 const pageTitle = "Z Dinners | Between Startup, Big Tech, and What Comes Next";
 const pageDescription =
-  "The first Z Dinners gathering opens a wider question: what changes across startup, big tech, and whatever comes next? A small invited table in San Francisco.";
+  "The second Z Dinners gathering opens a wider question: what changes across startup, big tech, and whatever comes next? A small invited table in San Francisco.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 1 interest"
+  "Z Dinners No. 2 interest"
 )}`;
 const dinnerInterestPath = "/apply?interest=between-startup-big-tech-dinner";
 
 const posterSignals = [
-  "First gathering",
+  "Second gathering",
   "Six invited seats",
   "San Francisco",
   "By invitation"
@@ -171,7 +171,7 @@ export default function RoomWorthStayingPage() {
                 big tech, and what comes next.
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The first Z Dinners table begins with a wider question: what
+                The second Z Dinners table begins with a wider question: what
                 really changes as you move between startup, big tech, and the
                 less-scripted paths that might come after either one?
               </p>
@@ -336,7 +336,7 @@ export default function RoomWorthStayingPage() {
                 If this sounds like your table, let us know.
               </h2>
               <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
-                This first gathering is being convened by invitation in San
+                This second gathering is being convened by invitation in San
                 Francisco. If you have moved through startup, big tech, or are
                 now imagining something beyond both, we would be glad to hear
                 from you.

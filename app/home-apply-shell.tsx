@@ -8,8 +8,8 @@ import posthog from "posthog-js";
 import { ApplicationForm } from "./apply/application-form";
 import { contactEmail } from "./site-config";
 
-const dinnerPromptStorageKey = "zlabs:dinner-prompt-dismissed:v1";
-const dinnerPromptTheme = "between-startup-big-tech";
+const dinnerPromptStorageKey = "zlabs:dinner-prompt-dismissed:v2";
+const dinnerPromptTheme = "designer-researcher-builder";
 const dinnerPromptDelayMs = 1400;
 const dinnerPromptCooldownMs = 1000 * 60 * 60 * 24 * 7;
 const dinnerFastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
@@ -208,13 +208,13 @@ export function HomeApplyShell({
                   id="home-dinner-title"
                   className="mt-2 max-w-2xl text-3xl leading-tight text-ink sm:text-4xl"
                 >
-                  Between startup, big tech, and what comes next.
+                  Designer, researcher, builder, or whatever?
                 </h2>
                 <p className="mt-4 max-w-2xl leading-7 text-ink/62">
                   Our first private dinner is taking shape for mid-June in San
                   Francisco: six invited seats, one honest conversation about
-                  what each path gives, what each one quietly costs, and what
-                  might come after either world stops fitting.
+                  the labels people still use, the work they actually do, and
+                  the identities starting to blur.
                 </p>
               </div>
               <button
@@ -239,20 +239,21 @@ export function HomeApplyShell({
 
               <p className="max-w-2xl text-[1.02rem] leading-7 text-ink/66">
                 A quieter invitation than a splashy launch. If you have lived
-                across startup, big tech, or are thinking seriously about what
-                comes next, we would be glad to hear from you.
+                across research, design, product, or building, or if your work
+                has started to outgrow one clean title, we would be glad to hear
+                from you.
               </p>
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/dinners/room-worth-staying"
+                  href="/dinners/designer-researcher-builder-or-whatever"
                   className="inline-flex h-12 items-center justify-center rounded-md bg-ink px-5 text-sm font-medium text-white transition duration-300 hover:bg-zlabs-blue-deep focus:outline-none focus:ring-2 focus:ring-zlabs-blue-deep focus:ring-offset-2 focus:ring-offset-white"
                   onClick={() => handleDinnerPromptCta("details")}
                 >
                   Read the invitation
                 </Link>
                 <Link
-                  href="/apply?interest=between-startup-big-tech-dinner"
+                  href="/apply?interest=designer-researcher-builder-dinner"
                   className="inline-flex h-12 items-center justify-center rounded-md border border-ink/12 bg-white/72 px-5 text-sm text-ink/68 transition duration-300 hover:border-ink/18 hover:bg-white"
                   onClick={() => handleDinnerPromptCta("apply")}
                 >

@@ -11,14 +11,14 @@ const pagePath = "/dinners/designer-researcher-builder-or-whatever";
 const pageUrl = absoluteUrl(pagePath);
 const pageTitle = "Z Dinners | Designer, Researcher, Builder, or Whatever?";
 const pageDescription =
-  "The second Z Dinners gathering asks a different kind of identity question: designer, researcher, builder, or something blurrier in between? A small invited table in San Francisco.";
+  "The first Z Dinners gathering asks a different kind of identity question: designer, researcher, builder, or something blurrier in between? A small invited table in San Francisco.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 2 interest"
+  "Z Dinners No. 1 interest"
 )}`;
 const dinnerInterestPath = "/apply?interest=designer-researcher-builder-dinner";
 
 const posterSignals = [
-  "Second gathering",
+  "First gathering",
   "Six invited seats",
   "San Francisco",
   "By invitation"
@@ -170,7 +170,7 @@ export default function DesignerResearcherBuilderPage() {
                 builder, or whatever?
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The second Z Dinners table begins with a different kind of
+                The first Z Dinners table begins with a different kind of
                 question: when the real work keeps spilling across categories,
                 what do our labels still help explain, and what do they start to
                 hide?
@@ -337,7 +337,7 @@ export default function DesignerResearcherBuilderPage() {
                 If this sounds uncomfortably familiar, let us know.
               </h2>
               <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
-                This second gathering is being convened by invitation in San
+                This first gathering is being convened by invitation in San
                 Francisco. If your work already spills across categories, or
                 you have been trying to name yourself more truthfully, we would
                 be glad to hear from you.
