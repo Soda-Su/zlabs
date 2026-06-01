@@ -16,8 +16,8 @@ const featured = [
   {
     title: "Z Dinners: Designer, Researcher, Builder, or Whatever?",
     meta: "Stealth Gathering",
-    text: "The first table begins with a question about what happens when the actual work spills across categories faster than titles can keep up.",
-    keywords: ["Now convening", "By invitation in SF", "Research x design x build"],
+    text: "A private Config-week side-table for people whose work no longer fits one clean title.",
+    keywords: ["Config week", "Independent private dinner", "Research x design x build"],
     href: "/dinners/designer-researcher-builder-or-whatever",
     visual: "gradient-salon",
     visualLabel: "First Gathering",
@@ -39,8 +39,8 @@ const featured = [
   {
     title: "Z Labs",
     meta: "Private Circle",
-    text: "A quieter Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI-native experience, the knowledge economy, and next-gen VC.",
-    keywords: ["Bay Area room", "Research depth", "Patient trust"],
+    text: "A quieter Bay Area room for serious people comparing notes on AI, organization, and taste.",
+    keywords: ["AI", "Organization", "Taste"],
     href: "/apply",
     visual: "gradient-aurora",
     visualLabel: "Z Labs",
@@ -52,10 +52,10 @@ const stories = [
   {
     title: "Academic to Tech, Without Losing the Plot",
     meta: "Editorial",
-    category: "career",
+    category: "organization",
     featured: true,
     highlight: "Field guide",
-    tags: ["PhD careers", "Hiring signal", "Portfolio"],
+    tags: ["Organization", "Career systems", "Proof"],
     text: "A practical guide for PhDs translating research depth into hiring signal, portfolio proof, and a more legible path into tech.",
     visual: "gradient-academic-tech",
     visualLabel: "Academic to Tech",
@@ -67,7 +67,7 @@ const stories = [
     meta: "Editorial",
     category: "ai",
     highlight: "Knowledge work",
-    tags: ["GenAI", "Judgment", "Work"],
+    tags: ["AI", "AI-native work", "Judgment"],
     text: "A field guide to what GenAI makes cheap, what it makes more valuable, and why judgment becomes the scarcer layer of work.",
     visual: "gradient-signal",
     visualLabel: "GenAI at Work",
@@ -77,9 +77,9 @@ const stories = [
   {
     title: "A Quieter Room for Serious People",
     meta: "Editorial",
-    category: "personal",
+    category: "organization",
     highlight: "Social thesis",
-    tags: ["Community", "Trust", "Serious rooms"],
+    tags: ["Organization", "Trust", "Room quality"],
     text: "A thesis on what real knowledge sharing requires when most communities optimize for noise, visibility, and weak ties.",
     visual: "gradient-bridge",
     visualLabel: "\"A Quieter Room\"",
@@ -91,7 +91,7 @@ const stories = [
     meta: "Editorial",
     category: "ai",
     highlight: "Calmer essay",
-    tags: ["AI anxiety", "Trust", "Adaptation"],
+    tags: ["AI", "AI anxiety", "Legibility"],
     text: "A calmer essay on why AI anxiety often reflects shifting norms of trust, judgment, and value across both people and organizations.",
     visual: "gradient-research",
     visualLabel: "AI Anxiety",
@@ -101,9 +101,9 @@ const stories = [
   {
     title: "Too Many Ideas, Too Little Energy",
     meta: "Editorial",
-    category: "personal",
+    category: "taste",
     highlight: "Founder note",
-    tags: ["Founder energy", "Ideas", "Attention"],
+    tags: ["Taste", "Attention", "Sequence"],
     text: "A founder note on idea surplus, option debt, and the energy infrastructure required to let one important thing become real.",
     visual: "gradient-workspace",
     visualLabel: "Ideas x Energy",
@@ -114,16 +114,16 @@ const stories = [
 
 const editorialCategories = [
   {
-    id: "career",
-    title: "Career"
-  },
-  {
     id: "ai",
     title: "AI"
   },
   {
-    id: "personal",
-    title: "Personal"
+    id: "organization",
+    title: "Organization"
+  },
+  {
+    id: "taste",
+    title: "Taste"
   }
 ] as const;
 
@@ -429,9 +429,9 @@ export default function Home() {
         name: "San Francisco Bay Area"
       },
       knowsAbout: [
-        "AI-native experience",
-        "knowledge economy",
-        "next-gen VC",
+        "AI",
+        "organization",
+        "taste",
         "Bay Area PhDs",
         "Z Dinners"
       ],
@@ -463,7 +463,7 @@ export default function Home() {
       url: `${siteUrl}/`,
       name: "Z Labs",
       description:
-        "A public editorial overview of Z Labs, its Bay Area focus, and its work across AI-native experience, the knowledge economy, and next-gen VC.",
+        "A public editorial overview of Z Labs, its Bay Area focus, and its work around AI, organization, and taste.",
       isPartOf: {
         "@id": `${siteUrl}/#website`
       },
@@ -541,8 +541,7 @@ export default function Home() {
         </h1>
         <p className="mt-6 max-w-4xl text-lg leading-8 text-ink/65">
           A private Bay Area room for PhDs, researchers, operators, and
-          founders comparing notes on AI-native experience, the knowledge
-          economy, and <span className="whitespace-nowrap">next-gen VC</span>.
+          founders comparing notes on AI, organization, and taste.
         </p>
         <div className="mt-9 w-full max-w-3xl">
           <HeroInvite />
@@ -560,7 +559,7 @@ export default function Home() {
         <div className="home-section-shell">
           <SectionIntro
             title="Editorial"
-            description="Essays on research, translation, and the social infrastructure around technical work."
+            description="Public notes from the room: essays on AI, organizational life, and the taste required to choose well."
             ctaHref={latestStory.href}
             ctaLabel="Read latest"
           >
@@ -642,11 +641,11 @@ export default function Home() {
         <div className="home-section-shell">
           <SectionIntro
             title="How We Gather"
-            description="The room itself, and the tables now taking shape."
+            description="Small tables for comparing AI, organization, and taste before ideas harden into public positions."
             ctaHref="/dinners/designer-researcher-builder-or-whatever"
             ctaLabel="See first dinner"
           />
-          <div className="home-section-content overflow-x-auto pb-2 snap-x snap-mandatory">
+          <div className="home-section-content -my-8 overflow-x-auto py-8 snap-x snap-mandatory">
             <div className="flex w-max gap-4 pr-4">
               {featured.map((item) => (
                 <div
@@ -668,7 +667,7 @@ export default function Home() {
         <div className="home-section-shell">
           <SectionIntro
             title="Intelligence with a social life."
-            description="Z Labs is in a long period of research and curation, preparing a selective beta for PhDs, research operators, and technical founders who move with trust and high-quality execution."
+            description="Z Labs is preparing a selective beta for PhDs, research operators, and technical founders thinking seriously about AI, organization, and taste."
           />
           <div className="home-section-content membership-stack">
             <p className="max-w-2xl text-[1.02rem] leading-8 text-ink/65">

@@ -11,7 +11,7 @@ export default function Image() {
       <OgTemplate
         kicker="Z Dinners"
         title="Designer, Researcher, Builder, or Whatever?"
-        description="A small San Francisco dinner on the labels people still use, the work they actually do, and the identities starting to blur."
+        description="An independent Config-week side-table in San Francisco for people whose work no longer fits one clean title."
         accent="warm"
       />
     ),

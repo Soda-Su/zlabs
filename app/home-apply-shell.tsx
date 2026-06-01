@@ -211,10 +211,9 @@ export function HomeApplyShell({
                   Designer, researcher, builder, or whatever?
                 </h2>
                 <p className="mt-4 max-w-2xl leading-7 text-ink/62">
-                  Our first private dinner is taking shape for mid-June in San
-                  Francisco: six invited seats, one honest conversation about
-                  the labels people still use, the work they actually do, and
-                  the identities starting to blur.
+                  Around Config week in San Francisco, Z Dinners is convening
+                  a small independent discussion for people whose work no
+                  longer fits one clean title.
                 </p>
               </div>
               <button
@@ -232,16 +231,16 @@ export function HomeApplyShell({
                 <span className="story-status story-status-lead story-status-spotlight">
                   First gathering
                 </span>
-                <span className="story-status">Mid-June</span>
+                <span className="story-status">Config week</span>
                 <span className="story-status">San Francisco</span>
-                <span className="story-status">Six invited seats</span>
+                <span className="story-status">Independent private dinner</span>
               </div>
 
               <p className="max-w-2xl text-[1.02rem] leading-7 text-ink/66">
-                A quieter invitation than a splashy launch. If you have lived
-                across research, design, product, or building, or if your work
-                has started to outgrow one clean title, we would be glad to hear
-                from you.
+                A quieter invitation than a splashy launch. If you are in SF
+                for the product-building energy around Config, this is the
+                smaller conversation after the stage: AI, organization, and the
+                taste required when tools move faster.
               </p>
 
               <div className="flex flex-wrap gap-3">

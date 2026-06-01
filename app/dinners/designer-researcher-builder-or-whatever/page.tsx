@@ -11,7 +11,7 @@ const pagePath = "/dinners/designer-researcher-builder-or-whatever";
 const pageUrl = absoluteUrl(pagePath);
 const pageTitle = "Z Dinners | Designer, Researcher, Builder, or Whatever?";
 const pageDescription =
-  "The first Z Dinners gathering asks a different kind of identity question: designer, researcher, builder, or something blurrier in between? A small invited table in San Francisco.";
+  "The first Z Dinners gathering is an independent Config-week side-table in San Francisco for people whose work no longer fits one clean title.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
   "Z Dinners No. 1 interest"
 )}`;
@@ -19,34 +19,34 @@ const dinnerInterestPath = "/apply?interest=designer-researcher-builder-dinner";
 
 const posterSignals = [
   "First gathering",
-  "Six invited seats",
+  "Config week",
   "San Francisco",
-  "By invitation"
+  "Independent private dinner"
 ] as const;
 
 const tableNotes = [
   {
     eyebrow: "Why now",
-    title: "The labels stopped feeling precise.",
-    text: "A lot of smart people still introduce themselves as designers, researchers, or builders. The actual work looks messier than that now. Roles are stretching, overlapping, and quietly mutating faster than the titles can keep up."
+    title: "Config brings the public product-building energy.",
+    text: "The private question is what happens after the talks, when AI changes the tools, teams change the work, and the labels people use to describe themselves start feeling less precise."
   },
   {
     eyebrow: "In the room",
     title: "Six invited seats.",
-    text: "People who have worked across product, research, design, and building, or who no longer feel fully described by any one of those categories."
+    text: "Designers, researchers, builders, product-minded operators, and founders whose work has started to cross the boundaries that used to organize product teams."
   },
   {
     eyebrow: "The tone",
     title: "More candor, less self-branding.",
-    text: "Not a networking mixer. Not a panel on career paths. Just a smaller dinner where people can talk honestly about the work they actually do, the labels they still use, and the ones they may have outgrown."
+    text: "Not an official Config event, not a mixer, and not a panel on career paths. Just a smaller dinner where people can talk honestly about the work they actually do."
   }
 ] as const;
 
 const conversationAngles = [
-  "At what point does a title stop accurately describing the work you actually do?",
+  "What changes when AI makes product-building faster but judgment more exposed?",
+  "Are designer, researcher, and builder still useful labels, or just convenient introductions?",
   "Which boundaries between design, research, and building still feel real, and which ones are mostly habit?",
-  "What kinds of people are becoming more valuable precisely because they do not fit one clean category?",
-  "If your role is getting blurrier, what helps you explain your value without flattening yourself?"
+  "What kind of taste becomes more valuable when tools get easier?"
 ] as const;
 
 export const metadata: Metadata = {
@@ -170,14 +170,15 @@ export default function DesignerResearcherBuilderPage() {
                 builder, or whatever?
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The first Z Dinners table begins with a different kind of
-                question: when the real work keeps spilling across categories,
-                what do our labels still help explain, and what do they start to
-                hide?
+                A private Config-week table for people whose work no longer
+                fits one title. Around Config 2026 in San Francisco, Z Dinners
+                is convening a small independent discussion on AI,
+                organization, and taste.
               </p>
               <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/52">
-                A dinner for people whose titles are still neat on LinkedIn,
-                but less neat in real life.
+                Not affiliated with Figma or Config. More like the conversation
+                people wish they had after the public product-building energy
+                of the week.
               </p>
 
               <div className="mt-9 flex flex-wrap gap-3">
@@ -203,9 +204,9 @@ export default function DesignerResearcherBuilderPage() {
                     Tonight&apos;s table
                   </p>
                   <p className="mt-3 max-w-sm text-[1.02rem] leading-7 text-ink/72">
-                    Six invited seats. People whose work has drifted between
-                    research, design, product, and building, and who are trying
-                    to name that drift more honestly.
+                    Six invited seats. Designers, researchers, builders,
+                    product-minded operators, and founders who are trying to
+                    name the work more honestly as the categories blur.
                   </p>
                 </article>
                 <article className="border-b border-ink/8 pb-5">
@@ -213,9 +214,9 @@ export default function DesignerResearcherBuilderPage() {
                     Why this one
                   </p>
                   <p className="mt-3 max-w-sm text-[1.02rem] leading-7 text-ink/72">
-                    People keep using old labels because they are legible. They
-                    also know, privately, that those labels are describing less
-                    and less of the real work.
+                    Config gathers people building products at public scale.
+                    This table is for a smaller question: what kind of judgment
+                    and taste become harder to fake as tools get easier?
                   </p>
                 </article>
                 <article>
@@ -239,21 +240,20 @@ export default function DesignerResearcherBuilderPage() {
           <div>
             <p className="text-sm text-ink/55">Why this dinner</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
-              The work changed faster than the titles.
+              A smaller conversation around a very public week.
             </h2>
           </div>
           <div className="max-w-3xl space-y-6">
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              In a lot of teams, the actual work no longer sits neatly inside
-              one discipline. Researchers prototype. Designers write. Builders
-              shape product thinking. Operators do synthesis that used to live
-              somewhere else.
+              Config brings together the public energy of product building:
+              tools, demos, talks, launches, and thousands of people trying to
+              understand where design and development are going next.
             </p>
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              Z Dinners exists to take that blur seriously and place it around
-              a smaller table, where people can compare what they still call
-              themselves, what they are actually becoming, and what kinds of
-              work demand a less rigid identity.
+              Z Dinners is for the smaller conversation that often happens
+              after the stage: what the work is becoming, what titles no longer
+              explain, and what kind of taste matters when AI changes the
+              tools.
             </p>
           </div>
         </div>
@@ -303,8 +303,8 @@ export default function DesignerResearcherBuilderPage() {
             </h2>
             <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
               Questions people usually learn to ask only after they have spent
-              enough time doing work that no longer fits cleanly under one
-              heading.
+              enough time building with other people, watching tools change,
+              and noticing which parts of judgment still do not automate well.
             </p>
           </div>
 
@@ -338,9 +338,9 @@ export default function DesignerResearcherBuilderPage() {
               </h2>
               <p className="mt-5 max-w-xl text-[1.02rem] leading-8 text-ink/66">
                 This first gathering is being convened by invitation in San
-                Francisco. If your work already spills across categories, or
-                you have been trying to name yourself more truthfully, we would
-                be glad to hear from you.
+                Francisco around Config week. If your work already spills
+                across categories, or you are thinking seriously about AI,
+                organization, and taste, we would be glad to hear from you.
               </p>
             </div>
 

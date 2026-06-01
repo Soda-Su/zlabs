@@ -1,9 +1,9 @@
 export const siteUrl = "https://thezlabs.org";
 export const siteName = "Z Labs";
 export const siteTitle =
-  "Z Labs | A Quieter Room for Research, Trust, and Serious People";
+  "Z Labs | AI, Organization, and Taste";
 export const siteDescription =
-  "A private Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI-native experience, the knowledge economy, and next-gen VC.";
+  "A private Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI, organization, and taste.";
 export const contactEmail = "chatwithsoda@gmail.com";
 export const xiaohongshuHandle = "ChatwithSoda";
 export const locale = "en_US";

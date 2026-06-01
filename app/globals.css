@@ -444,29 +444,29 @@ input {
   line-height: 1;
 }
 
-#stories[data-editorial-filter="career"]
-  [data-editorial-category]:not([data-editorial-category="career"]),
 #stories[data-editorial-filter="ai"]
   [data-editorial-category]:not([data-editorial-category="ai"]),
-#stories[data-editorial-filter="personal"]
-  [data-editorial-category]:not([data-editorial-category="personal"]) {
+#stories[data-editorial-filter="organization"]
+  [data-editorial-category]:not([data-editorial-category="organization"]),
+#stories[data-editorial-filter="taste"]
+  [data-editorial-category]:not([data-editorial-category="taste"]) {
   opacity: 0.34;
   filter: saturate(0.35);
 }
 
-#stories[data-editorial-filter="career"] [data-editorial-category="career"],
 #stories[data-editorial-filter="ai"] [data-editorial-category="ai"],
-#stories[data-editorial-filter="personal"] [data-editorial-category="personal"] {
+#stories[data-editorial-filter="organization"] [data-editorial-category="organization"],
+#stories[data-editorial-filter="taste"] [data-editorial-category="taste"] {
   opacity: 1;
   filter: none;
 }
 
-#stories[data-editorial-filter="career"]
-  [data-editorial-category="career"].editorial-mini-item,
 #stories[data-editorial-filter="ai"]
   [data-editorial-category="ai"].editorial-mini-item,
-#stories[data-editorial-filter="personal"]
-  [data-editorial-category="personal"].editorial-mini-item {
+#stories[data-editorial-filter="organization"]
+  [data-editorial-category="organization"].editorial-mini-item,
+#stories[data-editorial-filter="taste"]
+  [data-editorial-category="taste"].editorial-mini-item {
   background: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.74),
@@ -474,14 +474,14 @@ input {
   );
 }
 
-#stories[data-editorial-filter="career"]
-  [data-editorial-category="career"].editorial-card
-  .image-frame,
 #stories[data-editorial-filter="ai"]
   [data-editorial-category="ai"].editorial-card
   .image-frame,
-#stories[data-editorial-filter="personal"]
-  [data-editorial-category="personal"].editorial-card
+#stories[data-editorial-filter="organization"]
+  [data-editorial-category="organization"].editorial-card
+  .image-frame,
+#stories[data-editorial-filter="taste"]
+  [data-editorial-category="taste"].editorial-card
   .image-frame {
   box-shadow: 0 0 0 2px rgba(26, 102, 178, 0.2);
 }
@@ -513,11 +513,10 @@ input {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(249, 248, 246, 0.92));
   box-shadow: 0 8px 24px rgba(16, 16, 16, 0.04);
-  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+  transition: box-shadow 220ms ease, border-color 220ms ease;
 }
 
 .featured-panel:hover {
-  transform: translateY(-1px);
   border-color: rgba(16, 16, 16, 0.12);
   box-shadow: 0 12px 30px rgba(16, 16, 16, 0.05);
 }
@@ -544,8 +543,8 @@ input {
 }
 
 .featured-panel-spotlight::before {
-  inset: -2px;
-  border-radius: 10px;
+  inset: -0.5rem;
+  border-radius: 14px;
   background:
     linear-gradient(
       135deg,
@@ -554,8 +553,8 @@ input {
       rgba(139, 201, 255, 0.3) 68%,
       rgba(244, 189, 92, 0.44) 100%
     );
-  filter: blur(14px);
-  opacity: 0.24;
+  filter: blur(16px);
+  opacity: 0.22;
   z-index: 0;
   animation: featuredAura 6.5s ease-in-out infinite;
 }
@@ -573,7 +572,6 @@ input {
 }
 
 .featured-panel-spotlight:hover {
-  transform: translateY(-2px);
   border-color: rgba(16, 16, 16, 0.16);
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.42) inset,
@@ -2072,12 +2070,12 @@ input {
   0%,
   100% {
     opacity: 0.34;
-    transform: translate3d(0, 0, 0) scale(1);
+    transform: scale(1);
   }
 
   50% {
     opacity: 0.52;
-    transform: translate3d(0.4rem, -0.2rem, 0) scale(1.02);
+    transform: scale(1.018);
   }
 }
 
