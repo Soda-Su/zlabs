@@ -409,6 +409,130 @@ function FeaturedPanel({
   );
 }
 
+function MobileHomeDeck() {
+  const deckCards = [
+    {
+      id: "intro",
+      eyebrow: "Private research ecosystem",
+      title: "Z Labs",
+      kicker: "[ Stealth Mode ]",
+      text: "A private Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI, organization, and taste.",
+      visual: "gradient-aurora",
+      visualLabel: "Z Labs",
+      href: "#mobile-card-play",
+      ctaLabel: "Start the preview"
+    },
+    {
+      id: "play",
+      eyebrow: "Playful experiment",
+      title: "Meet your AI archetype.",
+      text: "A small pixel-game about how you think, build, and move with AI.",
+      visual: "gradient-signal",
+      visualLabel: "Play",
+      href: "/ai-archetype",
+      ctaLabel: "Play the quiz"
+    },
+    {
+      id: "editorial",
+      eyebrow: "Editorial",
+      title: featuredStory.title,
+      text: "Public notes from the room: essays on AI, organizational life, and the taste required to choose well.",
+      visual: featuredStory.visual,
+      visualLabel: featuredStory.visualLabel,
+      href: featuredStory.href,
+      ctaLabel: "Read the essay"
+    },
+    {
+      id: "vision",
+      eyebrow: "Vision",
+      title: "A translation layer for serious judgment.",
+      text: "Research depth, trustworthy signal, and technical gathering need a quieter shared format.",
+      visual: "gradient-research",
+      visualLabel: "Vision",
+      href: "/vision",
+      ctaLabel: "Read the vision",
+      list: visionPillars.slice(0, 3).map((item) => item.title)
+    },
+    {
+      id: "gather",
+      eyebrow: "How We Gather",
+      title: featured[0].title,
+      text: "Small tables for comparing AI, organization, and taste before ideas harden into public positions.",
+      visual: featured[0].visual,
+      visualLabel: featured[0].visualLabel,
+      href: featured[0].href,
+      ctaLabel: "See first dinner"
+    },
+    {
+      id: "desktop",
+      eyebrow: "Continue on desktop",
+      title: "The full room opens on a larger screen.",
+      text: "Read the complete essays, browse the vision, and return when you want to write a careful application.",
+      visual: "gradient-academic-tech",
+      visualLabel: "Desktop",
+      href: "/apply",
+      ctaLabel: "Continue from desktop"
+    }
+  ];
+
+  return (
+    <section className="mobile-home-deck md:hidden" aria-label="Z Labs mobile preview">
+      <div className="mobile-home-track">
+        {deckCards.map((card, index) => (
+          <article
+            key={card.id}
+            id={`mobile-card-${card.id}`}
+            className={`mobile-home-card mobile-home-card-${card.id}`}
+          >
+            <div className="mobile-home-card-inner">
+              <div>
+                <div className="mobile-home-card-topline">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <span>{card.eyebrow}</span>
+                </div>
+                <h2 className="mobile-home-card-title">
+                  {card.title}
+                  {card.kicker ? (
+                    <span className="mobile-home-card-kicker">{card.kicker}</span>
+                  ) : null}
+                </h2>
+                <p className="mobile-home-card-text">{card.text}</p>
+              </div>
+
+              <div
+                aria-label={card.visualLabel}
+                role="img"
+                className={`mobile-home-visual gradient-visual ${card.visual}`}
+              >
+                <span>{card.visualLabel}</span>
+              </div>
+
+              {card.list ? (
+                <div className="mobile-home-list" aria-label="Vision pillars">
+                  {card.list.map((item) => (
+                    <span key={item}>{item}</span>
+                  ))}
+                </div>
+              ) : null}
+
+              <a className="mobile-home-card-link" href={card.href}>
+                {card.ctaLabel}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+      <nav className="mobile-home-progress" aria-label="Mobile preview cards">
+        {deckCards.map((card, index) => (
+          <a key={card.id} href={`#mobile-card-${card.id}`} aria-label={`Go to card ${index + 1}`}>
+            <span />
+          </a>
+        ))}
+      </nav>
+    </section>
+  );
+}
+
 export default function Home() {
   const structuredData = [
     {
@@ -504,7 +628,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      <header className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
+      <header className="home-header mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <a href="#" className="brand-mark">
           <span className="brand-text">Z Labs</span>
         </a>
@@ -528,12 +652,17 @@ export default function Home() {
             Beta
           </a>
         </nav>
-        <a className="quiet-link text-ink/70" href="/apply">
+        <a className="quiet-link hidden text-ink/70 md:inline-flex" href="/apply">
           Join the Beta
+        </a>
+        <a className="mobile-apply-link quiet-link md:hidden" href="/apply">
+          Apply
         </a>
       </header>
 
-      <section className="mx-auto flex min-h-[66svh] max-w-[1180px] flex-col items-center justify-center px-4 pb-20 pt-14 text-center sm:px-6 lg:px-8">
+      <MobileHomeDeck />
+
+      <section className="home-hero mx-auto hidden min-h-[66svh] max-w-[1180px] flex-col items-center justify-center px-4 pb-20 pt-14 text-center md:flex sm:px-6 lg:px-8">
         <p className="hero-kicker">Private research ecosystem</p>
         <h1 className="mt-6 max-w-5xl text-5xl leading-[1.02] text-ink sm:text-6xl md:text-7xl">
           Z Labs{" "}
@@ -543,18 +672,21 @@ export default function Home() {
           A private Bay Area room for PhDs, researchers, operators, and
           founders comparing notes on AI, organization, and taste.
         </p>
-        <div className="mt-9 w-full max-w-3xl">
+        <a className="mobile-hero-apply-link" href="/apply">
+          Complete application on desktop
+        </a>
+        <div className="hero-invite-wrap mt-9 w-full max-w-3xl">
           <HeroInvite />
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
+      <section className="mx-auto hidden max-w-[1440px] border-t border-ink/10 px-4 py-12 md:block sm:px-6 lg:px-8">
         <HomeArchetypeTeaser />
       </section>
 
       <section
         id="stories"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+        className="mx-auto hidden max-w-[1440px] border-t border-ink/10 px-4 py-12 md:block sm:px-6 lg:px-8"
       >
         <div className="home-section-shell">
           <SectionIntro
@@ -604,7 +736,7 @@ export default function Home() {
 
       <section
         id="ecosystem"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+        className="mx-auto hidden max-w-[1440px] border-t border-ink/10 px-4 py-12 md:block sm:px-6 lg:px-8"
       >
         <div className="home-section-shell">
           <SectionIntro
@@ -636,7 +768,7 @@ export default function Home() {
 
       <section
         id="featured"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+        className="mx-auto hidden max-w-[1440px] border-t border-ink/10 px-4 py-12 md:block sm:px-6 lg:px-8"
       >
         <div className="home-section-shell">
           <SectionIntro
@@ -645,12 +777,12 @@ export default function Home() {
             ctaHref="/dinners/designer-researcher-builder-or-whatever"
             ctaLabel="See first dinner"
           />
-          <div className="home-section-content -my-8 overflow-x-auto py-8 snap-x snap-mandatory">
+          <div className="home-section-content featured-scroll-area -my-8 overflow-x-auto py-8 snap-x snap-mandatory">
             <div className="flex w-max gap-4 pr-4">
               {featured.map((item) => (
                 <div
                   key={item.title}
-                  className="flex w-[min(88vw,37rem)] shrink-0 snap-start self-stretch lg:w-[32rem]"
+                  className="featured-panel-cell flex w-[min(88vw,37rem)] shrink-0 snap-start self-stretch lg:w-[32rem]"
                 >
                   <FeaturedPanel {...item} />
                 </div>
@@ -662,7 +794,7 @@ export default function Home() {
 
       <section
         id="membership"
-        className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8"
+        className="mx-auto hidden max-w-[1440px] border-t border-ink/10 px-4 py-12 md:block sm:px-6 lg:px-8"
       >
         <div className="home-section-shell">
           <SectionIntro
@@ -700,7 +832,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="border-t border-ink/10 bg-white px-4 py-10 text-center sm:px-6 lg:px-8">
+      <footer className="hidden border-t border-ink/10 bg-white px-4 py-10 text-center md:block sm:px-6 lg:px-8">
         <div className="mx-auto max-w-[1440px]">
           <div className="mx-auto max-w-xl">
             <a href="#" className="brand-mark justify-center">

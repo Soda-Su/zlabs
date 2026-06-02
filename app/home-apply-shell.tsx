@@ -23,8 +23,11 @@ export function HomeApplyShell({
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [isDinnerPromptOpen, setIsDinnerPromptOpen] = useState(false);
+  const [isDesktopApplyPromptOpen, setIsDesktopApplyPromptOpen] = useState(false);
+  const [isMobileExperience, setIsMobileExperience] = useState(false);
   const [email, setEmail] = useState("");
-  const isAnyModalOpen = isOpen || isDinnerPromptOpen;
+  const isAnyModalOpen =
+    isOpen || isDinnerPromptOpen || isDesktopApplyPromptOpen;
 
   const persistDinnerPromptDismissal = useCallback(() => {
     if (typeof window === "undefined") {
@@ -50,13 +53,43 @@ export function HomeApplyShell({
     });
   }, [persistDinnerPromptDismissal]);
 
+  const closeDesktopApplyPrompt = useCallback(() => {
+    setIsDesktopApplyPromptOpen(false);
+  }, []);
+
+  const openDesktopApplyPrompt = useCallback(() => {
+    setIsDinnerPromptOpen(false);
+    setIsDesktopApplyPromptOpen(true);
+    persistDinnerPromptDismissal();
+    posthog.capture("mobile_desktop_apply_prompt_viewed");
+  }, [persistDinnerPromptDismissal]);
+
   const openModal = useCallback((nextEmail = "") => {
+    if (isMobileExperience) {
+      openDesktopApplyPrompt();
+      return;
+    }
+
     persistDinnerPromptDismissal();
     setEmail(nextEmail);
     setIsDinnerPromptOpen(false);
     setIsOpen(true);
     posthog.capture("apply_modal_opened", { email_prefilled: nextEmail !== "" });
-  }, [persistDinnerPromptDismissal]);
+  }, [isMobileExperience, openDesktopApplyPrompt, persistDinnerPromptDismissal]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const media = window.matchMedia("(max-width: 767px)");
+    const update = () => setIsMobileExperience(media.matches);
+
+    update();
+    media.addEventListener("change", update);
+
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     if (!isAnyModalOpen) {
@@ -73,6 +106,11 @@ export function HomeApplyShell({
           return;
         }
 
+        if (isDesktopApplyPromptOpen) {
+          closeDesktopApplyPrompt();
+          return;
+        }
+
         closeDinnerPrompt();
       }
     }
@@ -83,10 +121,17 @@ export function HomeApplyShell({
       document.body.style.overflow = previousOverflow;
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [closeDinnerPrompt, closeModal, isAnyModalOpen, isOpen]);
+  }, [
+    closeDesktopApplyPrompt,
+    closeDinnerPrompt,
+    closeModal,
+    isAnyModalOpen,
+    isDesktopApplyPromptOpen,
+    isOpen
+  ]);
 
   useEffect(() => {
-    if (typeof window === "undefined" || isAnyModalOpen) {
+    if (typeof window === "undefined" || isAnyModalOpen || isMobileExperience) {
       return;
     }
 
@@ -117,7 +162,7 @@ export function HomeApplyShell({
     return () => {
       window.clearTimeout(timer);
     };
-  }, [isAnyModalOpen]);
+  }, [isAnyModalOpen, isMobileExperience]);
 
   useEffect(() => {
     function handleOpen(event: Event) {
@@ -173,6 +218,11 @@ export function HomeApplyShell({
 
     event.preventDefault();
 
+    if (isMobileExperience) {
+      openDesktopApplyPrompt();
+      return;
+    }
+
     const url = new URL(href, window.location.origin);
     openModal(url.searchParams.get("email")?.trim() ?? "");
   }
@@ -188,6 +238,39 @@ export function HomeApplyShell({
   return (
     <div onClickCapture={handleApplyLinkCapture}>
       {children}
+      {isDesktopApplyPromptOpen ? (
+        <div
+          className="apply-modal-overlay mobile-apply-prompt-overlay"
+          role="presentation"
+          onClick={closeDesktopApplyPrompt}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="mobile-apply-prompt-title"
+            className="mobile-apply-prompt"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div>
+              <p className="text-sm text-ink/50">Selective beta</p>
+              <h2 id="mobile-apply-prompt-title" className="mt-2">
+                Continue from desktop.
+              </h2>
+              <p className="mt-3">
+                The mobile version is a short preview. Come back from a laptop
+                or desktop for the full essays, vision, and application flow.
+              </p>
+            </div>
+            <button
+              type="button"
+              className="mobile-apply-prompt-button"
+              onClick={closeDesktopApplyPrompt}
+            >
+              Got it
+            </button>
+          </div>
+        </div>
+      ) : null}
       {isDinnerPromptOpen ? (
         <div
           className="apply-modal-overlay"
