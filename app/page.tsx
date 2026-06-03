@@ -1,6 +1,7 @@
 import { HeroInvite } from "./hero-invite";
 import { HomeApplyShell } from "./home-apply-shell";
 import { HomeArchetypeTeaser } from "./home-archetype-teaser";
+import { MobileHomeDeckEndTrigger } from "./mobile-home-deck-end-trigger";
 import { EditorialFilterControls } from "./editorial-filter-controls";
 import { PixelAvatar } from "./ai-archetype/avatar";
 import { getResultState } from "./ai-archetype/logic";
@@ -412,11 +413,28 @@ function FeaturedPanel({
 }
 
 function MobileHomeDeck() {
-  const archetypePreview = getResultState("cartographer", "grounded", {
-    palette: "sage",
-    expression: "focused",
-    accessory: "visor"
-  });
+  const archetypePreviews = [
+    getResultState("cartographer", "grounded", {
+      palette: "sage",
+      expression: "focused",
+      accessory: "visor"
+    }),
+    getResultState("dreamer", "speculative", {
+      palette: "dusk",
+      expression: "mischief",
+      accessory: "star"
+    }),
+    getResultState("tinkerer", "grounded", {
+      palette: "electric",
+      expression: "focused",
+      accessory: "headset"
+    }),
+    getResultState("conductor", "grounded", {
+      palette: "electric",
+      expression: "calm",
+      accessory: "headset"
+    })
+  ];
   const deckCards = [
     {
       id: "intro",
@@ -427,48 +445,29 @@ function MobileHomeDeck() {
       visual: "gradient-aurora",
       visualLabel: "Z Labs",
       href: "#mobile-card-gather",
-      ctaLabel: "Start the preview"
+      ctaLabel: "Start the preview",
+      list: ["Research depth", "Trustworthy judgment", "Technical gathering"]
     },
     {
       id: "gather",
       eyebrow: "How We Gather",
       title: "Z Dinners",
-      text: "Small tables for designer-researcher-builder types comparing AI, organization, and taste before ideas harden in public.",
+      text: "The first gathering is a private Config-week side-table in San Francisco for people whose work no longer fits one clean title.",
       visual: featured[0].visual,
       visualLabel: featured[0].visualLabel,
       href: featured[0].href,
-      ctaLabel: "See first dinner"
+      ctaLabel: "See first dinner",
+      list: ["Six invited seats", "Designer x researcher x builder", "More candor, less self-branding"]
     },
     {
       id: "play",
       eyebrow: "AI Archetypes",
-      title: "Meet your AI archetype.",
-      text: "A small pixel-game about how you think, build, and move with AI.",
+      title: "AI Archetype",
+      text: "A small pixel-game about how you think, build, and move with AI: seven quick prompts, eight archetypes, one downloadable avatar card.",
       visualLabel: "The Cartographer",
       href: "/ai-archetype",
       ctaLabel: "Play the quiz",
-      avatar: archetypePreview
-    },
-    {
-      id: "vision",
-      eyebrow: "Vision",
-      title: "Serious judgment, translated.",
-      text: "Research depth, trustworthy signal, and technical gathering need a quieter shared format.",
-      visual: "gradient-research",
-      visualLabel: "Vision",
-      href: "/vision",
-      ctaLabel: "Read the vision",
-      list: visionPillars.slice(0, 3).map((item) => item.title)
-    },
-    {
-      id: "desktop",
-      eyebrow: "Continue on desktop",
-      title: "Continue on a larger screen.",
-      text: "Read the complete essays, browse the vision, and return when you want to write a careful application.",
-      visual: "gradient-academic-tech",
-      visualLabel: "Desktop",
-      href: "/apply",
-      ctaLabel: "Continue from desktop"
+      avatars: archetypePreviews
     }
   ];
 
@@ -496,15 +495,22 @@ function MobileHomeDeck() {
                 <p className="mobile-home-card-text">{card.text}</p>
               </div>
 
-              {card.avatar ? (
+              {card.avatars ? (
                 <div className="mobile-home-avatar-visual">
-                  <PixelAvatar
-                    archetype={card.avatar.archetype}
-                    recipe={card.avatar.recipe}
-                    size={156}
-                    className="mobile-home-avatar"
-                    label="The Cartographer avatar"
-                  />
+                  {card.avatars.map((avatar, avatarIndex) => (
+                    <div
+                      key={`${avatar.archetype}-${avatar.signal}`}
+                      className={`mobile-home-avatar-frame mobile-home-avatar-frame-${avatarIndex + 1}`}
+                    >
+                      <PixelAvatar
+                        archetype={avatar.archetype}
+                        recipe={avatar.recipe}
+                        size={188}
+                        className="mobile-home-avatar"
+                        label={`${avatar.archetype} avatar`}
+                      />
+                    </div>
+                  ))}
                   <span>{card.visualLabel}</span>
                 </div>
               ) : (
@@ -531,6 +537,7 @@ function MobileHomeDeck() {
             </div>
           </article>
         ))}
+        <MobileHomeDeckEndTrigger />
       </div>
       <nav className="mobile-home-progress" aria-label="Mobile preview cards">
         {deckCards.map((card, index) => (
