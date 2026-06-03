@@ -123,17 +123,17 @@ export default function DesignerResearcherBuilderPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-alabaster text-ink">
+    <main className="dinner-page min-h-screen bg-alabaster text-ink">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      <header className="mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
+      <header className="dinner-page-header mx-auto flex max-w-[1440px] items-center justify-between px-4 py-4 text-sm sm:px-6 lg:px-8">
         <Link href="/" className="brand-mark">
           <span className="brand-text">Z Labs</span>
         </Link>
-        <div className="flex items-center gap-5 text-ink/70">
+        <div className="dinner-page-actions flex items-center gap-5 text-ink/70">
           <Link className="quiet-link hidden sm:inline" href="/">
             Back to home
           </Link>
@@ -143,14 +143,14 @@ export default function DesignerResearcherBuilderPage() {
         </div>
       </header>
 
-      <section className="mx-auto max-w-[1440px] px-4 pb-6 pt-4 sm:px-6 lg:px-8">
-        <div className="dinner-hero-glow overflow-hidden rounded-[1rem] border border-ink/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.86)_0%,rgba(249,247,243,0.92)_54%,rgba(237,242,245,0.92)_100%)] shadow-[0_18px_46px_rgba(16,16,16,0.05)]">
-          <div className="grid gap-10 px-5 py-5 sm:px-7 sm:py-7 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:px-8 lg:py-8">
-            <div>
-              <p className="text-[0.78rem] uppercase tracking-[0.18em] text-ink/44">
+      <section className="dinner-hero-section mx-auto max-w-[1440px] px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+        <div className="dinner-hero-panel dinner-hero-glow overflow-hidden rounded-[1rem] border border-ink/10 bg-[linear-gradient(145deg,rgba(255,255,255,0.86)_0%,rgba(249,247,243,0.92)_54%,rgba(237,242,245,0.92)_100%)] shadow-[0_18px_46px_rgba(16,16,16,0.05)]">
+          <div className="dinner-hero-grid grid gap-10 px-5 py-5 sm:px-7 sm:py-7 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:px-8 lg:py-8">
+            <div className="dinner-hero-copy">
+              <p className="dinner-hero-eyebrow text-[0.78rem] uppercase tracking-[0.18em] text-ink/44">
                 Z Dinners
               </p>
-              <div className="mt-4 flex flex-wrap items-center gap-2">
+              <div className="dinner-signal-row mt-4 flex flex-wrap items-center gap-2">
                 {posterSignals.map((signal, index) => (
                   <span
                     key={signal}
@@ -164,24 +164,24 @@ export default function DesignerResearcherBuilderPage() {
                   </span>
                 ))}
               </div>
-              <h1 className="mt-6 max-w-4xl text-5xl leading-[0.98] text-ink sm:text-6xl lg:text-7xl">
+              <h1 className="dinner-hero-title mt-6 max-w-4xl text-5xl leading-[0.98] text-ink sm:text-6xl lg:text-7xl">
                 Designer, researcher,
-                <br className="hidden sm:block" />
+                <br className="hidden sm:block" />{" "}
                 builder, or whatever?
               </h1>
-              <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
+              <p className="dinner-hero-lede mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
                 A private Config-week table for people whose work no longer
                 fits one title. Around Config 2026 in San Francisco, Z Dinners
                 is convening a small independent discussion on AI,
                 organization, and taste.
               </p>
-              <p className="mt-5 max-w-2xl text-sm leading-7 text-ink/52">
+              <p className="dinner-hero-note mt-5 max-w-2xl text-sm leading-7 text-ink/52">
                 Not affiliated with Figma or Config. More like the conversation
                 people wish they had after the public product-building energy
                 of the week.
               </p>
 
-              <div className="mt-9 flex flex-wrap gap-3">
+              <div className="dinner-hero-actions mt-9 flex flex-wrap gap-3">
                 <Link
                   href={dinnerInterestPath}
                   className="inline-flex h-12 items-center justify-center rounded-md bg-ink px-5 text-sm font-medium text-white transition duration-300 hover:bg-zlabs-blue-deep focus:outline-none focus:ring-2 focus:ring-zlabs-blue-deep focus:ring-offset-2 focus:ring-offset-white"
@@ -197,7 +197,7 @@ export default function DesignerResearcherBuilderPage() {
               </div>
             </div>
 
-            <aside className="border-t border-ink/10 pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+            <aside className="dinner-hero-aside border-t border-ink/10 pt-5 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
               <div className="space-y-5">
                 <article className="border-b border-ink/8 pb-5">
                   <p className="text-[0.74rem] uppercase tracking-[0.16em] text-ink/42">
@@ -235,8 +235,8 @@ export default function DesignerResearcherBuilderPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
+      <section className="dinner-content-section mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="dinner-content-grid grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
           <div>
             <p className="text-sm text-ink/55">Why this dinner</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
@@ -259,8 +259,8 @@ export default function DesignerResearcherBuilderPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
+      <section className="dinner-content-section mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="dinner-content-grid grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
           <div>
             <p className="text-sm text-ink/55">What kind of room this is</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
@@ -294,8 +294,8 @@ export default function DesignerResearcherBuilderPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
+      <section className="dinner-content-section mx-auto max-w-[1440px] border-t border-ink/10 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="dinner-content-grid grid gap-10 lg:grid-cols-[0.72fr_1.12fr]">
           <div>
             <p className="text-sm text-ink/55">A few questions</p>
             <h2 className="mt-2 max-w-lg text-4xl leading-tight sm:text-5xl">
@@ -328,8 +328,8 @@ export default function DesignerResearcherBuilderPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[1440px] border-t border-ink/10 px-4 pb-14 pt-12 sm:px-6 lg:px-8">
-        <div className="rounded-[1rem] border border-ink/10 bg-white/82 p-5 shadow-[0_12px_32px_rgba(16,16,16,0.04)] sm:p-6">
+      <section className="dinner-content-section dinner-final-section mx-auto max-w-[1440px] border-t border-ink/10 px-4 pb-14 pt-12 sm:px-6 lg:px-8">
+        <div className="dinner-final-panel rounded-[1rem] border border-ink/10 bg-white/82 p-5 shadow-[0_12px_32px_rgba(16,16,16,0.04)] sm:p-6">
           <div className="grid gap-8 lg:grid-cols-[0.78fr_1fr] lg:items-end">
             <div>
               <p className="text-sm text-ink/55">A seat at the table</p>

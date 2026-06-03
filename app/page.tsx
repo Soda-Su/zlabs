@@ -413,6 +413,16 @@ function FeaturedPanel({
 }
 
 function MobileHomeDeck() {
+  const mobileEditorialStories = [
+    {
+      ...featuredStory,
+      mobileTitle: "Academic to Tech"
+    },
+    {
+      ...stories[1],
+      mobileTitle: "GenAI at Work"
+    }
+  ];
   const archetypePreviews = [
     getResultState("cartographer", "grounded", {
       palette: "sage",
@@ -459,6 +469,17 @@ function MobileHomeDeck() {
       ctaLabel: "See first dinner",
       list: ["Six invited seats", "Designer x researcher x builder", "More candor, less self-branding"]
     },
+    ...mobileEditorialStories.map((story, storyIndex) => ({
+      id: storyIndex === 0 ? "editorial-academic" : "editorial-genai",
+      eyebrow: "Editorial",
+      title: story.mobileTitle,
+      text: story.text,
+      visual: story.visual,
+      visualLabel: story.visualLabel,
+      href: story.href,
+      ctaLabel: "Read essay",
+      list: story.tags
+    })),
     {
       id: "play",
       eyebrow: "AI Archetypes",
@@ -524,7 +545,7 @@ function MobileHomeDeck() {
               )}
 
               {card.list ? (
-                <div className="mobile-home-list" aria-label="Vision pillars">
+                <div className="mobile-home-list" aria-label={`${card.title} highlights`}>
                   {card.list.map((item) => (
                     <span key={item}>{item}</span>
                   ))}

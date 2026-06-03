@@ -3534,6 +3534,182 @@ input {
     margin-top: 0.7rem;
   }
 
+  .dinner-page-header {
+    align-items: center;
+    gap: 1rem;
+    padding: 0.95rem 1rem 0.7rem !important;
+  }
+
+  .dinner-page {
+    overflow-x: hidden;
+  }
+
+  .dinner-page-actions {
+    display: none !important;
+  }
+
+  .dinner-hero-section {
+    padding: 0.65rem 0.85rem 1.25rem !important;
+  }
+
+  .dinner-hero-panel {
+    border-radius: 8px !important;
+    box-shadow: none !important;
+  }
+
+  .dinner-hero-panel,
+  .dinner-hero-grid,
+  .dinner-hero-copy,
+  .dinner-hero-aside,
+  .dinner-content-section,
+  .dinner-content-grid,
+  .dinner-final-panel {
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .dinner-hero-grid {
+    gap: 1.15rem !important;
+    padding: 1rem !important;
+  }
+
+  .dinner-hero-eyebrow {
+    font-size: 0.68rem !important;
+    letter-spacing: 0.15em !important;
+  }
+
+  .dinner-signal-row {
+    flex-wrap: wrap !important;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: visible;
+  }
+
+  .dinner-signal-row .story-status {
+    flex: 0 0 auto;
+  }
+
+  .dinner-hero-title {
+    max-width: 100% !important;
+    margin-top: 1rem !important;
+    font-size: clamp(2.42rem, 12.4vw, 3.2rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  .dinner-hero-lede {
+    max-width: 23rem !important;
+    margin-top: 1rem !important;
+    font-size: 0.96rem !important;
+    line-height: 1.62 !important;
+  }
+
+  .dinner-hero-note {
+    max-width: 23rem !important;
+    margin-top: 0.75rem !important;
+    font-size: 0.82rem !important;
+    line-height: 1.55 !important;
+  }
+
+  .dinner-hero-actions {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 0.7rem !important;
+    margin-top: 1.35rem !important;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .dinner-hero-actions a,
+  .dinner-final-panel a {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 2.85rem;
+    border-radius: 8px;
+  }
+
+  .dinner-hero-aside {
+    padding-top: 0.95rem !important;
+  }
+
+  .dinner-hero-aside .space-y-5 {
+    display: grid;
+    gap: 0;
+  }
+
+  .dinner-hero-aside article {
+    padding-bottom: 0.9rem;
+  }
+
+  .dinner-hero-aside article + article {
+    padding-top: 0.9rem;
+  }
+
+  .dinner-hero-aside p:first-child {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+
+  .dinner-hero-aside p:last-child {
+    margin-top: 0.45rem;
+    font-size: 0.9rem;
+    line-height: 1.52;
+    overflow-wrap: anywhere;
+  }
+
+  .dinner-page > .dinner-content-section {
+    padding: 1.8rem 1rem !important;
+  }
+
+  .dinner-content-grid {
+    gap: 1.3rem !important;
+  }
+
+  .dinner-content-section h2 {
+    max-width: 12.5ch;
+    font-size: 1.95rem !important;
+    line-height: 1.08 !important;
+  }
+
+  .dinner-content-section p {
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+  }
+
+  .dinner-content-section p:not([class*="text-sm"]):not([class*="text-[0."]) {
+    font-size: 0.95rem !important;
+  }
+
+  .dinner-content-section article {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .dinner-content-section article h3 {
+    font-size: 1.28rem;
+    line-height: 1.18;
+  }
+
+  .dinner-final-section {
+    padding-bottom: 2rem !important;
+  }
+
+  .dinner-final-panel {
+    border-radius: 8px !important;
+    padding: 1rem !important;
+    box-shadow: none !important;
+  }
+
+  .dinner-final-panel > div {
+    gap: 1.35rem;
+  }
+
+  .dinner-final-panel .mt-6 {
+    display: grid;
+    gap: 0.7rem;
+    margin-top: 1rem !important;
+  }
+
   .membership-stack > p {
     font-size: 0.98rem;
     line-height: 1.68;
