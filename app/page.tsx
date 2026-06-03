@@ -2,6 +2,8 @@ import { HeroInvite } from "./hero-invite";
 import { HomeApplyShell } from "./home-apply-shell";
 import { HomeArchetypeTeaser } from "./home-archetype-teaser";
 import { EditorialFilterControls } from "./editorial-filter-controls";
+import { PixelAvatar } from "./ai-archetype/avatar";
+import { getResultState } from "./ai-archetype/logic";
 import type { ReactNode } from "react";
 import { visionPillars } from "./vision/content";
 import {
@@ -410,6 +412,11 @@ function FeaturedPanel({
 }
 
 function MobileHomeDeck() {
+  const archetypePreview = getResultState("cartographer", "grounded", {
+    palette: "sage",
+    expression: "focused",
+    accessory: "visor"
+  });
   const deckCards = [
     {
       id: "intro",
@@ -419,33 +426,33 @@ function MobileHomeDeck() {
       text: "A private Bay Area room for PhDs, researchers, operators, and founders comparing notes on AI, organization, and taste.",
       visual: "gradient-aurora",
       visualLabel: "Z Labs",
-      href: "#mobile-card-play",
+      href: "#mobile-card-gather",
       ctaLabel: "Start the preview"
     },
     {
-      id: "play",
-      eyebrow: "Playful experiment",
-      title: "Meet your AI archetype.",
-      text: "A small pixel-game about how you think, build, and move with AI.",
-      visual: "gradient-signal",
-      visualLabel: "Play",
-      href: "/ai-archetype",
-      ctaLabel: "Play the quiz"
+      id: "gather",
+      eyebrow: "How We Gather",
+      title: "Z Dinners",
+      text: "Small tables for designer-researcher-builder types comparing AI, organization, and taste before ideas harden in public.",
+      visual: featured[0].visual,
+      visualLabel: featured[0].visualLabel,
+      href: featured[0].href,
+      ctaLabel: "See first dinner"
     },
     {
-      id: "editorial",
-      eyebrow: "Editorial",
-      title: featuredStory.title,
-      text: "Public notes from the room: essays on AI, organizational life, and the taste required to choose well.",
-      visual: featuredStory.visual,
-      visualLabel: featuredStory.visualLabel,
-      href: featuredStory.href,
-      ctaLabel: "Read the essay"
+      id: "play",
+      eyebrow: "AI Archetypes",
+      title: "Meet your AI archetype.",
+      text: "A small pixel-game about how you think, build, and move with AI.",
+      visualLabel: "The Cartographer",
+      href: "/ai-archetype",
+      ctaLabel: "Play the quiz",
+      avatar: archetypePreview
     },
     {
       id: "vision",
       eyebrow: "Vision",
-      title: "A translation layer for serious judgment.",
+      title: "Serious judgment, translated.",
       text: "Research depth, trustworthy signal, and technical gathering need a quieter shared format.",
       visual: "gradient-research",
       visualLabel: "Vision",
@@ -454,19 +461,9 @@ function MobileHomeDeck() {
       list: visionPillars.slice(0, 3).map((item) => item.title)
     },
     {
-      id: "gather",
-      eyebrow: "How We Gather",
-      title: featured[0].title,
-      text: "Small tables for comparing AI, organization, and taste before ideas harden into public positions.",
-      visual: featured[0].visual,
-      visualLabel: featured[0].visualLabel,
-      href: featured[0].href,
-      ctaLabel: "See first dinner"
-    },
-    {
       id: "desktop",
       eyebrow: "Continue on desktop",
-      title: "The full room opens on a larger screen.",
+      title: "Continue on a larger screen.",
       text: "Read the complete essays, browse the vision, and return when you want to write a careful application.",
       visual: "gradient-academic-tech",
       visualLabel: "Desktop",
@@ -499,13 +496,26 @@ function MobileHomeDeck() {
                 <p className="mobile-home-card-text">{card.text}</p>
               </div>
 
-              <div
-                aria-label={card.visualLabel}
-                role="img"
-                className={`mobile-home-visual gradient-visual ${card.visual}`}
-              >
-                <span>{card.visualLabel}</span>
-              </div>
+              {card.avatar ? (
+                <div className="mobile-home-avatar-visual">
+                  <PixelAvatar
+                    archetype={card.avatar.archetype}
+                    recipe={card.avatar.recipe}
+                    size={156}
+                    className="mobile-home-avatar"
+                    label="The Cartographer avatar"
+                  />
+                  <span>{card.visualLabel}</span>
+                </div>
+              ) : (
+                <div
+                  aria-label={card.visualLabel}
+                  role="img"
+                  className={`mobile-home-visual gradient-visual ${card.visual}`}
+                >
+                  <span>{card.visualLabel}</span>
+                </div>
+              )}
 
               {card.list ? (
                 <div className="mobile-home-list" aria-label="Vision pillars">
@@ -654,9 +664,6 @@ export default function Home() {
         </nav>
         <a className="quiet-link hidden text-ink/70 md:inline-flex" href="/apply">
           Join the Beta
-        </a>
-        <a className="mobile-apply-link quiet-link md:hidden" href="/apply">
-          Apply
         </a>
       </header>
 
