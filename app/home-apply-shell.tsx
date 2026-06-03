@@ -252,7 +252,7 @@ export function HomeApplyShell({
             onClick={(event) => event.stopPropagation()}
           >
             <div>
-              <p className="text-sm text-ink/50">Selective beta</p>
+              <p className="text-sm text-ink/50">Read more about Z Labs</p>
               <h2 id="mobile-apply-prompt-title" className="mt-2">
                 Continue from desktop.
               </h2>
