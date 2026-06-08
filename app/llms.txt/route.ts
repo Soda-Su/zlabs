@@ -21,7 +21,7 @@ It is for Bay Area PhDs, researchers, operators, and founders moving between res
 - knowledge economy
 - next-gen VC
 - Bay Area PhDs
-- Z Dinners
+- Z Salon
 
 ## Public URLs
 - ${siteUrl}/

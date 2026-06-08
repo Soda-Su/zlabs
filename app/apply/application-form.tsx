@@ -201,7 +201,7 @@ export function ApplicationForm({
 
       <div className="mt-5 grid gap-5">
         <SelectField
-          label="Would you like to be considered for the current or next Z Dinners gathering?"
+          label="Would you like to be considered for the current or next Z Salon gathering?"
           value={values.dinnerInterest}
           onChange={(value) => updateField("dinnerInterest", value)}
           options={[

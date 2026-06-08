@@ -8,9 +8,9 @@ import {
 
 const pagePath = "/dinners/startup-culture";
 const pageUrl = absoluteUrl(pagePath);
-const pageTitle = "Z Dinners | Startup Culture, Across Startup and Big Tech";
+const pageTitle = "Z Salon | Startup Culture, Across Startup and Big Tech";
 const pageDescription =
-  "The first Z Dinners gathering begins with one practical question: how different does company culture feel across startup and big tech? A small invited table in San Francisco.";
+  "The first Z Salon gathering begins with one practical question: how different does company culture feel across startup and big tech? A small invited table in San Francisco.";
 
 const posterSignals = [
   "First gathering",
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   keywords: [
-    "Z Dinners",
+    "Z Salon",
     "startup culture",
     "big tech culture",
     "San Francisco dinner",
@@ -110,7 +110,7 @@ export default function FirstGatheringPage() {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Z Dinners",
+          name: "Z Salon",
           item: pageUrl
         }
       ]
@@ -143,7 +143,7 @@ export default function FirstGatheringPage() {
           <div className="grid gap-10 px-5 py-5 sm:px-7 sm:py-7 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:px-8 lg:py-8">
             <div>
               <p className="text-[0.78rem] uppercase tracking-[0.18em] text-ink/44">
-                Z Dinners
+                Z Salon
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {posterSignals.map((signal, index) => (
@@ -165,7 +165,7 @@ export default function FirstGatheringPage() {
                 told a little closer to the truth.
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The first Z Dinners table begins with one practical question:
+                The first Z Salon table begins with one practical question:
                 how much of startup life is about the work itself, and how much
                 of it is about the people, pace, and pressure around it?
               </p>
@@ -242,7 +242,7 @@ export default function FirstGatheringPage() {
               or structural.
             </p>
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              That question felt larger than one person. Z Dinners exists to
+              That question felt larger than one person. Z Salon exists to
               take questions people usually keep inside private chats and place
               them around a smaller table, where experienced people can compare
               what they have actually seen.

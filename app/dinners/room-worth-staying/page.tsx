@@ -9,11 +9,11 @@ import {
 
 const pagePath = "/dinners/room-worth-staying";
 const pageUrl = absoluteUrl(pagePath);
-const pageTitle = "Z Dinners | Between Startup, Big Tech, and What Comes Next";
+const pageTitle = "Z Salon | Between Startup, Big Tech, and What Comes Next";
 const pageDescription =
-  "The second Z Dinners gathering opens a wider question: what changes across startup, big tech, and whatever comes next? A small invited table in San Francisco.";
+  "The second Z Salon gathering opens a wider question: what changes across startup, big tech, and whatever comes next? A small invited table in San Francisco.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 2 interest"
+  "Z Salon No. 2 interest"
 )}`;
 const dinnerInterestPath = "/apply?interest=between-startup-big-tech-dinner";
 
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   keywords: [
-    "Z Dinners",
+    "Z Salon",
     "startup",
     "big tech",
     "career transitions",
@@ -116,7 +116,7 @@ export default function RoomWorthStayingPage() {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Z Dinners",
+          name: "Z Salon",
           item: pageUrl
         }
       ]
@@ -149,7 +149,7 @@ export default function RoomWorthStayingPage() {
           <div className="grid gap-10 px-5 py-5 sm:px-7 sm:py-7 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:px-8 lg:py-8">
             <div>
               <p className="text-[0.78rem] uppercase tracking-[0.18em] text-ink/44">
-                Z Dinners
+                Z Salon
               </p>
               <div className="mt-4 flex flex-wrap items-center gap-2">
                 {posterSignals.map((signal, index) => (
@@ -171,7 +171,7 @@ export default function RoomWorthStayingPage() {
                 big tech, and what comes next.
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
-                The second Z Dinners table begins with a wider question: what
+                The second Z Salon table begins with a wider question: what
                 really changes as you move between startup, big tech, and the
                 less-scripted paths that might come after either one?
               </p>
@@ -249,7 +249,7 @@ export default function RoomWorthStayingPage() {
               other, or quietly done with both.
             </p>
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              Z Dinners exists to take that more candid question and place it
+              Z Salon exists to take that more candid question and place it
               around a smaller table, where people can compare what each world
               rewards, what it asks from them, and what they are starting to
               imagine beyond those defaults.

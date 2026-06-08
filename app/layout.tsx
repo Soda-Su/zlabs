@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     "next-gen VC",
     "knowledge work",
     "research community",
-    "Z Dinners"
+    "Z Salon"
   ],
   alternates: {
     canonical: "/",

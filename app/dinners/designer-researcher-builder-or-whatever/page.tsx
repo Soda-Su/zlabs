@@ -9,11 +9,11 @@ import {
 
 const pagePath = "/dinners/designer-researcher-builder-or-whatever";
 const pageUrl = absoluteUrl(pagePath);
-const pageTitle = "Z Dinners | Designer, Researcher, Builder, or Whatever?";
+const pageTitle = "Z Salon | Designer, Researcher, Builder, or Whatever?";
 const pageDescription =
-  "The first Z Dinners gathering is an independent Config-week side-table in San Francisco for people whose work no longer fits one clean title.";
+  "The first Z Salon gathering is an independent Config-week side-table in San Francisco for people whose work no longer fits one clean title.";
 const fastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 1 interest"
+  "Z Salon No. 1 interest"
 )}`;
 const dinnerInterestPath = "/apply?interest=designer-researcher-builder-dinner";
 
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   title: pageTitle,
   description: pageDescription,
   keywords: [
-    "Z Dinners",
+    "Z Salon",
     "design research builder",
     "career identity",
     "San Francisco dinner",
@@ -115,7 +115,7 @@ export default function DesignerResearcherBuilderPage() {
         {
           "@type": "ListItem",
           position: 2,
-          name: "Z Dinners",
+          name: "Z Salon",
           item: pageUrl
         }
       ]
@@ -148,7 +148,7 @@ export default function DesignerResearcherBuilderPage() {
           <div className="dinner-hero-grid grid gap-10 px-5 py-5 sm:px-7 sm:py-7 lg:grid-cols-[1.08fr_0.72fr] lg:items-end lg:px-8 lg:py-8">
             <div className="dinner-hero-copy">
               <p className="dinner-hero-eyebrow text-[0.78rem] uppercase tracking-[0.18em] text-ink/44">
-                Z Dinners
+                Z Salon
               </p>
               <div className="dinner-signal-row mt-4 flex flex-wrap items-center gap-2">
                 {posterSignals.map((signal, index) => (
@@ -171,7 +171,7 @@ export default function DesignerResearcherBuilderPage() {
               </h1>
               <p className="dinner-hero-lede mt-6 max-w-3xl text-lg leading-8 text-ink/66 sm:text-[1.04rem]">
                 A private Config-week table for people whose work no longer
-                fits one title. Around Config 2026 in San Francisco, Z Dinners
+                fits one title. Around Config 2026 in San Francisco, Z Salon
                 is convening a small independent discussion on AI,
                 organization, and taste.
               </p>
@@ -250,7 +250,7 @@ export default function DesignerResearcherBuilderPage() {
               understand where design and development are going next.
             </p>
             <p className="text-[1.02rem] leading-8 text-ink/66">
-              Z Dinners is for the smaller conversation that often happens
+              Z Salon is for the smaller conversation that often happens
               after the stage: what the work is becoming, what titles no longer
               explain, and what kind of taste matters when AI changes the
               tools.

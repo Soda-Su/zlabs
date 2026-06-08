@@ -17,7 +17,7 @@ import {
 
 const featured = [
   {
-    title: "Z Dinners: Designer, Researcher, Builder, or Whatever?",
+    title: "Z Salon: Designer, Researcher, Builder, or Whatever?",
     meta: "Stealth Gathering",
     text: "A private Config-week side-table for people whose work no longer fits one clean title.",
     keywords: ["Config week", "Independent private dinner", "Research x design x build"],
@@ -29,7 +29,7 @@ const featured = [
     spotlight: true
   },
   {
-    title: "Z Dinners: Between Startup, Big Tech, and What Comes Next",
+    title: "Z Salon: Between Startup, Big Tech, and What Comes Next",
     meta: "Stealth Gathering",
     text: "A second table with a wider question: what really changes between startup, big tech, and the less-scripted paths that might come after either one?",
     keywords: ["Now forming", "By invitation in SF", "Startup x big tech x beyond"],
@@ -461,7 +461,7 @@ function MobileHomeDeck() {
     {
       id: "gather",
       eyebrow: "How We Gather",
-      title: "Z Dinners",
+      title: "Z Salon",
       text: "The first gathering is a private Config-week side-table in San Francisco for people whose work no longer fits one clean title.",
       visual: featured[0].visual,
       visualLabel: featured[0].visualLabel,
@@ -595,7 +595,7 @@ export default function Home() {
         "organization",
         "taste",
         "Bay Area PhDs",
-        "Z Dinners"
+        "Z Salon"
       ],
       contactPoint: [
         {

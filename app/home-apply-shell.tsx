@@ -13,7 +13,7 @@ const dinnerPromptTheme = "designer-researcher-builder";
 const dinnerPromptDelayMs = 1400;
 const dinnerPromptCooldownMs = 1000 * 60 * 60 * 24 * 7;
 const dinnerFastLaneMailto = `mailto:${contactEmail}?subject=${encodeURIComponent(
-  "Z Dinners No. 1 interest"
+  "Z Salon No. 1 interest"
 )}`;
 
 export function HomeApplyShell({
@@ -286,7 +286,7 @@ export function HomeApplyShell({
           >
             <div className="apply-modal-header border-b border-ink/8">
               <div>
-                <p className="text-sm text-ink/55">An invitation from Z Dinners</p>
+                <p className="text-sm text-ink/55">An invitation from Z Salon</p>
                 <h2
                   id="home-dinner-title"
                   className="mt-2 max-w-2xl text-3xl leading-tight text-ink sm:text-4xl"
@@ -294,7 +294,7 @@ export function HomeApplyShell({
                   Designer, researcher, builder, or whatever?
                 </h2>
                 <p className="mt-4 max-w-2xl leading-7 text-ink/62">
-                  Around Config week in San Francisco, Z Dinners is convening
+                  Around Config week in San Francisco, Z Salon is convening
                   a small independent discussion for people whose work no
                   longer fits one clean title.
                 </p>
